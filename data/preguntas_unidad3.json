@@ -1,0 +1,1406 @@
+[
+  {
+    "pregunta_id": "u3_b_01",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "definicion_y_estructura_de_un_vector",
+    "tipo": "Conceptual",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "¿Qué es un vector (arreglo unidimensional) en programación?",
+    "opciones": [
+      "A) Una variable que almacena un único valor",
+      "B) Una colección de elementos del mismo tipo almacenados de forma contigua en memoria, accesibles mediante un índice numérico",
+      "C) Una función matemática de dirección",
+      "D) Un tipo de ciclo especial"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Un vector es una estructura de datos que agrupa múltiples valores del mismo tipo bajo un nombre común. Cada elemento se accede por su posición (índice), generalmente comenzando en 0.",
+    "habilidad_evaluada": "Comprensión de la estructura y propósito de un vector"
+  },
+  {
+    "pregunta_id": "u3_m_01",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "definicion_y_estructura_de_un_vector",
+    "tipo": "Análisis",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Un vector de 6 elementos: notas=[5.0, 3.5, 4.2, 2.8, 4.8, 3.0]. ¿Cuál es el índice del elemento con valor 4.8 y cuántos elementos hay a su derecha?",
+    "opciones": [
+      "A) Índice 3; 2 elementos a la derecha",
+      "B) Índice 4; 1 elemento a la derecha (3.0)",
+      "C) Índice 5; 0 elementos a la derecha",
+      "D) Índice 4; 2 elementos a la derecha"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "notas[0]=5.0, notas[1]=3.5, notas[2]=4.2, notas[3]=2.8, notas[4]=4.8, notas[5]=3.0. El valor 4.8 está en el índice 4. A su derecha solo hay 1 elemento: notas[5]=3.0.",
+    "habilidad_evaluada": "Identificación de índices y posiciones relativas en un vector"
+  },
+  {
+    "pregunta_id": "u3_a_01",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "definicion_y_estructura_de_un_vector",
+    "tipo": "Razonamiento",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Un sistema almacena el historial de precios de una acción en los últimos 30 días en un vector. Para detectar la tendencia más reciente, necesita comparar los últimos 5 días con el promedio de los 25 anteriores. ¿Cómo accede eficientemente a: (a) los últimos 5 elementos y (b) los primeros 25, usando índices?",
+    "opciones": [
+      "A) Recorriendo todo el vector dos veces",
+      "B) (a) Últimos 5: índices [25] a [29] (N-5 a N-1 donde N=30). (b) Primeros 25: índices [0] a [24]. El acceso por índice es O(1) — directo sin recorrido",
+      "C) Usando un ciclo desde el inicio hasta encontrar cada grupo",
+      "D) No es posible acceder a subsecciones de un vector"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "El acceso por índice en un vector es O(1): se llega directamente a cualquier posición sin recorrer elementos intermedios. Para los últimos 5: indices N-5 a N-1 (25 a 29). Para los primeros 25: índices 0 a 24. Esta es la ventaja fundamental de los arreglos sobre otras estructuras como listas enlazadas.",
+    "habilidad_evaluada": "Uso eficiente de índices para acceso a subsecciones de vectores en O(1)"
+  },
+  {
+    "pregunta_id": "u3_b_02",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "acceso_a_elementos_por_indice",
+    "tipo": "Conceptual",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Vector: colores=['rojo','verde','azul','amarillo']. ¿Cuál es el valor de colores[2]?",
+    "opciones": [
+      "A) verde",
+      "B) azul",
+      "C) amarillo",
+      "D) rojo"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Los índices comienzan en 0. colores[0]='rojo', colores[1]='verde', colores[2]='azul', colores[3]='amarillo'. El elemento en índice 2 es 'azul'.",
+    "habilidad_evaluada": "Acceso correcto a elementos de un vector mediante índice base 0"
+  },
+  {
+    "pregunta_id": "u3_m_02",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "acceso_a_elementos_por_indice",
+    "tipo": "Bebras",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "vector=[10,20,30,40,50], N=5. ¿Qué valor tiene vector[N-2]? ¿Qué error ocurre con vector[N]?",
+    "opciones": [
+      "A) vector[N-2]=30; vector[N]=50",
+      "B) vector[N-2]=40; vector[N]=error de índice fuera de rango (índice 5 no existe en vector de tamaño 5)",
+      "C) vector[N-2]=50; vector[N]=10",
+      "D) vector[N-2]=40; vector[N]=0"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "N=5, N-2=3. vector[3]=40. vector[N]=vector[5]: el vector tiene índices 0 a 4 (N-1=4). El índice 5 no existe → error de índice fuera de rango (IndexOutOfBounds). Este es el error 'off-by-one' más común.",
+    "habilidad_evaluada": "Comprensión de índices relativos y del error clásico de acceso fuera de rango"
+  },
+  {
+    "pregunta_id": "u3_a_02",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "acceso_a_elementos_por_indice",
+    "tipo": "Razonamiento",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Un algoritmo accede a un vector circular: para un vector de tamaño N, el 'siguiente' del índice i es (i+1) % N, y el 'anterior' es (i-1+N) % N. Vector=[A,B,C,D,E], N=5, posición actual=4. ¿Cuál es el siguiente elemento y cuál es el anterior? ¿Por qué se suma N en la fórmula del anterior?",
+    "opciones": [
+      "A) Siguiente=E, anterior=D",
+      "B) Siguiente=A (índice 0, porque (4+1)%5=0), anterior=D (índice 3, porque (4-1+5)%5=3). Se suma N para evitar índice negativo: (4-1)=-1 y -1%5 puede ser negativo en algunos lenguajes",
+      "C) Siguiente=B, anterior=C",
+      "D) El vector circular no existe en programación"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Siguiente: (4+1)%5=5%5=0 → vector[0]=A. Anterior: (4-1+5)%5=8%5=3 → vector[3]=D. Se suma N porque en algunos lenguajes (-1)%5=-1 (no 4), causando error de índice. Sumar N garantiza que el resultado del módulo sea siempre positivo.",
+    "habilidad_evaluada": "Implementación y análisis de acceso circular a vectores con módulo"
+  },
+  {
+    "pregunta_id": "u3_b_03",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "recorrido_basico_de_un_vector_con_ciclo",
+    "tipo": "Conceptual",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "¿Cuál es la forma correcta de recorrer todos los elementos de un vector de N elementos usando un ciclo for?",
+    "opciones": [
+      "A) PARA i DESDE 1 HASTA N",
+      "B) PARA i DESDE 0 HASTA N-1",
+      "C) PARA i DESDE 0 HASTA N",
+      "D) PARA i DESDE 1 HASTA N+1"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Los vectores se indexan desde 0 hasta N-1. El recorrido correcto es desde el índice 0 hasta N-1 inclusive. Usar HASTA N causaría un acceso al índice N que no existe (error).",
+    "habilidad_evaluada": "Formulación correcta del ciclo de recorrido de un vector con indexación base-0"
+  },
+  {
+    "pregunta_id": "u3_m_03",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "recorrido_basico_de_un_vector_con_ciclo",
+    "tipo": "Análisis",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Algoritmo:\nvector=[3,7,1,9,4,6,2]\nsuma=0\nPARA i DESDE 0 HASTA 6:\n  suma += vector[i]\nMostrar suma / 7\n¿Qué calcula y cuál es el resultado?",
+    "opciones": [
+      "A) El máximo del vector; resultado=9",
+      "B) El promedio de los elementos; resultado=32/7 ≈ 4.57",
+      "C) La suma; resultado=32",
+      "D) El mínimo; resultado=1"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "El ciclo acumula todos los elementos: 3+7+1+9+4+6+2=32. Luego divide por 7 (el número de elementos). El resultado es el promedio: 32/7 ≈ 4.571.",
+    "habilidad_evaluada": "Comprensión de algoritmos de recorrido para cálculo de promedio en vectores"
+  },
+  {
+    "pregunta_id": "u3_a_03",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "recorrido_basico_de_un_vector_con_ciclo",
+    "tipo": "Bebras",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Dos algoritmos recorren el mismo vector de 1000 elementos buscando un valor:\nAlgoritmo A: recorre de inicio a fin (índice 0 a 999)\nAlgoritmo B: recorre de fin a inicio (índice 999 a 0)\nSi el valor buscado siempre está en el índice 950, ¿cuántas comparaciones hace cada algoritmo y cuál es más eficiente en este caso?",
+    "opciones": [
+      "A) A: 1000 comparaciones, B: 1000 comparaciones; son iguales",
+      "B) A: 951 comparaciones (índices 0 a 950), B: 50 comparaciones (índices 999 a 950). El B es más eficiente cuando el objetivo está cerca del final",
+      "C) A: 950, B: 50; ambos tienen el mismo rendimiento promedio",
+      "D) El B siempre es más eficiente que el A"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "A recorre desde 0 hasta encontrar en índice 950: hace 951 comparaciones. B recorre desde 999 hasta índice 950: hace 50 comparaciones (999,998,...,950). El B es ~19x más rápido en este caso específico. El rendimiento depende de la posición del elemento y la dirección del recorrido.",
+    "habilidad_evaluada": "Análisis comparativo de estrategias de recorrido según la posición esperada del dato buscado"
+  },
+  {
+    "pregunta_id": "u3_b_04",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "definicion_y_estructura_de_una_matriz",
+    "tipo": "Conceptual",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "¿Cómo se organiza una matriz bidimensional de 3 filas × 4 columnas?",
+    "opciones": [
+      "A) Como una lista de 7 elementos (3+4)",
+      "B) Como una tabla con 3 filas y 4 columnas, donde cada celda se accede con dos índices [fila][columna], conteniendo 12 elementos en total",
+      "C) Como dos vectores separados de 3 y 4 elementos",
+      "D) Como un vector de 12 elementos sin estructura"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Una matriz bidimensional es como una tabla: tiene filas y columnas. Se accede a cada elemento con dos índices: el primero indica la fila, el segundo la columna. Una matriz 3×4 tiene 3*4=12 elementos.",
+    "habilidad_evaluada": "Comprensión de la estructura bidimensional de matrices y acceso por dos índices"
+  },
+  {
+    "pregunta_id": "u3_m_04",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "definicion_y_estructura_de_una_matriz",
+    "tipo": "Análisis",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Matriz M de 3×3:\nM=[[1,2,3],[4,5,6],[7,8,9]]\n¿Cuáles son los valores de M[0][2], M[1][1] y M[2][0]?",
+    "opciones": [
+      "A) M[0][2]=1, M[1][1]=5, M[2][0]=9",
+      "B) M[0][2]=3, M[1][1]=5, M[2][0]=7",
+      "C) M[0][2]=3, M[1][1]=6, M[2][0]=8",
+      "D) M[0][2]=7, M[1][1]=5, M[2][0]=3"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "M[0][2]: fila 0, columna 2 → [1,2,3][2]=3. M[1][1]: fila 1, columna 1 → [4,5,6][1]=5. M[2][0]: fila 2, columna 0 → [7,8,9][0]=7. Los elementos de la diagonal principal son 1,5,9.",
+    "habilidad_evaluada": "Acceso correcto a elementos de una matriz bidimensional por índices de fila y columna"
+  },
+  {
+    "pregunta_id": "u3_a_04",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "definicion_y_estructura_de_una_matriz",
+    "tipo": "Razonamiento",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Un sistema de reconocimiento de imágenes en blanco y negro representa cada imagen como una matriz de 28×28 píxeles, donde cada valor es 0 (negro) o 255 (blanco). Una red neuronal procesa 1000 imágenes simultáneamente. ¿Cuántos valores se almacenan en total y qué estructura de datos sería la más apropiada?",
+    "opciones": [
+      "A) 28,000 valores; un vector de 28,000 elementos",
+      "B) 784,000 valores (28×28×1000). Estructura: tensor 3D de dimensiones [1000, 28, 28] — un arreglo tridimensional donde la primera dimensión indexa la imagen y las otras dos las coordenadas del píxel",
+      "C) 56 valores (28+28); una matriz 2×28",
+      "D) 1000 valores; un vector de 1000 matrices"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Cada imagen: 28×28=784 valores. 1000 imágenes: 784×1000=784,000 valores. La estructura natural es un tensor 3D [1000][28][28]: el índice [i][f][c] accede al píxel en fila f, columna c de la imagen i. Esta es exactamente la estructura que usan frameworks como TensorFlow para datos de imagen.",
+    "habilidad_evaluada": "Diseño de estructuras multidimensionales para representación de datos complejos del mundo real"
+  },
+  {
+    "pregunta_id": "u3_b_05",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "acceso_a_celdas_por_fila_y_columna",
+    "tipo": "Conceptual",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "En una matriz de notas de 4 estudiantes × 3 materias, ¿qué representa notas[2][1]?",
+    "opciones": [
+      "A) La nota del estudiante 1 en la materia 2",
+      "B) La nota del estudiante 2 en la materia 1",
+      "C) El promedio de la materia 2",
+      "D) El número total de materias"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "La convención es [fila][columna] = [estudiante][materia]. notas[2][1] accede a la fila 2 (tercer estudiante) y columna 1 (segunda materia).",
+    "habilidad_evaluada": "Interpretación de índices de fila y columna en contextos reales"
+  },
+  {
+    "pregunta_id": "u3_m_05",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "acceso_a_celdas_por_fila_y_columna",
+    "tipo": "Análisis",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Algoritmo que calcula el promedio de la fila 1 de una matriz M de 3×4:\nsuma=0\nPARA j DESDE 0 HASTA 3:\n  suma += M[1][j]\npromedio = suma / 4\nSi M[1]=[8,6,9,7], ¿cuál es el promedio y qué cambio haría el algoritmo para calcular el promedio de la columna 2?",
+    "opciones": [
+      "A) Promedio=7.5; para columna 2: cambiar j a variar filas y fijar columna=2",
+      "B) Promedio=7.5; para columna 2: PARA i DESDE 0 HASTA 2: suma += M[i][2]; promedio=suma/3",
+      "C) Promedio=8; para columna 2: invertir los índices",
+      "D) Promedio=6; para columna 2: cambiar suma/4 por suma/3"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Fila 1: 8+6+9+7=30, promedio=30/4=7.5. Para columna 2: se fija el segundo índice en 2 y se varía el primero (fila): PARA i DESDE 0 HASTA 2: suma+=M[i][2]; promedio=suma/3 (3 filas).",
+    "habilidad_evaluada": "Adaptación de algoritmos de recorrido entre filas y columnas de matrices"
+  },
+  {
+    "pregunta_id": "u3_a_05",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "acceso_a_celdas_por_fila_y_columna",
+    "tipo": "Razonamiento",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Una tabla de distancias entre 5 ciudades se almacena en una matriz D de 5×5 donde D[i][j] es la distancia de ciudad i a ciudad j. La diagonal D[i][i]=0 (misma ciudad). Si las distancias son simétricas (D[i][j]==D[j][i]), ¿qué porcentaje de la matriz contiene información redundante y cómo se optimizaría el almacenamiento?",
+    "opciones": [
+      "A) 0% redundante; todos los valores son necesarios",
+      "B) La diagonal (5 ceros) más el triángulo inferior (10 valores) son redundantes = 15/25 = 60% redundante. Se optimiza guardando solo el triángulo superior (10 valores únicos) en un vector de N*(N-1)/2 elementos",
+      "C) 50% redundante; se almacena solo la mitad de la matriz",
+      "D) 25% redundante; solo la diagonal es innecesaria"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "En una matriz 5×5=25 elementos: diagonal=5 ceros (innecesarios), triángulo superior=10 valores únicos, triángulo inferior=10 valores duplicados del superior. Redundantes: 5+10=15 de 25 (60%). Optimización: almacenar solo el triángulo superior en un vector de N*(N-1)/2=10 posiciones, usando fórmula de indexación: índice = i*N + j - i*(i+1)/2.",
+    "habilidad_evaluada": "Análisis de redundancia en matrices simétricas y optimización de almacenamiento"
+  },
+  {
+    "pregunta_id": "u3_b_06",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "modificacion_de_contenido_de_vectores_y_matrices",
+    "tipo": "Conceptual",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Vector v=[10,20,30,40]. Después de ejecutar v[1]=99 y v[3]=v[0]+1, ¿cuál es el vector resultante?",
+    "opciones": [
+      "A) [10,99,30,40]",
+      "B) [10,99,30,11]",
+      "C) [99,20,30,11]",
+      "D) [10,20,30,11]"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "v[1]=99: cambia la posición 1 → [10,99,30,40]. v[3]=v[0]+1=10+1=11: cambia posición 3 → [10,99,30,11].",
+    "habilidad_evaluada": "Ejecución de modificaciones directas de elementos en vectores"
+  },
+  {
+    "pregunta_id": "u3_m_06",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "modificacion_de_contenido_de_vectores_y_matrices",
+    "tipo": "Análisis",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Algoritmo que duplica todos los elementos negativos de un vector:\nvector=[-2, 5, -3, 8, -1, 4]\nPARA i DESDE 0 HASTA 5:\n  SI vector[i] < 0: vector[i] = vector[i] * 2\nMostrar vector\n¿Cuál es el vector final?",
+    "opciones": [
+      "A) [-2,5,-3,8,-1,4]",
+      "B) [-4,5,-6,8,-2,4]",
+      "C) [4,5,6,8,2,4]",
+      "D) [-4,10,-6,16,-2,8]"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "i=0: -2<0 → -2*2=-4. i=1: 5≥0 → sin cambio. i=2: -3<0 → -3*2=-6. i=3: 8≥0 → sin cambio. i=4: -1<0 → -1*2=-2. i=5: 4≥0 → sin cambio. Resultado: [-4,5,-6,8,-2,4].",
+    "habilidad_evaluada": "Modificación condicional de elementos en un vector mediante ciclo"
+  },
+  {
+    "pregunta_id": "u3_a_06",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "modificacion_de_contenido_de_vectores_y_matrices",
+    "tipo": "Bebras",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Algoritmo que rota una matriz cuadrada 90° en sentido horario IN-PLACE (sin usar una matriz auxiliar): Para una matriz 4×4, la rotación 90° transforma: M[i][j] → M[j][N-1-i]. ¿Por qué es más complejo hacer esto in-place (sin copia) y qué ciclo de intercambios se necesita para no perder valores?",
+    "opciones": [
+      "A) In-place es igual de simple que con copia",
+      "B) In-place es complejo porque al mover M[i][j] a M[j][N-1-i], se sobrescribe el valor que iba a M[j][N-1-i] antes de moverlo. Se necesita un ciclo de 4 intercambios (top→right→bottom→left→top) con una variable temporal",
+      "C) In-place es imposible; siempre se necesita una matriz auxiliar",
+      "D) Solo se necesita transponer la diagonal principal"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "En rotación in-place, cada elemento de la capa exterior forma un ciclo de 4 posiciones. Para no perder valores: temp=top, top=left, left=bottom, bottom=right, right=temp. Hacerlo elemento por elemento sobrescribiría valores antes de copiarlos. Esto reduce el uso de memoria de O(N²) a O(1) pero aumenta la complejidad del código.",
+    "habilidad_evaluada": "Comprensión de algoritmos in-place para transformación de matrices y gestión de valores temporales"
+  },
+  {
+    "pregunta_id": "u3_b_07",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "representacion_de_datos_del_mundo_real_en_arreglos",
+    "tipo": "Conceptual",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Una tienda quiere registrar las ventas diarias de los 12 meses del año. ¿Cuál estructura de datos es más apropiada?",
+    "opciones": [
+      "A) 12 variables separadas: ventas_enero, ventas_febrero, ...",
+      "B) Un vector de 12 elementos: ventas[0] a ventas[11], donde cada índice representa un mes",
+      "C) Una constante con el total anual",
+      "D) Un texto con los valores separados por comas"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Un vector de 12 elementos es superior a 12 variables separadas porque: se puede recorrer con un ciclo, cambiar el período (24 meses) requiere solo cambiar el tamaño, y el índice tiene significado (índice 0=enero, 11=diciembre). Las 12 variables separadas no se pueden procesar con ciclos.",
+    "habilidad_evaluada": "Selección de vectores sobre variables individuales para colecciones de datos homogéneos"
+  },
+  {
+    "pregunta_id": "u3_m_07",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "representacion_de_datos_del_mundo_real_en_arreglos",
+    "tipo": "Caso práctico",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Un cine tiene 5 filas × 8 asientos. El sistema representa la disponibilidad con una matriz de 5×8 donde 0=libre y 1=ocupado. Si la fila 2 (índice 2) tiene los asientos 3,4,5 (índices) ocupados, ¿cómo se ve esa fila en la matriz y cuántos asientos libres quedan en toda la sala?",
+    "opciones": [
+      "A) Fila 2: [0,0,0,1,1,1,0,0]; libres en sala=37",
+      "B) Fila 2: [1,1,1,0,0,0,0,0]; libres en sala=37",
+      "C) Fila 2: [0,0,0,1,1,1,0,0]; libres en sala=32",
+      "D) Fila 2: [0,0,0,0,1,1,0,0]; libres en sala=38"
+    ],
+    "respuesta_correcta": "A",
+    "explicacion": "Fila 2: asientos 3,4,5 ocupados (1), resto libres (0): [0,0,0,1,1,1,0,0]. Total asientos: 5×8=40. Ocupados: 3. Libres: 40-3=37.",
+    "habilidad_evaluada": "Representación de disponibilidad con matrices binarias y cálculo de estadísticas"
+  },
+  {
+    "pregunta_id": "u3_a_07",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "representacion_de_datos_del_mundo_real_en_arreglos",
+    "tipo": "Razonamiento",
+    "dominio": "KC_ABSTRACTION",
+    "enunciado": "Un mapa meteorológico divide Colombia en una cuadrícula de 100×100 celdas. Cada celda almacena: temperatura, humedad, presión y precipitación. Se toman mediciones cada hora durante 30 días. ¿Cuántos valores se almacenan en total? ¿Qué dimensiones tiene la estructura de datos completa?",
+    "opciones": [
+      "A) 100×100=10,000 valores en una matriz 2D",
+      "B) 100×100×4×24×30=288,000,000 valores. Estructura: tensor 5D [días][horas][filas][columnas][variable] o un arreglo 4D [tiempo][filas][columnas][variables] donde tiempo=720 horas",
+      "C) 100×100×4=40,000 valores",
+      "D) Solo 4 valores (las cuatro variables)"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Cálculo: 100 filas × 100 columnas × 4 variables × 24 horas × 30 días = 28,800,000 valores. La estructura natural es un tensor 4D: [720][100][100][4] donde 720=24×30 horas totales. Acceder a la temperatura de la celda (f,c) en la hora h sería: datos[h][f][c][0].",
+    "habilidad_evaluada": "Diseño de estructuras de datos multidimensionales para datos espacio-temporales del mundo real"
+  },
+  {
+    "pregunta_id": "u3_b_08",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "ciclos_con_vectores_llenar_buscar_modificar",
+    "tipo": "Conceptual",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "¿Cuál es la diferencia entre 'llenar', 'buscar' y 'modificar' elementos en un vector usando ciclos?",
+    "opciones": [
+      "A) Son exactamente lo mismo; solo cambia el nombre",
+      "B) Llenar: asigna valores a todos los elementos (escritura). Buscar: recorre comparando sin modificar (lectura). Modificar: cambia valores según una condición (lectura+escritura)",
+      "C) Buscar y modificar son iguales; llenar es diferente",
+      "D) Solo 'llenar' usa ciclos; buscar y modificar no los necesitan"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Las tres operaciones usan ciclos pero con propósitos distintos: llenar es escritura pura (asignar valor inicial), buscar es lectura pura (encontrar un elemento sin cambiar nada), y modificar combina lectura y escritura (leer el valor actual, calcular el nuevo, escribirlo).",
+    "habilidad_evaluada": "Distinción entre operaciones de lectura y escritura en vectores con ciclos"
+  },
+  {
+    "pregunta_id": "u3_m_08",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "ciclos_con_vectores_llenar_buscar_modificar",
+    "tipo": "Análisis",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Algoritmo:\nN=5; v=[0,0,0,0,0]\nPARA i DESDE 0 HASTA N-1:\n  v[i] = (i+1) * (i+1)\nMostrar v\n¿Cuál es el vector resultante?",
+    "opciones": [
+      "A) [0,1,4,9,16]",
+      "B) [1,4,9,16,25]",
+      "C) [1,2,3,4,5]",
+      "D) [0,0,0,0,0]"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "i=0: v[0]=(0+1)²=1. i=1: v[1]=(1+1)²=4. i=2: v[2]=(2+1)²=9. i=3: v[3]=(3+1)²=16. i=4: v[4]=(4+1)²=25. Vector: [1,4,9,16,25].",
+    "habilidad_evaluada": "Llenado de un vector con valores calculados mediante fórmula en un ciclo"
+  },
+  {
+    "pregunta_id": "u3_a_08",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "ciclos_con_vectores_llenar_buscar_modificar",
+    "tipo": "Bebras",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Algoritmo para eliminar duplicados de un vector manteniendo el orden:\noriginal=[3,1,4,1,5,9,2,6,5,3]\nresultado=[]\nPARA cada num EN original:\n  SI num NO ESTÁ EN resultado:\n    resultado.agregar(num)\nMostrar resultado\n¿Cuál es el resultado y cuántas veces se realiza la búsqueda 'num EN resultado' en total?",
+    "opciones": [
+      "A) [3,1,4,5,9,2,6]; 7 búsquedas",
+      "B) [3,1,4,5,9,2,6]; 10 búsquedas (una por cada elemento del original, con longitud creciente)",
+      "C) [1,2,3,4,5,6,9]; 10 búsquedas",
+      "D) [3,1,4,1,5,9,2,6,5,3]; sin búsquedas"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "El algoritmo recorre los 10 elementos del original. Para cada uno, verifica si está en 'resultado' (búsqueda lineal). Resultado final: [3,1,4,5,9,2,6] (7 únicos, en orden de primera aparición). 1 fue encontrado en 3, 5 fue encontrado en índice 3, 3 fue encontrado al final. Total búsquedas: 10 (una por elemento de original).",
+    "habilidad_evaluada": "Análisis de algoritmos de eliminación de duplicados y conteo de operaciones"
+  },
+  {
+    "pregunta_id": "u3_b_09",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "ciclos_anidados_doble_for_para_matrices",
+    "tipo": "Conceptual",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Para recorrer todos los elementos de una matriz de F filas × C columnas, ¿cuántos ciclos anidados se necesitan y cuántas veces se ejecuta el cuerpo interior?",
+    "opciones": [
+      "A) 1 ciclo; F+C veces",
+      "B) 2 ciclos anidados (uno para filas, otro para columnas); F×C veces en total",
+      "C) 3 ciclos; F×C×2 veces",
+      "D) 2 ciclos no anidados; F+C veces"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Para acceder a cada celda M[i][j], se necesitan dos índices: i (fila) y j (columna). El ciclo externo itera sobre filas (F iteraciones) y el interno sobre columnas (C iteraciones por cada fila). Total: F×C ejecuciones del cuerpo interior.",
+    "habilidad_evaluada": "Comprensión de la estructura de doble ciclo anidado para recorrido de matrices"
+  },
+  {
+    "pregunta_id": "u3_m_09",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "ciclos_anidados_doble_for_para_matrices",
+    "tipo": "Análisis",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Algoritmo que imprime una matriz triangular superior de asteriscos (N=4):\nPARA i DESDE 0 HASTA 3:\n  PARA j DESDE 0 HASTA 3:\n    SI j >= i: Mostrar '*'\n    SINO: Mostrar ' '\n  Mostrar salto de línea\n¿Cuántos asteriscos se imprimen en total?",
+    "opciones": [
+      "A) 8 asteriscos",
+      "B) 10 asteriscos",
+      "C) 16 asteriscos",
+      "D) 6 asteriscos"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Fila 0: j>=0 → 4 asteriscos (j=0,1,2,3). Fila 1: j>=1 → 3 asteriscos (j=1,2,3). Fila 2: j>=2 → 2 asteriscos (j=2,3). Fila 3: j>=3 → 1 asterisco (j=3). Total: 4+3+2+1=10=N*(N+1)/2.",
+    "habilidad_evaluada": "Análisis de ciclos anidados con condición para generar patrones triangulares"
+  },
+  {
+    "pregunta_id": "u3_a_09",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "ciclos_anidados_doble_for_para_matrices",
+    "tipo": "Razonamiento",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Multiplicación de matrices: C = A × B donde A es de F×K y B es de K×C_col. El elemento C[i][j] = suma de A[i][k] * B[k][j] para k de 0 a K-1. Si A es 100×200 y B es 200×150, ¿cuántas multiplicaciones se realizan para calcular toda la matriz C? ¿Cuál es la complejidad?",
+    "opciones": [
+      "A) 100×150=15,000 multiplicaciones",
+      "B) 100×150×200=3,000,000 multiplicaciones. Complejidad O(F×K×C_col) ≈ O(N³) para matrices cuadradas N×N",
+      "C) 200×200=40,000 multiplicaciones",
+      "D) 100+150+200=450 multiplicaciones"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Para cada uno de los 100×150=15,000 elementos de C, se realizan 200 multiplicaciones (una por k). Total: 15,000×200=3,000,000 multiplicaciones. Para matrices cuadradas N×N: N²×N=N³ operaciones → O(N³). Por eso la multiplicación matricial es costosa para matrices grandes.",
+    "habilidad_evaluada": "Cálculo de complejidad de la multiplicación de matrices con ciclos anidados triples"
+  },
+  {
+    "pregunta_id": "u3_b_10",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "ciclos_con_matrices_recorrido_completo",
+    "tipo": "Análisis",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Algoritmo:\nM=[[1,2],[3,4],[5,6]]; suma=0\nPARA i DESDE 0 HASTA 2:\n  PARA j DESDE 0 HASTA 1:\n    suma += M[i][j]\nMostrar suma\n¿Cuál es el resultado?",
+    "opciones": [
+      "A) 10",
+      "B) 21",
+      "C) 15",
+      "D) 11"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Suma de todos los elementos: 1+2+3+4+5+6=21. El doble ciclo recorre las 3 filas y 2 columnas, acumulando cada elemento.",
+    "habilidad_evaluada": "Seguimiento de ciclo doble para suma de todos los elementos de una matriz"
+  },
+  {
+    "pregunta_id": "u3_m_10",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "ciclos_con_matrices_recorrido_completo",
+    "tipo": "Análisis",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Algoritmo que cuenta elementos negativos en cada fila de una matriz 3×4:\nPARA i DESDE 0 HASTA 2:\n  neg_fila=0\n  PARA j DESDE 0 HASTA 3:\n    SI M[i][j] < 0: neg_fila += 1\n  Mostrar 'Fila', i, ':', neg_fila\nSi M=[[-1,2,-3,4],[5,-6,7,-8],[-9,-10,11,12]], ¿qué muestra?",
+    "opciones": [
+      "A) Fila 0: 1, Fila 1: 2, Fila 2: 2",
+      "B) Fila 0: 2, Fila 1: 2, Fila 2: 2",
+      "C) Fila 0: 2, Fila 1: 1, Fila 2: 3",
+      "D) Fila 0: 2, Fila 1: 2, Fila 2: 1"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Fila 0: [-1,2,-3,4] → -1 y -3 son negativos = 2. Fila 1: [5,-6,7,-8] → -6 y -8 = 2. Fila 2: [-9,-10,11,12] → -9 y -10 = 2. Cada fila tiene exactamente 2 negativos.",
+    "habilidad_evaluada": "Uso de ciclos anidados para contar ocurrencias condicionadas por fila"
+  },
+  {
+    "pregunta_id": "u3_a_10",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "ciclos_con_matrices_recorrido_completo",
+    "tipo": "Bebras",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Algoritmo de transposición de matriz cuadrada N×N (intercambia filas por columnas):\nPARA i DESDE 0 HASTA N-1:\n  PARA j DESDE i+1 HASTA N-1:\n    temp = M[i][j]\n    M[i][j] = M[j][i]\n    M[j][i] = temp\n¿Por qué el ciclo interno comienza en j=i+1 y no en j=0? ¿Cuántos intercambios hace para N=4?",
+    "opciones": [
+      "A) Por eficiencia; hace N² intercambios",
+      "B) Para no intercambiar dos veces el mismo par: comenzar en j=i+1 procesa solo el triángulo superior. Para N=4: 3+2+1=6 intercambios (N*(N-1)/2)",
+      "C) Porque j=0 causaría error de índice",
+      "D) Para procesar la diagonal principal"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Si j comenzara en 0, primero intercambiaría M[0][1] con M[1][0], y después cuando i=1,j=0 volvería a intercambiarlos, regresando al estado original. Comenzar en j=i+1 procesa cada par solo una vez (triángulo superior). Para N=4: (i=0:j=1,2,3=3 intercambios)+(i=1:j=2,3=2)+(i=2:j=3=1)=6 intercambios.",
+    "habilidad_evaluada": "Comprensión de por qué los ciclos de transposición recorren solo el triángulo superior"
+  },
+  {
+    "pregunta_id": "u3_b_11",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "combinacion_de_ciclos_con_funciones",
+    "tipo": "Conceptual",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "¿Cuál es la ventaja de combinar ciclos con funciones al procesar vectores?",
+    "opciones": [
+      "A) Los ciclos con funciones son más lentos pero más elegantes",
+      "B) La función encapsula la lógica de procesamiento de cada elemento; el ciclo la aplica repetidamente. Esto separa el 'qué hace' (función) del 'cuándo y cuántas veces' (ciclo)",
+      "C) Solo se puede usar esta combinación con matrices",
+      "D) Elimina la necesidad de variables"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Combinar ciclos con funciones aplica el principio de separación de responsabilidades: la función procesa un elemento (ej: calcular_descuento), el ciclo determina a cuáles elementos aplicarla. Esto hace el código más legible, testeable y reutilizable.",
+    "habilidad_evaluada": "Comprensión del principio de separación de responsabilidades entre ciclos y funciones"
+  },
+  {
+    "pregunta_id": "u3_m_11",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "combinacion_de_ciclos_con_funciones",
+    "tipo": "Análisis",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Función: es_primo(n): retorna VERDADERO si n es primo, FALSO si no.\nAlgoritmo que usa esta función:\nprimos=[]\nPARA i DESDE 2 HASTA 50:\n  SI es_primo(i): primos.agregar(i)\nMostrar primos\n¿Cuántos elementos tiene la lista 'primos' al final?",
+    "opciones": [
+      "A) 10 primos",
+      "B) 15 primos",
+      "C) 25 primos",
+      "D) 12 primos"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Los números primos del 2 al 50 son: 2,3,5,7,11,13,17,19,23,29,31,37,41,43,47. Son exactamente 15 primos. El algoritmo los recoge usando la función es_primo como filtro.",
+    "habilidad_evaluada": "Aplicación de funciones como filtros en ciclos para coleccionar elementos que cumplen una condición"
+  },
+  {
+    "pregunta_id": "u3_a_11",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "combinacion_de_ciclos_con_funciones",
+    "tipo": "Razonamiento",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Un sistema aplica una cadena de transformaciones a cada elemento de un vector:\ntransformaciones = [normalizar, eliminar_outliers, escalar, redondear]\nvector_resultado = vector_original\nPARA cada transformacion EN transformaciones:\n  vector_resultado = aplicar(transformacion, vector_resultado)\nEste patrón se llama 'pipeline'. ¿Cuál es su ventaja principal y qué problema puede surgir?",
+    "opciones": [
+      "A) Ventaja: es más rápido. Problema: no se puede cambiar el orden",
+      "B) Ventaja: las transformaciones son intercambiables y el código escala fácilmente (agregar/quitar funciones sin cambiar el ciclo). Problema: el orden importa — eliminar_outliers antes de normalizar puede dar resultados distintos a normalizar primero",
+      "C) No tiene ventajas sobre aplicar las funciones una a una",
+      "D) Ventaja: ahorra memoria. Problema: solo funciona con vectores numéricos"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "El patrón pipeline permite agregar, quitar o reordenar transformaciones sin cambiar el código del ciclo principal. Sin embargo, muchas transformaciones estadísticas son dependientes del orden: normalizar cambia los valores antes de que eliminar_outliers actúe, lo que puede producir resultados cualitativamente diferentes.",
+    "habilidad_evaluada": "Comprensión del patrón pipeline y su trade-off entre flexibilidad y dependencia de orden"
+  },
+  {
+    "pregunta_id": "u3_b_12",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "optimizacion_de_ciclos_evitar_iteraciones_innecesarias",
+    "tipo": "Conceptual",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Para verificar si un número N es primo, ¿por qué es suficiente verificar divisores hasta √N en lugar de hasta N-1?",
+    "opciones": [
+      "A) Porque los números primos son siempre menores que su raíz cuadrada",
+      "B) Si N tiene un divisor mayor que √N, su par correspondiente es menor que √N y ya fue verificado. Por lo tanto, no es necesario verificar más allá de √N",
+      "C) Por convención matemática, no por razón lógica",
+      "D) Porque √N siempre es primo"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Si d es divisor de N y d>√N, entonces N/d < √N, y N/d también es divisor de N que ya fue verificado. Por lo tanto, si ningún número hasta √N divide a N, tampoco lo hará ningún número mayor. Esto reduce el ciclo de N pasos a √N pasos.",
+    "habilidad_evaluada": "Comprensión de la optimización de √N en verificación de primalidad"
+  },
+  {
+    "pregunta_id": "u3_m_12",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "optimizacion_de_ciclos_evitar_iteraciones_innecesarias",
+    "tipo": "Análisis",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Dos algoritmos de ordenamiento burbuja:\nA (básico): siempre hace N-1 pasadas\nB (optimizado): si en una pasada no hubo intercambios, detiene porque la lista ya está ordenada\nPara una lista casi ordenada con solo 1 elemento fuera de lugar, ¿cuántas pasadas hace cada algoritmo (N=100)?",
+    "opciones": [
+      "A) A: 99 pasadas, B: 99 pasadas; son iguales",
+      "B) A: 99 pasadas siempre. B: aproximadamente 2 pasadas (1 para colocar el elemento, 1 para verificar que no hubo más intercambios)",
+      "C) A: 50 pasadas, B: 2 pasadas",
+      "D) A: 1 pasada, B: 99 pasadas"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "El algoritmo A siempre hace N-1=99 pasadas sin importar el estado inicial de la lista. El B detecta que tras 1-2 pasadas la lista quedó ordenada (cero intercambios) y termina. Para listas casi ordenadas, el B puede ser dramáticamente más eficiente: O(N) en el mejor caso vs O(N²) siempre del A.",
+    "habilidad_evaluada": "Comprensión de la optimización del ordenamiento burbuja mediante detección de convergencia"
+  },
+  {
+    "pregunta_id": "u3_a_12",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "optimizacion_de_ciclos_evitar_iteraciones_innecesarias",
+    "tipo": "Razonamiento",
+    "dominio": "KC_LOOPS_AND_ITERATION",
+    "enunciado": "Un sistema busca un valor en una lista de 10 millones de elementos. Versión A: búsqueda lineal O(N). Versión B: ordena primero O(N log N) y luego búsqueda binaria O(log N). Si se realizan 1000 búsquedas distintas sobre la misma lista, ¿cuál versión es más eficiente y a partir de cuántas búsquedas conviene ordenar primero?",
+    "opciones": [
+      "A) A siempre es mejor porque no tiene el costo de ordenar",
+      "B) Con 1000 búsquedas, B es más eficiente: el costo de ordenar (10M×23≈230M ops) se amortiza entre 1000 búsquedas (cada una cuesta log(10M)≈23 ops). Conviene ordenar cuando k búsquedas superan el costo de ordenar: k×N > N×logN + k×logN → k > logN ≈ 23 búsquedas",
+      "C) A es mejor porque la búsqueda lineal es más simple",
+      "D) Son exactamente iguales para cualquier número de búsquedas"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Costo A: 1000 búsquedas × 10M = 10 mil millones de ops. Costo B: ordenar (10M×23=230M) + 1000×23=23,000 búsquedas binarias ≈ 230M ops total. B es ~43x más eficiente. El punto de equilibrio: vale la pena ordenar si se harán más de ~23 búsquedas (log(10M) ≈ 23).",
+    "habilidad_evaluada": "Análisis de amortización del costo de ordenamiento versus múltiples búsquedas"
+  },
+  {
+    "pregunta_id": "u3_b_13",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "busqueda_de_elementos_en_un_vector",
+    "tipo": "Conceptual",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "¿Cuál es la diferencia entre una búsqueda lineal y una búsqueda binaria?",
+    "opciones": [
+      "A) La búsqueda lineal usa ciclos; la binaria no",
+      "B) La búsqueda lineal recorre elemento por elemento sin requisitos previos; la binaria divide el vector a la mitad en cada paso pero requiere que el vector esté ordenado",
+      "C) La binaria busca en dos vectores a la vez",
+      "D) Son idénticas pero con nombres diferentes"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Búsqueda lineal: revisa cada elemento en orden, funciona en cualquier vector (O(N)). Búsqueda binaria: compara con el elemento del medio, descarta la mitad del vector, pero el vector DEBE estar ordenado (O(log N)).",
+    "habilidad_evaluada": "Distinción entre búsqueda lineal y binaria en términos de requisitos y eficiencia"
+  },
+  {
+    "pregunta_id": "u3_m_13",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "busqueda_de_elementos_en_un_vector",
+    "tipo": "Bebras",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Vector ordenado: [2,5,8,12,16,23,38,56,72,91]. Se busca el valor 23 con búsqueda binaria. ¿Cuántas comparaciones se realizan y en qué orden se comparan los elementos?",
+    "opciones": [
+      "A) 5 comparaciones: 2,5,8,12,23 en ese orden",
+      "B) 3 comparaciones: primero 16 (medio del total), luego 38 (medio de la mitad derecha), luego 23 (medio de ese segmento)",
+      "C) 10 comparaciones; revisa todos",
+      "D) 1 comparación; salta directamente al 23"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Paso 1: inicio=0, fin=9, medio=4 → vector[4]=16. 23>16 → busca en [5..9]. Paso 2: inicio=5, fin=9, medio=7 → vector[7]=56. 23<56 → busca en [5..6]. Paso 3: inicio=5, fin=6, medio=5 → vector[5]=23. ¡Encontrado! 3 comparaciones.",
+    "habilidad_evaluada": "Simulación de búsqueda binaria contando comparaciones y orden de acceso"
+  },
+  {
+    "pregunta_id": "u3_a_13",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "busqueda_de_elementos_en_un_vector",
+    "tipo": "Razonamiento",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Un sistema de base de datos tiene 1 millón de registros. Cada búsqueda lineal tarda 1 segundo. Se propone mantener los registros ordenados para usar búsqueda binaria. Cada inserción en la posición correcta del vector ordenado requiere desplazar en promedio N/2 elementos. ¿Vale la pena mantener ordenado si se hacen 10,000 búsquedas y 100 inserciones diarias?",
+    "opciones": [
+      "A) No vale la pena; las inserciones son muy costosas",
+      "B) Sí vale la pena: búsquedas sin orden=10,000s/día; con orden=log(1M)≈20µs×10,000=0.2s. Ahorro≈10,000s. Costo inserciones: 100×(N/2 desplazamientos) significativo pero compensado por el ahorro",
+      "C) Es indiferente; el ahorro y el costo son iguales",
+      "D) Depende del lenguaje de programación"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Sin orden: 10,000 búsquedas × 1s = 10,000 segundos/día. Con orden: 10,000 × O(log N) ≈ 10,000 × 20µs = 0.2 segundos. Ahorro: ~10,000 segundos. El costo de 100 inserciones ordenadas, aunque significativo, es irrelevante frente al ahorro de búsquedas. Para aplicaciones con alta frecuencia de búsqueda y baja inserción, mantener ordenado es claramente beneficioso.",
+    "habilidad_evaluada": "Análisis de costo-beneficio de mantener datos ordenados para optimizar búsquedas"
+  },
+  {
+    "pregunta_id": "u3_b_14",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "identificar_el_maximo_minimo_y_promedio_en_arreglos",
+    "tipo": "Análisis",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "vector=[15, 3, 42, 8, 27, 5]. ¿Cuáles son el máximo, mínimo y promedio?",
+    "opciones": [
+      "A) máx=42, mín=3, promedio=17",
+      "B) máx=27, mín=5, promedio=20",
+      "C) máx=42, mín=3, promedio=16.67",
+      "D) máx=42, mín=5, promedio=17"
+    ],
+    "respuesta_correcta": "C",
+    "explicacion": "Máximo: 42. Mínimo: 3. Suma: 15+3+42+8+27+5=100. Promedio: 100/6≈16.67.",
+    "habilidad_evaluada": "Cálculo de estadísticas básicas (máximo, mínimo, promedio) en un vector"
+  },
+  {
+    "pregunta_id": "u3_m_14",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "identificar_el_maximo_minimo_y_promedio_en_arreglos",
+    "tipo": "Caso práctico",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Un sistema calcula estadísticas de temperaturas de 5 días: [28, 35, 22, 41, 30]. Necesita: máximo, mínimo, promedio y rango (máx-mín). ¿Cuántos recorridos del vector se necesitan mínimo para calcular los 4 valores?",
+    "opciones": [
+      "A) 4 recorridos (uno por cada estadística)",
+      "B) 1 recorrido: en un solo ciclo se puede calcular máx, mín y suma simultáneamente; el promedio y rango se calculan al final con operaciones O(1)",
+      "C) 2 recorridos: uno para máx y mín, otro para promedio",
+      "D) 3 recorridos: uno para cada par de estadísticas"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "En un solo recorrido del vector se pueden mantener: máx (inicializar con primer elemento, actualizar si actual>máx), mín (igual pero con <), y suma (acumulador). Al terminar: promedio=suma/N, rango=máx-mín (ambos O(1)). Un solo recorrido es suficiente.",
+    "habilidad_evaluada": "Optimización de cálculo de múltiples estadísticas en un único recorrido del vector"
+  },
+  {
+    "pregunta_id": "u3_a_14",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "identificar_el_maximo_minimo_y_promedio_en_arreglos",
+    "tipo": "Razonamiento",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Un sensor registra temperatura cada segundo durante 24 horas (86,400 lecturas). Se necesita: máx global, mínimo, promedio, y además la 'hora pico' (hora con el mayor promedio de temperatura). ¿Qué estructura de datos y qué algoritmo permite calcular eficientemente la hora pico?",
+    "opciones": [
+      "A) Ordenar todas las 86,400 lecturas y tomar las primeras 3,600",
+      "B) Vector auxiliar de 24 elementos (promedio por hora): recorrer las 86,400 lecturas en un ciclo, acumular en el bucket de hora correspondiente (índice=segundo/3600), al final encontrar el máximo del vector de 24 promedios",
+      "C) Hacer 24 recorridos del vector, uno por hora",
+      "D) No es posible calcularlo en un solo recorrido"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Solución O(N): vector promedio_hora[24], suma_hora[24], contador_hora[24]. Para cada segundo s: hora=s/3600; suma_hora[hora]+=temperatura; contador_hora[hora]++. Al final: promedio_hora[h]=suma_hora[h]/contador_hora[h]. Hora pico: índice con mayor promedio_hora. Solo 1 recorrido de los datos + 1 recorrido de 24 elementos.",
+    "habilidad_evaluada": "Diseño de algoritmos con estructuras auxiliares para análisis estadístico por segmentos"
+  },
+  {
+    "pregunta_id": "u3_b_15",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "busqueda_en_matrices_fila_y_columna",
+    "tipo": "Conceptual",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Para buscar un valor específico en todas las celdas de una matriz de 3×4, ¿qué estructura de ciclo se necesita?",
+    "opciones": [
+      "A) Un ciclo simple",
+      "B) Dos ciclos anidados: el externo recorre filas (0 a 2), el interno recorre columnas (0 a 3); en cada celda se compara con el valor buscado",
+      "C) Cuatro ciclos separados",
+      "D) No se pueden buscar valores en matrices"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Para acceder a cada celda M[i][j], se necesitan dos índices. Dos ciclos anidados permiten visitar sistemáticamente todas las F×C celdas de la matriz.",
+    "habilidad_evaluada": "Identificación de la estructura de ciclos anidados para búsqueda en matrices"
+  },
+  {
+    "pregunta_id": "u3_m_15",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "busqueda_en_matrices_fila_y_columna",
+    "tipo": "Análisis",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Matriz M de calificaciones (4 estudiantes × 3 materias):\nM=[[3.5,4.0,2.8],[4.5,3.8,4.2],[2.9,3.1,3.7],[4.8,4.6,4.9]]\nEncuentra el estudiante (fila) con el mayor promedio. ¿Cuál es y cuál es su promedio?",
+    "opciones": [
+      "A) Estudiante 0; promedio=3.43",
+      "B) Estudiante 3; promedio=4.77",
+      "C) Estudiante 1; promedio=4.17",
+      "D) Estudiante 2; promedio=3.23"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Est0: (3.5+4.0+2.8)/3=3.43. Est1: (4.5+3.8+4.2)/3=4.17. Est2: (2.9+3.1+3.7)/3=3.23. Est3: (4.8+4.6+4.9)/3=4.77. El mayor promedio lo tiene el Estudiante 3 con 4.77.",
+    "habilidad_evaluada": "Búsqueda del máximo promedio por fila en una matriz mediante doble ciclo"
+  },
+  {
+    "pregunta_id": "u3_a_15",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "busqueda_en_matrices_fila_y_columna",
+    "tipo": "Bebras",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Matriz ordenada (cada fila y cada columna están ordenadas de menor a mayor). Se busca el valor 35 en la matriz:\n[[1,10,20,45],[5,15,30,55],[8,22,35,60],[12,28,45,70]]\nAlgoritmo eficiente: inicia en la esquina superior derecha M[0][cols-1]. Si M[i][j]==buscado: encontrado. Si M[i][j]>buscado: mueve a la izquierda (j--). Si M[i][j]<buscado: mueve abajo (i++). ¿Cuántos pasos hace y por qué este algoritmo es más eficiente que el doble ciclo?",
+    "opciones": [
+      "A) 4 pasos; igual de eficiente que doble ciclo",
+      "B) 4 pasos: M[0][3]=45>35→izq, M[0][2]=20<35→abajo, M[1][2]=30<35→abajo, M[2][2]=35=encontrado. Es O(F+C) vs O(F×C) del doble ciclo",
+      "C) 16 pasos; revisa toda la matriz",
+      "D) 1 paso; salta directamente al elemento"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Ruta: [0][3]=45>35→j=2; [0][2]=20<35→i=1; [1][2]=30<35→i=2; [2][2]=35=encontrado. 4 pasos. Complejidad: O(F+C) porque en cada paso se elimina una fila o una columna completa. El doble ciclo es O(F×C). Para una matriz 1000×1000: 2000 vs 1,000,000 pasos.",
+    "habilidad_evaluada": "Comprensión y simulación del algoritmo de búsqueda eficiente en matrices ordenadas O(F+C)"
+  },
+  {
+    "pregunta_id": "u3_b_16",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "patrones_en_matrices_diagonal_bordes_simetria",
+    "tipo": "Conceptual",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "En una matriz cuadrada N×N, ¿cuál es la condición para que una celda M[i][j] esté en la diagonal PRINCIPAL?",
+    "opciones": [
+      "A) i + j == N-1",
+      "B) i == j",
+      "C) i + j == N",
+      "D) i * j == 0"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "La diagonal principal conecta la esquina superior izquierda con la inferior derecha. Sus elementos tienen el mismo índice de fila y columna: M[0][0], M[1][1], M[2][2]... La condición es i==j.",
+    "habilidad_evaluada": "Identificación de la condición matemática para acceder a la diagonal principal de una matriz"
+  },
+  {
+    "pregunta_id": "u3_m_16",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "patrones_en_matrices_diagonal_bordes_simetria",
+    "tipo": "Análisis",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Algoritmo que imprime los elementos del borde de una matriz N×N (primera fila, última fila, primera columna, última columna) sin repetir esquinas. ¿Cuántos elementos tiene el borde de una matriz 5×5?",
+    "opciones": [
+      "A) 10 elementos",
+      "B) 16 elementos",
+      "C) 20 elementos",
+      "D) 25 elementos"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Fórmula del borde de NxN: primera fila (N=5) + última fila (N=5) + columnas intermedias izquierda (N-2=3) + columnas intermedias derecha (N-2=3) = 5+5+3+3=16. Alternativamente: 4×(N-1)=4×4=16.",
+    "habilidad_evaluada": "Cálculo del número de elementos en el borde de una matriz cuadrada"
+  },
+  {
+    "pregunta_id": "u3_a_16",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "patrones_en_matrices_diagonal_bordes_simetria",
+    "tipo": "Razonamiento",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Una imagen de 500×500 píxeles se representa como matriz. Se necesita aplicar un filtro que reemplaza cada píxel por el promedio de sus 8 vecinos (arriba, abajo, izquierda, derecha y 4 diagonales). ¿Qué problema especial presentan los píxeles del borde de la imagen y cómo se resuelve?",
+    "opciones": [
+      "A) Los píxeles del borde no tienen problema; tienen 8 vecinos normalmente",
+      "B) Los píxeles del borde tienen vecinos fuera de la matriz (índices negativos o ≥N). Se resuelve con: padding (agregar fila/columna extra de ceros o valores replicados), clipping (usar solo vecinos válidos), o verificación de índice antes de acceder",
+      "C) El filtro no puede aplicarse a matrices mayores de 100×100",
+      "D) Los píxeles del borde se eliminan antes de aplicar el filtro"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Un píxel en M[0][0] (esquina) necesitaría M[-1][-1], M[-1][0], etc., que no existen. Soluciones: (1) Padding: agregar una fila/columna virtual alrededor con valor 0 o replicando el borde; (2) Clipping: ignorar vecinos fuera del rango y promediar solo los válidos; (3) Guard: verificar 0<=i<N && 0<=j<N antes de acceder. El padding es la técnica más común en procesamiento de imágenes.",
+    "habilidad_evaluada": "Identificación y resolución del problema de bordes (boundary conditions) en filtros de matrices"
+  },
+  {
+    "pregunta_id": "u3_b_17",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "generalizacion_de_algoritmos_para_n_dimensiones",
+    "tipo": "Conceptual",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Un algoritmo que funciona en vectores (1D) y matrices (2D), ¿cómo se generaliza a datos en 3 dimensiones (como un cubo de datos)?",
+    "opciones": [
+      "A) Agregando un ciclo adicional para la tercera dimensión y un tercer índice",
+      "B) Usando el mismo algoritmo sin cambios",
+      "C) Convirtiendo el cubo en un vector largo",
+      "D) No es posible generalizar a 3 dimensiones"
+    ],
+    "respuesta_correcta": "A",
+    "explicacion": "La generalización a N dimensiones sigue el mismo patrón: cada dimensión adicional agrega un ciclo anidado y un índice. Para 3D: tres ciclos anidados con índices i, j, k para acceder a elemento[i][j][k].",
+    "habilidad_evaluada": "Comprensión del patrón de generalización dimensional mediante ciclos anidados adicionales"
+  },
+  {
+    "pregunta_id": "u3_m_17",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "generalizacion_de_algoritmos_para_n_dimensiones",
+    "tipo": "Análisis",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "Un cubo de datos 4×4×4 almacena temperaturas en una habitación (x=largo, y=ancho, z=altura). ¿Cuántos elementos tiene y cómo se calcula el promedio de toda la temperatura de la habitación?",
+    "opciones": [
+      "A) 48 elementos; promedio con un solo ciclo",
+      "B) 64 elementos (4³); promedio con tres ciclos anidados acumulando la suma de todos los datos[x][y][z] y dividiendo entre 64",
+      "C) 12 elementos (4×3 caras); promedio de las caras",
+      "D) 16 elementos; promedio con dos ciclos"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "4×4×4=64 elementos. Para el promedio: tres ciclos anidados (x de 0 a 3, y de 0 a 3, z de 0 a 3), acumular suma+=datos[x][y][z]. Al final: promedio=suma/64.",
+    "habilidad_evaluada": "Extensión de algoritmos de recorrido y cálculo estadístico a estructuras tridimensionales"
+  },
+  {
+    "pregunta_id": "u3_a_17",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "generalizacion_de_algoritmos_para_n_dimensiones",
+    "tipo": "Razonamiento",
+    "dominio": "KC_PATTERN_RECOGNITION",
+    "enunciado": "En aprendizaje automático, los datos de video se representan como tensores 4D: [frames][alto][ancho][canales_color]. Un video de 5 segundos a 30fps, resolución 1920×1080, con 3 canales (RGB). ¿Cuántos valores almacena este tensor y cuántos ciclos anidados se necesitarían para recorrerlo completamente?",
+    "opciones": [
+      "A) 1920×1080=2,073,600 valores; 2 ciclos",
+      "B) 150×1080×1920×3=933,120,000 (≈933 millones) valores; 4 ciclos anidados",
+      "C) 30×3=90 valores; 2 ciclos",
+      "D) 5×1080=5,400 valores; 1 ciclo"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Frames: 5s × 30fps = 150. Valores totales: 150×1080×1920×3 = 933,120,000. Se necesitarían 4 ciclos anidados (uno por dimensión). Esta es la razón por la que el procesamiento de video requiere GPUs: recorrer 933 millones de valores con operaciones matemáticas en un solo frame es computacionalmente intensivo.",
+    "habilidad_evaluada": "Cálculo de dimensiones de tensores multidimensionales y comprensión del costo computacional del video"
+  },
+  {
+    "pregunta_id": "u3_b_18",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "modularidad_disear_multiples_funciones_relacionadas",
+    "tipo": "Conceptual",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "¿Qué significa 'modularidad' en el diseño de software?",
+    "opciones": [
+      "A) Hacer el programa lo más corto posible",
+      "B) Dividir el sistema en módulos (componentes) independientes con responsabilidades claras, que se comunican a través de interfaces definidas",
+      "C) Usar muchos archivos de código",
+      "D) Evitar el uso de funciones"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "La modularidad organiza el software en partes independientes (módulos) donde cada uno tiene una responsabilidad específica. Los módulos se comunican a través de interfaces definidas, permitiendo que cada uno se desarrolle, pruebe y mantenga de forma independiente.",
+    "habilidad_evaluada": "Comprensión del concepto de modularidad como principio de diseño de software"
+  },
+  {
+    "pregunta_id": "u3_m_18",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "modularidad_disear_multiples_funciones_relacionadas",
+    "tipo": "Caso práctico",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "Un sistema de análisis de vectores tiene las funciones: calcular_suma(v), calcular_promedio(v), encontrar_máximo(v), encontrar_mínimo(v), calcular_desviacion_estandar(v). Observa que calcular_promedio llama a calcular_suma, y calcular_desviacion llama a calcular_promedio. ¿Qué principio de diseño refleja esta organización y qué ventaja tiene?",
+    "opciones": [
+      "A) Ningún principio; es solo conveniencia",
+      "B) Reutilización de componentes: las funciones de menor nivel (suma, promedio) son bloques de construcción para las de mayor nivel (desviación). Si se optimiza calcular_suma, todas las funciones que la usan se benefician",
+      "C) El principio de aislamiento: cada función debe ser completamente independiente",
+      "D) El principio de seguridad: las funciones críticas deben llamar a las menos críticas"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "La jerarquía de llamadas refleja el principio de reutilización: calcular_suma es el bloque base, calcular_promedio lo reutiliza, y calcular_desviacion reutiliza el promedio. Si se mejora o corrige calcular_suma, el beneficio se propaga hacia arriba automáticamente.",
+    "habilidad_evaluada": "Identificación del principio de reutilización en jerarquías de funciones relacionadas"
+  },
+  {
+    "pregunta_id": "u3_a_18",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "modularidad_disear_multiples_funciones_relacionadas",
+    "tipo": "Razonamiento",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "Se diseña un sistema de gestión de arreglos con dos versiones de la función buscar: buscar_lineal(arreglo, valor): O(N), sin requisitos; buscar_binaria(arreglo, valor): O(log N), requiere arreglo ordenado. Una función principal es_duplicado(arreglo, valor) verifica si valor aparece más de una vez. ¿Cómo diseñarías un módulo de búsqueda que elija automáticamente el algoritmo más eficiente según el estado del arreglo?",
+    "opciones": [
+      "A) Siempre usar búsqueda lineal para mayor simplicidad",
+      "B) Diseñar buscar(arreglo, valor, esta_ordenado=FALSO): SI esta_ordenado: usar buscar_binaria SINO: usar buscar_lineal. El módulo encapsula la decisión, manteniendo la interfaz consistente para quien lo usa",
+      "C) Siempre usar búsqueda binaria independientemente del orden",
+      "D) Crear funciones separadas sin ninguna función común"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "El módulo expone una interfaz unificada (buscar) que internamente selecciona el algoritmo más apropiado. El consumidor del módulo no necesita saber cuál algoritmo se usa; solo especifica si el arreglo está ordenado. Esto es el patrón de 'strategy' y ejemplifica cómo la modularidad oculta complejidad interna.",
+    "habilidad_evaluada": "Diseño de módulos que encapsulan la selección de estrategias algorítmicas"
+  },
+  {
+    "pregunta_id": "u3_b_19",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "reutilizacion_de_funciones_en_distintos_contextos",
+    "tipo": "Conceptual",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "La función calcular_promedio(lista) se usa en: el módulo de notas académicas, el módulo de análisis de ventas y el módulo de estadísticas de temperatura. ¿Qué principio demuestra esto?",
+    "opciones": [
+      "A) El principio de especificidad: cada módulo debe tener su propia función de promedio",
+      "B) El principio de reutilización (DRY - Don't Repeat Yourself): una función bien diseñada puede utilizarse en múltiples contextos sin modificaciones",
+      "C) El principio de seguridad: compartir funciones es más seguro",
+      "D) No demuestra ningún principio; es una coincidencia"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "DRY (Don't Repeat Yourself) establece que cada pieza de lógica debe existir en un solo lugar. Una función de promedio correctamente diseñada es genérica y reutilizable. Tener tres versiones separadas es antipatrón: si hay un bug, debe corregirse en tres lugares.",
+    "habilidad_evaluada": "Aplicación del principio DRY en el diseño de funciones reutilizables"
+  },
+  {
+    "pregunta_id": "u3_m_19",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "reutilizacion_de_funciones_en_distintos_contextos",
+    "tipo": "Análisis",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "La función ordenar_burbuja(vector) se implementó para ordenar números. Ahora se necesita ordenar nombres (strings). Un desarrollador propone modificar la función para que reciba también una función de comparación como parámetro: ordenar(vector, funcion_comparacion). ¿Por qué esta modificación aumenta la reutilización?",
+    "opciones": [
+      "A) No aumenta la reutilización; es más complejo",
+      "B) La función de comparación parametrizada permite que el mismo algoritmo de ordenamiento funcione con cualquier tipo de datos: números, strings, fechas, objetos complejos, solo cambiando la función de comparación",
+      "C) Solo funciona si los vectores tienen el mismo tamaño",
+      "D) Disminuye el rendimiento por el costo de llamar funciones"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Al parametrizar la comparación, el algoritmo de burbuja se convierte en genérico: el mismo código maneja cualquier tipo de dato. Para ordenar fechas o productos por precio, solo se pasa una función de comparación diferente. Este patrón es la base de las funciones de ordenamiento en todos los lenguajes modernos (sort() con comparador).",
+    "habilidad_evaluada": "Comprensión de la generalización mediante funciones de orden superior para mayor reutilización"
+  },
+  {
+    "pregunta_id": "u3_a_19",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "reutilizacion_de_funciones_en_distintos_contextos",
+    "tipo": "Bebras",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "Una biblioteca de funciones para arreglos incluye: filtrar(arreglo, condicion), mapear(arreglo, transformacion), reducir(arreglo, funcion, valor_inicial). Usando solo estas tres funciones, expresa el siguiente proceso: 'De una lista de 100 transacciones, tomar solo las de monto>10000, multiplicar cada monto por 1.19 (IVA), y calcular el total'",
+    "opciones": [
+      "A) Es imposible sin ciclos explícitos",
+      "B) grandes=filtrar(transacciones, t→t.monto>10000); con_IVA=mapear(grandes, t→t.monto*1.19); total=reducir(con_IVA, (acc,v)→acc+v, 0)",
+      "C) Solo se puede hacer con reducir, no con las otras",
+      "D) Se necesitan ciclos for adicionales para conectarlas"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "El paradigma funcional permite componer operaciones: filtrar selecciona el subconjunto relevante, mapear transforma cada elemento, reducir combina todos los valores en uno. Cada función es reutilizable independientemente; su composición crea pipelines expresivos sin ciclos explícitos visibles.",
+    "habilidad_evaluada": "Composición de funciones de orden superior (filtrar, mapear, reducir) para resolver problemas complejos"
+  },
+  {
+    "pregunta_id": "u3_b_20",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "funciones_que_llaman_a_otras_funciones",
+    "tipo": "Conceptual",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "Una función procesar_ventas() llama a calcular_total(), luego a aplicar_descuento() y finalmente a generar_factura(). ¿Cómo se llama a esta función principal y qué representa?",
+    "opciones": [
+      "A) Una función recursiva",
+      "B) Una función orquestadora: coordina el flujo llamando a subfunciones especializadas en el orden correcto",
+      "C) Una función de entrada principal del sistema operativo",
+      "D) Una función que no puede ser llamada desde fuera"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Una función orquestadora define el flujo de alto nivel sin implementar los detalles (que están en las subfunciones). Su responsabilidad es coordinar: llamar a cada subfunción en el orden correcto y pasar los resultados de una a otra.",
+    "habilidad_evaluada": "Comprensión del patrón de función orquestadora que coordina subfunciones"
+  },
+  {
+    "pregunta_id": "u3_m_20",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "funciones_que_llaman_a_otras_funciones",
+    "tipo": "Análisis",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "def analizar_grupo(vector):\n  promedio = calcular_promedio(vector)\n  desviacion = calcular_desviacion(vector, promedio)\n  clasificacion = clasificar_variabilidad(desviacion)\n  RETORNAR promedio, desviacion, clasificacion\nSi calcular_desviacion necesita el promedio ya calculado, ¿por qué se pasa como parámetro en lugar de que la calcule internamente?",
+    "opciones": [
+      "A) Por error de diseño; calcular_desviacion debería calcularlo internamente",
+      "B) Para evitar calcular el promedio dos veces (eficiencia) y para que calcular_desviacion pueda ser reutilizada cuando el promedio ya se conoce de otra fuente (flexibilidad)",
+      "C) Porque las funciones no pueden acceder a variables externas",
+      "D) Por convención; no hay diferencia real"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Si calcular_desviacion recalcula el promedio internamente, se hace el trabajo doble innecesariamente (ineficiente). Al recibirlo como parámetro: (1) se evita el cálculo duplicado y (2) la función es reutilizable en contextos donde el promedio ya existe. Este es el principio de inyección de dependencias.",
+    "habilidad_evaluada": "Comprensión de por qué pasar valores precalculados como parámetros evita trabajo redundante"
+  },
+  {
+    "pregunta_id": "u3_a_20",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "funciones_que_llaman_a_otras_funciones",
+    "tipo": "Razonamiento",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "Un sistema tiene la siguiente cadena de llamadas para procesar datos de sensores:\nleer_sensores() → validar_datos() → normalizar() → detectar_anomalias() → generar_alerta()\nUna falla en validar_datos() hace que los datos corruptos lleguen a normalizar() y detectar_anomalias() produciendo alertas falsas. ¿Cómo rediseñarías el flujo para que una falla en validar_datos() detenga el pipeline sin ejecutar los pasos siguientes?",
+    "opciones": [
+      "A) Eliminar la validación para simplificar el flujo",
+      "B) Hacer que validar_datos() retorne un código de resultado (datos_validos, error). La función orquestadora verifica el resultado antes de llamar al siguiente paso: SI resultado==error: detener y reportar",
+      "C) Ejecutar todos los pasos en paralelo para mayor velocidad",
+      "D) Repetir la validación en cada función posterior"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "El rediseño implementa el patrón de 'fail-fast': si una etapa del pipeline falla, el sistema se detiene inmediatamente en lugar de propagar datos inválidos. Cada función retorna su estado de éxito/fallo, y la orquestadora verifica antes de continuar. Esto previene efectos secundarios indeseados (alertas falsas) y hace el sistema más confiable.",
+    "habilidad_evaluada": "Diseño de pipelines robustos con manejo de errores en cadenas de llamadas entre funciones"
+  },
+  {
+    "pregunta_id": "u3_b_21",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "diseo_topdown_de_una_solucion_compleja",
+    "tipo": "Conceptual",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "¿En qué consiste el enfoque 'top-down' para diseñar software?",
+    "opciones": [
+      "A) Empezar programando las partes más pequeñas y detalladas primero",
+      "B) Partir del problema global (nivel alto) y descomponerlo progresivamente en subproblemas más pequeños y manejables hasta llegar al nivel de implementación",
+      "C) Revisar el código de abajo hacia arriba para encontrar errores",
+      "D) Diseñar primero la interfaz gráfica y luego la lógica"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "El diseño top-down comienza con la visión general del sistema y la descompone en partes cada vez más específicas. Contrasta con el enfoque bottom-up que comienza con los componentes individuales. Top-down facilita mantener la coherencia con los requisitos del usuario desde el inicio.",
+    "habilidad_evaluada": "Comprensión del enfoque top-down como metodología de diseño por descomposición jerárquica"
+  },
+  {
+    "pregunta_id": "u3_m_21",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "diseo_topdown_de_una_solucion_compleja",
+    "tipo": "Análisis",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "Problema: 'Sistema de gestión de inventario de una farmacia'. Descomposición top-down:\nNivel 1: Sistema de inventario\nNivel 2: Gestión de productos, Gestión de stock, Gestión de pedidos, Reportes\nNivel 3 (para Gestión de stock): verificar_stock_mínimo(), actualizar_cantidad(), registrar_movimiento(), alertar_proveedor()\n¿Cuántos niveles adicionales de descomposición podría necesitar verificar_stock_mínimo() y cuándo se detiene la descomposición?",
+    "opciones": [
+      "A) Siempre se necesitan exactamente 5 niveles",
+      "B) La descomposición se detiene cuando cada unidad hace una sola cosa claramente definida y puede implementarse en una función de 10-20 líneas. verificar_stock_mínimo puede descomponerse en: obtener_stock_actual(producto_id) y comparar_con_mínimo(actual, mínimo)",
+      "C) Se detiene cuando el árbol tiene forma simétrica",
+      "D) Nunca se detiene; siempre puede descomponerse más"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "La descomposición top-down se detiene cuando se llega a unidades de implementación directa: funciones que hacen una sola cosa, con código claro y conciso. No hay un número mágico de niveles; el criterio es la simplicidad de la unidad resultante. Descomponer demasiado (funciones de 1 línea) o muy poco (funciones de 500 líneas) son ambos antipatrones.",
+    "habilidad_evaluada": "Criterio de parada en la descomposición top-down y nivel apropiado de granularidad"
+  },
+  {
+    "pregunta_id": "u3_a_21",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "diseo_topdown_de_una_solucion_compleja",
+    "tipo": "Razonamiento",
+    "dominio": "KC_PROBLEM_DECOMPOSITION",
+    "enunciado": "Se diseña un sistema de análisis de datos de sensores IoT top-down:\nNivel 1: plataforma_iot()\nNivel 2: recolectar_datos(), procesar_datos(), almacenar_datos(), visualizar_datos()\nDurante el desarrollo, el equipo de almacenamiento descubre que necesita procesar los datos antes de guardarlos (compresión). Esto crea una dependencia circular: procesar_datos→almacenar→procesar. ¿Cómo resolvería este problema de diseño?",
+    "opciones": [
+      "A) Ignorar la dependencia circular; los sistemas siempre las tienen",
+      "B) Introducir un módulo intermedio 'transformar_para_almacenamiento()' que encapsula la compresión sin crear dependencia circular; separar 'procesamiento de análisis' de 'procesamiento para almacenamiento'",
+      "C) Eliminar la función procesar_datos() y hacer todo en almacenar_datos()",
+      "D) Crear dos versiones de procesar_datos(): una para análisis y otra para almacenamiento, duplicando el código"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Las dependencias circulares son un antipatrón que dificulta la prueba y el mantenimiento. La solución es extraer la responsabilidad compartida en un nuevo módulo: transformar_para_almacenamiento() es responsable solo de la compresión. Así: procesar_datos (análisis) y almacenar_datos llaman ambos a transformar_para_almacenamiento() sin crearse dependencias entre sí.",
+    "habilidad_evaluada": "Resolución de dependencias circulares en diseño top-down mediante extracción de módulos"
+  },
+  {
+    "pregunta_id": "u3_b_22",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "trazabilidad_de_un_algoritmo_paso_a_paso",
+    "tipo": "Análisis",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Algoritmo de ordenamiento burbuja (2 primeras pasadas) sobre [5,3,8,1]:\nPasada 1: compara pares adyacentes e intercambia si el izquierdo > derecho.\n¿Cuál es el estado del vector después de la primera pasada completa?",
+    "opciones": [
+      "A) [1,3,5,8]",
+      "B) [3,5,1,8]",
+      "C) [3,5,8,1]",
+      "D) [5,1,3,8]"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Pasada 1: (5,3)→5>3 intercambia→[3,5,8,1]; (5,8)→5<8 no intercambia→[3,5,8,1]; (8,1)→8>1 intercambia→[3,5,1,8]. Resultado después de pasada 1: [3,5,1,8]. El 8 (mayor) 'burbujea' hasta el final.",
+    "habilidad_evaluada": "Trazado manual de una pasada del algoritmo de ordenamiento burbuja"
+  },
+  {
+    "pregunta_id": "u3_m_22",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "trazabilidad_de_un_algoritmo_paso_a_paso",
+    "tipo": "Bebras",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Algoritmo para verificar si un vector es palíndromo:\nizq=0; der=N-1; es_palindromo=VERDADERO\nMIENTRAS izq < der:\n  SI v[izq] != v[der]: es_palindromo=FALSO; ROMPER\n  izq++; der--\nPara v=[1,2,3,2,1], ¿cuántas iteraciones hace el ciclo y cuál es el resultado?",
+    "opciones": [
+      "A) 5 iteraciones; FALSO",
+      "B) 2 iteraciones; VERDADERO (izq=0↔der=4: OK, izq=1↔der=3: OK, izq=2=der=2: condición izq<der=FALSO → termina)",
+      "C) 3 iteraciones; VERDADERO",
+      "D) 1 iteración; VERDADERO"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "iter1: izq=0,der=4: v[0]=1==v[4]=1 → OK; izq=1,der=3. iter2: izq=1,der=3: v[1]=2==v[3]=2 → OK; izq=2,der=2. Condición izq<der: 2<2=FALSO → termina. Resultado: VERDADERO. 2 iteraciones (el elemento central no necesita compararse consigo mismo).",
+    "habilidad_evaluada": "Trazado de algoritmo de verificación de palíndromo con dos punteros"
+  },
+  {
+    "pregunta_id": "u3_a_22",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "trazabilidad_de_un_algoritmo_paso_a_paso",
+    "tipo": "Razonamiento",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Algoritmo de ordenamiento por inserción:\nPARA i DESDE 1 HASTA N-1:\n  clave = v[i]\n  j = i - 1\n  MIENTRAS j >= 0 Y v[j] > clave:\n    v[j+1] = v[j]\n    j = j - 1\n  v[j+1] = clave\nTratar para v=[4,2,7,1,3]. ¿Cuál es el vector después de completar la iteración i=3 (procesando el elemento 1)?",
+    "opciones": [
+      "A) [1,2,4,7,3]",
+      "B) [1,2,7,4,3]",
+      "C) [2,4,7,1,3]",
+      "D) [1,4,2,7,3]"
+    ],
+    "respuesta_correcta": "A",
+    "explicacion": "Después de i=1 (clave=2): [2,4,7,1,3]. Después de i=2 (clave=7): [2,4,7,1,3] (sin cambio). En i=3 (clave=1): j=2: v[2]=7>1 → v[3]=7, j=1; v[1]=4>1 → v[2]=4, j=0; v[0]=2>1 → v[1]=2, j=-1. v[0]=1. Resultado: [1,2,4,7,3].",
+    "habilidad_evaluada": "Trazado detallado del algoritmo de inserción con seguimiento de índices y desplazamientos"
+  },
+  {
+    "pregunta_id": "u3_b_23",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "diseo_de_algoritmos_de_alta_complejidad",
+    "tipo": "Conceptual",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "¿Qué significa que un algoritmo tenga complejidad O(N²) comparado con O(N log N)?",
+    "opciones": [
+      "A) O(N²) es siempre mejor porque el exponente es constante",
+      "B) O(N²) escala cuadráticamente: duplicar N cuadruplica el tiempo. O(N log N) escala casi linealmente: es mucho más eficiente para valores grandes de N",
+      "C) Son iguales porque ambos dependen de N",
+      "D) O(N log N) es peor porque tiene más operaciones"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Para N=1000: O(N²)=1,000,000 operaciones; O(N log N)≈10,000 operaciones. Para N=1,000,000: O(N²)=10^12; O(N log N)≈20,000,000. La diferencia se vuelve dramática con datos grandes.",
+    "habilidad_evaluada": "Comprensión intuitiva de la diferencia entre complejidades cuadrática y cuasi-lineal"
+  },
+  {
+    "pregunta_id": "u3_m_23",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "diseo_de_algoritmos_de_alta_complejidad",
+    "tipo": "Análisis",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Se necesita encontrar todos los pares de números en un vector de N elementos que sumen un valor objetivo K. Enfoque A: dos ciclos anidados O(N²) — compara cada par posible. Enfoque B: ordenar O(N log N) + dos punteros O(N) = O(N log N) total. Para N=10,000, si cada operación tarda 1 nanosegundo, ¿cuánto tarda cada enfoque?",
+    "opciones": [
+      "A) A=0.1s, B=0.1s (iguales)",
+      "B) A≈100,000,000 ns=0.1s. B≈140,000 ns=0.00014s. B es ~714 veces más rápido",
+      "C) A=10,000ns=0.00001s; B=0.1s",
+      "D) No se puede calcular sin conocer el hardware"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "A: N²=10,000²=100,000,000 operaciones × 1ns = 0.1 segundos. B: N log N ≈ 10,000×13.3≈133,000 + N=10,000 = ~143,000 ops × 1ns ≈ 0.000143 segundos. B es aproximadamente 700 veces más rápido para N=10,000.",
+    "habilidad_evaluada": "Cálculo y comparación de tiempos de ejecución según complejidad algorítmica"
+  },
+  {
+    "pregunta_id": "u3_a_23",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "diseo_de_algoritmos_de_alta_complejidad",
+    "tipo": "Razonamiento",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "El problema de la mochila (knapsack) 0/1: dados N objetos con pesos y valores, y una mochila con capacidad máxima W, ¿cuáles objetos llevar para maximizar el valor sin superar el peso? Un algoritmo de fuerza bruta prueba todas las combinaciones (2^N). Un algoritmo de programación dinámica usa una tabla de N×W. Para N=30 objetos y W=100kg, ¿cuántas operaciones hace cada enfoque?",
+    "opciones": [
+      "A) Ambos hacen N×W=3,000 operaciones",
+      "B) Fuerza bruta: 2^30 ≈ 1,073,741,824 (≈1 billón). Programación dinámica: N×W=30×100=3,000. DP es aproximadamente 358,000 veces más eficiente",
+      "C) Fuerza bruta: N=30 operaciones; DP: 2^N operaciones",
+      "D) Son iguales para N<50"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Fuerza bruta: explora 2^30 ≈ 1 billón de subconjuntos. Programación dinámica: llena una tabla de N filas × W columnas = 3,000 celdas. La DP convierte un problema exponencial O(2^N) en pseudopolinomial O(N×W) al almacenar soluciones a subproblemas y reutilizarlas.",
+    "habilidad_evaluada": "Comprensión de cómo la programación dinámica convierte problemas exponenciales en polinomiales"
+  },
+  {
+    "pregunta_id": "u3_b_24",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "optimizacion_de_un_algoritmo",
+    "tipo": "Conceptual",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "¿Cuál es la primera pregunta que debe hacerse al optimizar un algoritmo?",
+    "opciones": [
+      "A) ¿En qué lenguaje está escrito?",
+      "B) ¿Dónde está el cuello de botella? (medir antes de optimizar, no asumir)",
+      "C) ¿Cuántas líneas de código tiene?",
+      "D) ¿Fue escrito por un experto?"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "La regla de oro de la optimización: 'Medir primero, optimizar después'. Sin medir (profiling), se corre el riesgo de optimizar partes que no son el problema real. El 80% del tiempo de ejecución suele concentrarse en el 20% del código.",
+    "habilidad_evaluada": "Comprensión de la importancia de medir antes de optimizar (regla 80/20)"
+  },
+  {
+    "pregunta_id": "u3_m_24",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "optimizacion_de_un_algoritmo",
+    "tipo": "Caso práctico",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Un algoritmo verifica si un número N es primo revisando divisores del 2 hasta N-1. Para N=999,983 (primo grande), ¿cuántas divisiones hace la versión no optimizada vs la optimizada (hasta √N)?",
+    "opciones": [
+      "A) Igual; ambas hacen N iteraciones",
+      "B) No optimizado: ≈999,981 divisiones. Optimizado (hasta √N≈999.9): ≈999 divisiones. La optimización reduce ~1,000 veces las operaciones",
+      "C) No optimizado: 10 divisiones; optimizado: 5 divisiones",
+      "D) No optimizado: ∞; optimizado: N divisiones"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Sin optimización: ciclo del 2 al 999,982 = 999,981 iteraciones. Con optimización √N: ciclo del 2 al ≈999 = 998 iteraciones. La reducción es de factor ≈1000 (=√N para N≈10^6). Este es un ejemplo clásico de cómo una mejora matemática reduce dramáticamente el número de operaciones.",
+    "habilidad_evaluada": "Cuantificación del impacto de la optimización de √N en verificación de primalidad"
+  },
+  {
+    "pregunta_id": "u3_a_24",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "optimizacion_de_un_algoritmo",
+    "tipo": "Razonamiento",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Un sistema procesa 10,000 consultas por segundo. Cada consulta ejecuta: (1) buscar en lista no ordenada O(N) con N=5,000, (2) formatear el resultado, (3) enviar respuesta. El profiling muestra: 95% del tiempo en búsqueda, 3% en formateo, 2% en envío. Un ingeniero propone dos optimizaciones: A) Ordenar la lista y usar búsqueda binaria. B) Optimizar el formateo 5x más rápido. ¿Cuál optimización tiene mayor impacto y cuánto reduce el tiempo total cada una?",
+    "opciones": [
+      "A) B tiene mayor impacto porque es más fácil de implementar",
+      "B) A tiene mayor impacto: reduce el 95% del tiempo en factor log(5000)≈12 (búsqueda: 95%/12≈8% del total). B solo afecta el 3% del tiempo y lo reduce al 0.6%, una mejora marginal del 2.4% sobre el total",
+      "C) Son iguales en impacto",
+      "D) Ninguna tiene impacto significativo"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "La Ley de Amdahl: el máximo beneficio de una optimización es proporcional a la fracción del tiempo que representa. Optimizar búsqueda (95% del tiempo): tiempo nuevo ≈ 5% + 95%/12 ≈ 12.9% del original → mejora de 7.7x. Optimizar formateo (3% del tiempo, 5x): tiempo nuevo ≈ 97% + 3%/5 = 97.6% → mejora de 2.4%: casi insignificante.",
+    "habilidad_evaluada": "Aplicación de la Ley de Amdahl para priorizar optimizaciones según el porcentaje de tiempo de ejecución"
+  },
+  {
+    "pregunta_id": "u3_b_25",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "comparar_soluciones_alternativas_al_mismo_problema",
+    "tipo": "Conceptual",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Para ordenar un arreglo, existen: burbuja O(N²), inserción O(N²), selección O(N²), mergesort O(N log N) y quicksort O(N log N) promedio. ¿Cuándo podría preferirse burbuja sobre mergesort?",
+    "opciones": [
+      "A) Nunca; mergesort siempre es mejor",
+      "B) Para listas pequeñas (N<20) o casi ordenadas: burbuja tiene menor overhead de implementación y memoria; para arreglos casi ordenados puede ser O(N) con la optimización de detección",
+      "C) Solo cuando el lenguaje no tiene mergesort",
+      "D) Cuando los datos son negativos"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "La elección de algoritmo depende del contexto. Para N pequeño, el overhead de mergesort (recursión, memoria auxiliar) puede superar su ventaja teórica. Para arreglos casi ordenados, burbuja optimizado es O(N). En la práctica, muchos lenguajes usan Timsort (combinación de inserción y mergesort) que aprovecha estas situaciones.",
+    "habilidad_evaluada": "Comprensión de que la complejidad teórica no siempre determina el mejor algoritmo en la práctica"
+  },
+  {
+    "pregunta_id": "u3_m_25",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "comparar_soluciones_alternativas_al_mismo_problema",
+    "tipo": "Análisis",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Problema: encontrar todos los números primos hasta N (Criba de Eratóstenes vs verificación individual). Criba: marca múltiplos de cada primo encontrado. Complejidad: O(N log log N). Verificación individual: para cada número hasta N, verifica si es primo (O(√N) por número). Complejidad total: O(N√N). Para N=1,000,000, ¿cuántas operaciones aproximadamente hace cada método?",
+    "opciones": [
+      "A) Ambos hacen N=1,000,000 operaciones",
+      "B) Criba: ≈N×log(log(N))≈1,000,000×3≈3,000,000. Verificación: N×√N=1,000,000×1,000=1,000,000,000. La Criba es ~333 veces más eficiente",
+      "C) Verificación: 1,000,000; Criba: 2,000,000",
+      "D) Son equivalentes para N<10M"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Para N=10^6: Criba: O(N log log N) ≈ 10^6 × 3 = 3 millones de operaciones. Verificación individual: O(N√N) = 10^6 × 10^3 = 10^9 operaciones. La Criba es ~333 veces más rápida. Este es un ejemplo clásico de cómo un algoritmo más inteligente supera ampliamente al enfoque ingenuo.",
+    "habilidad_evaluada": "Comparación cuantitativa de complejidades algorítmicas para el problema de encontrar primos"
+  },
+  {
+    "pregunta_id": "u3_a_25",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "comparar_soluciones_alternativas_al_mismo_problema",
+    "tipo": "Razonamiento",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Tres soluciones para calcular el N-ésimo número de Fibonacci:\nA: Recursión simple — O(2^N), recalcula muchos valores\nB: Memoización (guardar resultados ya calculados) — O(N) tiempo, O(N) espacio\nC: Iterativo con 2 variables — O(N) tiempo, O(1) espacio\nPara N=50, si C tarda 1 microsegundo, ¿cuánto tardaría A aproximadamente?",
+    "opciones": [
+      "A) 5 microsegundos (50x más lento)",
+      "B) 2^50 ≈ 10^15 microsegundos ≈ 31 años",
+      "C) 50 microsegundos",
+      "D) 1 millisegundo"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "A tiene complejidad O(2^N). Para N=50: 2^50 ≈ 1,125,899,906,842,624 operaciones. Si C tarda 50 operaciones × 0.02µs ≈ 1µs, entonces A tardaría ~1,125,899,906,842,624/50 µs ≈ 22,517,998,136 segundos ≈ 714 años. La diferencia exponencial vs lineal es devastadora para N grande.",
+    "habilidad_evaluada": "Comprensión dramática de la diferencia entre O(2^N) y O(N) mediante cálculo concreto para Fibonacci"
+  },
+  {
+    "pregunta_id": "u3_b_26",
+    "unidad": "unidad_3",
+    "nivel": "BASICO",
+    "kc": "diseo_completo_de_un_caso_de_estudio",
+    "tipo": "Conceptual",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Al diseñar un sistema completo de análisis de datos de ventas, ¿cuál es el orden correcto de las etapas?",
+    "opciones": [
+      "A) Programar → Analizar → Diseñar → Probar",
+      "B) Analizar el problema → Diseñar la solución → Implementar → Probar → Documentar",
+      "C) Probar → Implementar → Analizar → Documentar",
+      "D) Documentar → Probar → Diseñar → Implementar"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "El orden estándar en ingeniería de software: (1) Análisis: entender qué se necesita, (2) Diseño: planear cómo se construirá, (3) Implementación: construirlo, (4) Pruebas: verificar que funciona correctamente, (5) Documentación: registrar cómo funciona. Cada etapa alimenta a la siguiente.",
+    "habilidad_evaluada": "Reconocimiento del orden correcto de etapas en el desarrollo de un sistema completo"
+  },
+  {
+    "pregunta_id": "u3_m_26",
+    "unidad": "unidad_3",
+    "nivel": "MEDIO",
+    "kc": "diseo_completo_de_un_caso_de_estudio",
+    "tipo": "Caso práctico",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Sistema: 'Analizar las ventas mensuales de 5 productos durante 12 meses y encontrar el producto más vendido, el mes con mayor venta total y el promedio general'. ¿Qué estructura de datos es más apropiada y cómo se organizan los tres cálculos?",
+    "opciones": [
+      "A) Un vector de 60 elementos sin estructura",
+      "B) Matriz ventas[5][12]: filas=productos, columnas=meses. Producto más vendido: suma de cada fila → max. Mes mayor venta: suma de cada columna → max. Promedio: suma total / 60",
+      "C) 5 vectores separados de 12 elementos cada uno",
+      "D) Un único número que acumule todo"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "La matriz [5][12] organiza naturalmente: producto×mes. Producto más vendido: PARA cada fila, sumar columnas → encontrar fila con mayor suma. Mes mayor venta: PARA cada columna, sumar filas → encontrar columna con mayor suma. Promedio: suma total de todos los 60 elementos / 60.",
+    "habilidad_evaluada": "Diseño de estructura de datos y algoritmos para análisis multidimensional de datos"
+  },
+  {
+    "pregunta_id": "u3_a_26",
+    "unidad": "unidad_3",
+    "nivel": "ALTO",
+    "kc": "diseo_completo_de_un_caso_de_estudio",
+    "tipo": "Razonamiento",
+    "dominio": "KC_ALGORITHMIC_THINKING",
+    "enunciado": "Caso de estudio completo: 'Sistema de detección de anomalías en datos de sensores industriales'. Datos: 100 sensores, 1 lectura/segundo, 8 horas de operación = 2,880,000 lecturas. Requisito: detectar en tiempo real cualquier sensor cuya lectura esté a más de 3 desviaciones estándar del promedio histórico. Diseña la arquitectura de datos y el algoritmo principal, justificando cada decisión.",
+    "opciones": [
+      "A) Guardar todas las 2,880,000 lecturas en memoria y recalcular estadísticas desde cero en cada nueva lectura",
+      "B) Buffer circular por sensor (últimas N lecturas), estadísticas incrementales (promedio y desviación con fórmula online O(1)), comparar nueva lectura contra umbral dinámico. Complejidad: O(1) por nueva lectura, O(sensores) memoria",
+      "C) Solo comparar la lectura actual con un umbral fijo predefinido",
+      "D) Procesar en lotes de 1 hora; la detección en tiempo real no es necesaria"
+    ],
+    "respuesta_correcta": "B",
+    "explicacion": "Arquitectura óptima: (1) Buffer circular de las últimas K lecturas por sensor (O(K) memoria, no 2.88M). (2) Estadísticas incrementales: al llegar una nueva lectura, actualizar promedio y varianza con fórmula de Welford (O(1)) sin recalcular desde cero. (3) Umbral: promedio±3σ actualizado incrementalmente. Resultado: O(1) por lectura, detección instantánea, memoria acotada. Comparar con O(N) de recalcular todo: 100 sensores × O(1) = O(100) fijo vs O(2,880,000) creciente.",
+    "habilidad_evaluada": "Diseño de sistemas de procesamiento en tiempo real con estructuras de datos y algoritmos eficientes"
+  }
+]

@@ -1,0 +1,10 @@
+.env
+.env.local
+venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+uploads/
+output/
+tutor.db
