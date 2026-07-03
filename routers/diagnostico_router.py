@@ -1,4 +1,5 @@
 import json
+import logging
 import random
 import uuid
 from datetime import datetime
@@ -13,6 +14,7 @@ from database import get_db
 from auth import get_current_user
 import models
 from models import DiagnosticoSesion, BKTEstado, Nivel, User
+from services.progress_service import nivelar_unidad
 from bkt.engine import (
     BKT_PARAMS, KC_ORDEN_POR_UNIDAD, NIVEL_ORDEN,
     DOMINIO_UMBRAL, DESCENSO_UMBRAL, MAX_PREGUNTAS_POR_KC, MIN_PREGUNTAS_POR_KC,
@@ -256,6 +258,14 @@ def responder_pregunta(
         current_user.nivel_actual = Nivel(nivel_g)
         db.commit()
 
+        # Nivelar unidad anterior automáticamente si aplica
+        unidad_num = int(sesion.unidad_id.split("_")[1])
+        if unidad_num > 1:
+            try:
+                nivelar_unidad(f"unidad_{unidad_num - 1}", nivel_g, current_user.id, db)
+            except Exception as e:
+                logging.warning(f"nivelar_unidad falló (no crítico): {e}")
+
         return {
             "correcto": correcto,
             "respuesta_correcta": respuesta_correcta_shuffled,
@@ -293,6 +303,14 @@ def responder_pregunta(
             sesion.nivel_resultado_global = Nivel(nivel_g)
             current_user.nivel_actual = Nivel(nivel_g)
             db.commit()
+
+            unidad_num = int(sesion.unidad_id.split("_")[1])
+            if unidad_num > 1:
+                try:
+                    nivelar_unidad(f"unidad_{unidad_num - 1}", nivel_g, current_user.id, db)
+                except Exception as e:
+                    logging.warning(f"nivelar_unidad falló (no crítico): {e}")
+
             return {
                 "correcto": correcto,
                 "respuesta_correcta": respuesta_correcta_shuffled,

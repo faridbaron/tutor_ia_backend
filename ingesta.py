@@ -16,7 +16,6 @@ from pinecone import Pinecone, ServerlessSpec
 from extractors.pdf_extractor import PDFExtractor, agrupar_en_chunks
 from extractors.llm_extractor import LLMExtractor
 from pipeline.neo4j_builder import Neo4jBuilder
-from prompts.extraction_prompts import PROMPT_GRAFO_PREREQUISITOS
 
 # ── Configuración de logging ──────────────────────────────────
 logging.basicConfig(
@@ -107,38 +106,111 @@ def setup_pinecone(api_key: str) -> any:
 # GRAFO DE PRERREQUISITOS DESDE EXCEL
 # ─────────────────────────────────────────────────────────────
 
-def generar_grafo_desde_excel(ruta_excel: str, llm: LLMExtractor,
-                               neo4j: Neo4jBuilder):
-    """
-    Lee el Excel con los temas del curso, pide al LLM que genere el grafo
-    de prerrequisitos y lo carga en Neo4j.
-    """
+def _generar_grafo_dict(ruta_excel: str) -> dict:
+    """Lee el Excel y devuelve el grafo como dict {nodos, relaciones} sin tocar Neo4j."""
     import openpyxl
+    import re as _re
+    import unicodedata
+
+    def _canonico(nombre: str) -> str:
+        s = str(nombre or "").strip().lower()
+        s = unicodedata.normalize("NFD", s)
+        s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+        s = _re.sub(r"[^a-z0-9]+", "_", s)
+        return s.strip("_")
+
+    NIVEL_SUFIJO = {"básico": "BASICO", "medio": "MEDIO", "alto": "ALTO"}
+    NIVEL_NUM    = {"básico": 1, "medio": 2, "alto": 3}
+
+    def _node_id(tema: str, nivel: str) -> str:
+        return f"{_canonico(tema)}_{NIVEL_SUFIJO[nivel.lower()]}"
+
+    def _split_prereqs(texto: str) -> list[str]:
+        """Divide la lista de prerrequisitos respetando comas dentro de paréntesis."""
+        partes, actual, depth = [], [], 0
+        for ch in texto:
+            if ch == "(":
+                depth += 1
+                actual.append(ch)
+            elif ch == ")":
+                depth -= 1
+                actual.append(ch)
+            elif ch == "," and depth == 0:
+                p = "".join(actual).strip()
+                if p:
+                    partes.append(p)
+                actual = []
+            else:
+                actual.append(ch)
+        p = "".join(actual).strip()
+        if p:
+            partes.append(p)
+        return partes
+
+    def _parse_prereq(texto: str):
+        import unicodedata as _ud
+        texto = _ud.normalize("NFC", texto.strip())
+        m = _re.match(r"^(.+?)\s*\((Básico|Medio|Alto)\)\s*$", texto)
+        if not m:
+            return None
+        nivel = _ud.normalize("NFC", m.group(2).strip())
+        if nivel.lower() not in NIVEL_SUFIJO:
+            return None
+        return _node_id(m.group(1).strip(), nivel)
+
     wb = openpyxl.load_workbook(ruta_excel)
-    ws = wb.active
+    ws = wb["Temas"]
 
-    temas = []
+    nodos:     dict[str, dict] = {}
+    relaciones: set[tuple[str, str]] = set()
+
     for fila in ws.iter_rows(min_row=2, values_only=True):
-        if fila[0]:  # primera columna = nombre del tema
-            temas.append({
-                "nombre": str(fila[0]).strip(),
-                "unidad": str(fila[1]).strip() if len(fila) > 1 and fila[1] else "",
-            })
+        cols = (fila + (None,) * 5)[:5]
+        unidad_raw, tema_raw, nivel_raw, dominio_raw, prereqs_raw = cols
 
-    lista_temas_str = "\n".join(
-        f"- {t['nombre']} (Unidad: {t['unidad']})" for t in temas
+        if not tema_raw or not nivel_raw:
+            continue
+        import unicodedata as _ud
+        nivel_str = _ud.normalize("NFC", str(nivel_raw).strip())
+        if nivel_str.lower() not in NIVEL_SUFIJO:
+            continue
+
+        tema   = str(tema_raw).strip()
+        nid    = _node_id(tema, nivel_str)
+        m      = _re.search(r"unidad\s*(\d+)", str(unidad_raw or ""), _re.IGNORECASE)
+        unidad = f"Unidad {m.group(1)}" if m else str(unidad_raw or "").strip()
+
+        nodos[nid] = {
+            "tema_canonico":         nid,
+            "nombre_display":        f"{tema} ({nivel_str})",
+            "descripcion":           "",
+            "dificultad":            NIVEL_NUM[nivel_str.lower()],
+            "tiempo_estimado_horas": 1,
+            "unidad":                unidad,
+        }
+
+        for parte in _split_prereqs(str(prereqs_raw or "")):
+            pre_nid = _parse_prereq(parte)
+            if pre_nid and pre_nid != nid:
+                relaciones.add((pre_nid, nid))
+
+    relaciones = {(p, t) for p, t in relaciones if p in nodos and t in nodos}
+
+    return {
+        "nodos": list(nodos.values()),
+        "relaciones": [{"desde": p, "hacia": t} for p, t in relaciones],
+    }
+
+
+def generar_grafo_desde_excel(ruta_excel: str, neo4j: Neo4jBuilder):
+    """Lee el Excel y carga el grafo en Neo4j (primera ingesta, cuando Neo4j está vacío)."""
+    grafo = _generar_grafo_dict(ruta_excel)
+
+    logger.info(
+        f"Grafo desde Excel: {len(grafo['nodos'])} nodos, "
+        f"{len(grafo['relaciones'])} relaciones"
     )
-    prompt = PROMPT_GRAFO_PREREQUISITOS.format(lista_temas=lista_temas_str)
 
-    logger.info(f"Generando grafo de prerrequisitos para {len(temas)} temas...")
-    raw = llm._llamar_texto(prompt)
-    if not raw:
-        logger.error("No se pudo generar el grafo de prerrequisitos.")
-        return
-
-    grafo = json.loads(raw)
-
-    # Guardar para revisión
     Path("output").mkdir(exist_ok=True)
     with open("output/grafo_prerequisitos.json", "w", encoding="utf-8") as f:
         json.dump(grafo, f, ensure_ascii=False, indent=2)
@@ -302,7 +374,7 @@ def main():
         neo4j.crear_indices()
 
         # ── 1. Grafo de prerrequisitos desde Excel ────────────
-        generar_grafo_desde_excel(args.excel, llm, neo4j)
+        generar_grafo_desde_excel(args.excel, neo4j)
 
         # ── 2. Procesar cada libro ────────────────────────────
         totales = []

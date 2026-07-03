@@ -1,29 +1,21 @@
 """
 Carga el grafo de prerrequisitos DIRECTAMENTE desde el Excel a Neo4j.
-No necesita LLM — el Excel ya tiene los node_id, temas y relaciones listos.
+No necesita LLM — el Excel tiene los temas y relaciones listos.
 
-Hoja "Temas (3 niveles) y Prereq." → nodos Tema
-Hoja "Mapa Prerequisitos (Neo4j)"  → relaciones REQUIERE_PREVIO
+Hoja "Temas": Unidad | Tema | Nivel | Dominio | Prerequisitos
+Los node_id se derivan automáticamente de Tema + Nivel.
 """
 
 import logging
+import re
+import unicodedata
 import openpyxl
 from neo4j import GraphDatabase
 
 logger = logging.getLogger(__name__)
 
-# Mapeo de nivel texto → entero (para dificultad)
-NIVEL_A_INT = {"Básico": 1, "Medio": 2, "Alto": 3}
-
-# Mapeo de dominio KC → descripción corta
-KC_DISPLAY = {
-    "KC_ALGORITHMIC_THINKING":  "Pensamiento Algorítmico",
-    "KC_ABSTRACTION":           "Abstracción",
-    "KC_PATTERN_RECOGNITION":   "Reconocimiento de Patrones",
-    "KC_PROBLEM_DECOMPOSITION": "Descomposición de Problemas",
-    "KC_PROPOSITIONAL_LOGIC":   "Lógica Proposicional y Condicional",
-    "KC_LOOPS_AND_ITERATION":   "Bucles y Ciclos",
-}
+NIVEL_A_INT    = {"Básico": 1, "Medio": 2, "Alto": 3}
+NIVEL_A_SUFIJO = {"básico": "BASICO", "medio": "MEDIO", "alto": "ALTO"}
 
 
 class ExcelToNeo4j:
@@ -54,26 +46,19 @@ class ExcelToNeo4j:
 
     def cargar_desde_excel(self, ruta_excel: str):
         """
-        Carga nodos y relaciones desde el Excel completo.
+        Carga nodos y relaciones desde el Excel (hoja "Temas").
         Ejecutar con --limpiar antes si quieres empezar desde cero.
         """
         wb = openpyxl.load_workbook(ruta_excel, read_only=True)
+        ws = wb["Temas"]
 
-        # 1. Crear índices
         self._crear_indices()
 
-        # 2. Leer nodos de la hoja de temas
-        nodos = self._leer_nodos(wb["Temas (3 niveles) y Prereq."])
+        nodos, relaciones = self._leer_hoja(ws)
         logger.info(f"Nodos leídos del Excel: {len(nodos)}")
-
-        # 3. Leer relaciones de la hoja de mapa
-        relaciones = self._leer_relaciones(wb["Mapa Prerequisitos (Neo4j)"])
         logger.info(f"Relaciones leídas del Excel: {len(relaciones)}")
 
-        # 4. Insertar nodos
         self._insertar_nodos(nodos)
-
-        # 5. Insertar relaciones
         self._insertar_relaciones(relaciones)
 
         logger.info(f"✓ Grafo cargado: {len(nodos)} nodos, {len(relaciones)} relaciones")
@@ -83,82 +68,52 @@ class ExcelToNeo4j:
     # LECTURA DEL EXCEL
     # ──────────────────────────────────────────────────────────
 
-    def _leer_nodos(self, ws) -> list[dict]:
+    def _leer_hoja(self, ws) -> tuple[list[dict], list[dict]]:
         """
-        Lee la hoja 'Temas (3 niveles) y Prereq.' y construye la lista de nodos.
-        Columnas: Unidad | Semanas | Dominio | Tema | Nivel | Bloom | Nivel curso | KC | Prerequisitos
+        Lee la hoja 'Temas': Unidad | Tema | Nivel | Dominio | Prerequisitos
+        Devuelve (nodos, relaciones). Los node_id se derivan de Tema + Nivel.
         """
-        nodos = []
-        encabezado_encontrado = False
+        nodos: dict[str, dict] = {}
+        relaciones: list[dict] = []
 
-        for row in ws.iter_rows(values_only=True):
-            # Detectar fila de encabezado
-            if not encabezado_encontrado:
-                if row[0] == "Unidad":
-                    encabezado_encontrado = True
+        for row in ws.iter_rows(min_row=2, values_only=True):
+            cols = (row + (None,) * 5)[:5]
+            unidad_raw, tema_raw, nivel_raw, dominio_raw, prereqs_raw = cols
+            if not tema_raw or not nivel_raw:
+                continue
+            nivel_str = str(nivel_raw).strip()
+            if nivel_str.lower() not in NIVEL_A_SUFIJO:
                 continue
 
-            # Ignorar filas vacías o de sección
-            if not row[0] or not row[3] or not row[4]:
-                continue
-            if str(row[0]).startswith("UNIDAD"):
-                continue
+            tema   = str(tema_raw).strip()
+            nid    = self._tema_a_node_id(tema, nivel_str)
+            m      = re.search(r"unidad\s*(\d+)", str(unidad_raw or ""), re.IGNORECASE)
+            unidad = f"Unidad {m.group(1)}" if m else str(unidad_raw or "").strip()
 
-            unidad   = str(row[0]).strip()
-            semanas  = str(row[1]).strip() if row[1] else ""
-            dominio  = str(row[2]).strip() if row[2] else ""
-            tema     = str(row[3]).strip()
-            nivel    = str(row[4]).strip()   # Básico / Medio / Alto
-            bloom    = str(row[5]).strip() if row[5] else ""
-            kc       = str(row[7]).strip() if row[7] else ""
+            nodos[nid] = {
+                "node_id":        nid,
+                "nombre_display": f"{tema} ({nivel_str})",
+                "tema":           tema,
+                "tema_canonico":  self._tema_a_canonico(tema),
+                "nivel":          NIVEL_A_SUFIJO[nivel_str.lower()],
+                "dificultad":     NIVEL_A_INT.get(nivel_str, 1),
+                "unidad":         unidad,
+                "dominio":        str(dominio_raw or "").strip(),
+                "chunks_count":   0,
+            }
 
-            # Construir node_id igual que en el Excel de mapa
-            node_id = self._tema_a_node_id(tema, nivel)
-            tema_canonico = self._tema_a_canonico(tema)
+            for parte in str(prereqs_raw or "").split(","):
+                parte = parte.strip()
+                if not parte:
+                    continue
 
-            nodos.append({
-                "node_id":       node_id,
-                "nombre_display": f"{tema} ({nivel})",
-                "tema":          tema,
-                "tema_canonico": tema_canonico,
-                "nivel":         nivel.upper(),          # BASICO / MEDIO / ALTO
-                "dificultad":    NIVEL_A_INT.get(nivel, 1),
-                "unidad":        unidad,
-                "semanas":       semanas,
-                "dominio":       dominio,
-                "kc":            kc,
-                "bloom":         bloom,
-                "chunks_count":  0,
-            })
+                pre_nid = self._parse_prereq(parte)
+                if pre_nid and pre_nid != nid:
+                    relaciones.append({"desde": pre_nid, "hacia": nid})
 
-        return nodos
-
-    def _leer_relaciones(self, ws) -> list[dict]:
-        """
-        Lee la hoja 'Mapa Prerequisitos (Neo4j)' y construye lista de relaciones.
-        Columnas: Tema | Nivel | node_id | Prerequisito | Prerequisito node_id
-        """
-        relaciones = []
-        encabezado_encontrado = False
-
-        for row in ws.iter_rows(values_only=True):
-            if not encabezado_encontrado:
-                if row[0] == "Tema (nodo)":
-                    encabezado_encontrado = True
-                continue
-
-            if not row[2] or not row[4]:
-                continue
-            if str(row[4]).strip() == "—":
-                continue  # punto de partida, sin prerequisito
-
-            hacia = str(row[2]).strip()    # node_id del tema actual
-            desde = str(row[4]).strip()    # node_id del prerequisito
-
-            if desde and hacia and desde != "—":
-                relaciones.append({"desde": desde, "hacia": hacia})
-
-        return relaciones
+        # Filtrar relaciones cuyos nodos existan
+        relaciones = [r for r in relaciones if r["desde"] in nodos and r["hacia"] in nodos]
+        return list(nodos.values()), relaciones
 
     # ──────────────────────────────────────────────────────────
     # INSERCIÓN EN NEO4J
@@ -316,32 +271,25 @@ class ExcelToNeo4j:
 
     @staticmethod
     def _tema_a_canonico(tema: str) -> str:
-        """
-        Convierte el nombre de tema del Excel al tema_canonico snake_case.
-        Usa la misma lógica que el Excel para generar el node_id base.
-        """
-        import re
-        # Normalizar: minúsculas, quitar acentos básicos, reemplazar espacios y guiones
-        t = tema.lower()
-        t = t.replace("á","a").replace("é","e").replace("í","i").replace("ó","o").replace("ú","u")
-        t = t.replace("ñ","n")
-        t = re.sub(r"[^a-z0-9]+", "_", t)
-        t = t.strip("_")
-        return t
+        s = str(tema or "").strip().lower()
+        s = unicodedata.normalize("NFD", s)
+        s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+        s = re.sub(r"[^a-z0-9]+", "_", s)
+        return s.strip("_")
 
     @staticmethod
     def _tema_a_node_id(tema: str, nivel: str) -> str:
-        """Genera el node_id completo: tema_canonico + '_' + NIVEL."""
         canonico = ExcelToNeo4j._tema_a_canonico(tema)
-        nivel_upper = nivel.upper().replace("Á","A").replace("É","E").replace("Í","I")
-        # Normalizar nivel a BASICO/MEDIO/ALTO
-        if "ASICO" in nivel_upper or nivel_upper == "BASICO":
-            sufijo = "BASICO"
-        elif "EDIO" in nivel_upper or nivel_upper == "MEDIO":
-            sufijo = "MEDIO"
-        else:
-            sufijo = "ALTO"
+        sufijo   = NIVEL_A_SUFIJO.get(nivel.strip().lower(), "BASICO")
         return f"{canonico}_{sufijo}"
+
+    @staticmethod
+    def _parse_prereq(texto: str) -> str | None:
+        """Parsea 'Tema (Nivel)' → node_id, o None si no tiene el formato."""
+        m = re.match(r"^(.+?)\s*\((Básico|Medio|Alto)\)\s*$", texto.strip())
+        if not m:
+            return None
+        return ExcelToNeo4j._tema_a_node_id(m.group(1).strip(), m.group(2).strip())
 
 
 # ─────────────────────────────────────────────────────────────

@@ -21,6 +21,9 @@ from database import engine, Base
 import models
 from routers.auth import router as auth_router
 from routers.diagnostico_router import router as diagnostico_router
+from routers.ruta_router import router as ruta_router
+from routers.tutor_router import router as tutor_router
+from routers.estudio_router import router as estudio_router
 from auth import require_admin
 
 Base.metadata.create_all(bind=engine)
@@ -42,6 +45,9 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(diagnostico_router)
+app.include_router(ruta_router)
+app.include_router(tutor_router)
+app.include_router(estudio_router)
 
 # ── Configuración ──────────────────────────────────────────────
 UPLOAD_DIR = Path(__file__).parent / "uploads"
@@ -92,6 +98,26 @@ async def upload_pdfs(
     return {"uploaded": pipeline_state["pdfs"]}
 
 
+@app.post("/run-grafo")
+async def run_grafo(
+    background_tasks: BackgroundTasks,
+    _admin: models.User = Depends(require_admin),
+):
+    """Regenera solo el grafo de temas desde el Excel sin tocar Pinecone ni Chunks."""
+    if pipeline_state["running"]:
+        raise HTTPException(status_code=409, detail="El pipeline ya está en ejecución.")
+    if not EXCEL_PATH.exists():
+        raise HTTPException(status_code=400, detail=f"Excel no encontrado en {EXCEL_PATH}")
+
+    global log_queue
+    log_queue = asyncio.Queue()
+    pipeline_state["logs"] = []
+    pipeline_state["running"] = True
+
+    background_tasks.add_task(_ejecutar_solo_grafo, asyncio.get_event_loop())
+    return {"status": "iniciado"}
+
+
 @app.post("/run")
 async def run_pipeline(
     background_tasks: BackgroundTasks,
@@ -136,6 +162,51 @@ async def stream_logs():
 
 # ── Lógica del pipeline (corre en thread para no bloquear el event loop) ──────
 
+async def _ejecutar_solo_grafo(loop: asyncio.AbstractEventLoop):
+    def put(entry):
+        loop.call_soon_threadsafe(log_queue.put_nowait, entry)
+
+    class ThreadSafeQueueHandler(logging.Handler):
+        def emit(self, record):
+            try:
+                put({"type": "log", "message": self.format(record)})
+            except Exception:
+                pass
+
+    handler = ThreadSafeQueueHandler()
+    handler.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(name)s - %(message)s"))
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.INFO)
+    root_logger.addHandler(handler)
+
+    def run_sync():
+        try:
+            from ingesta import generar_grafo_desde_excel
+            from pipeline.neo4j_builder import Neo4jBuilder
+
+            neo4j_uri  = os.environ.get("NEO4J_URI",      "bolt://localhost:7687")
+            neo4j_user = os.environ.get("NEO4J_USER",     "neo4j")
+            neo4j_pass = os.environ.get("NEO4J_PASSWORD", "tutor123")
+
+            with Neo4jBuilder(neo4j_uri, neo4j_user, neo4j_pass) as neo4j:
+                neo4j.crear_indices()
+                # Generar grafo desde Excel (produce el dict con nodos y relaciones)
+                # y luego migrar usando regenerar_grafo_temas
+                from ingesta import _generar_grafo_dict
+                grafo = _generar_grafo_dict(str(EXCEL_PATH))
+                neo4j.regenerar_grafo_temas(grafo)
+
+            put({"type": "done", "resumen": {"grafo": "ok"}})
+        except Exception as e:
+            logging.exception(f"Error en run-grafo: {e}")
+            put({"type": "error", "message": str(e)})
+        finally:
+            pipeline_state["running"] = False
+            root_logger.removeHandler(handler)
+
+    await asyncio.to_thread(run_sync)
+
+
 async def _ejecutar_pipeline(limpiar: bool, loop: asyncio.AbstractEventLoop):
     def put(entry):
         loop.call_soon_threadsafe(log_queue.put_nowait, entry)
@@ -157,7 +228,7 @@ async def _ejecutar_pipeline(limpiar: bool, loop: asyncio.AbstractEventLoop):
         try:
             from ingesta import (
                 setup_pinecone, generar_grafo_desde_excel,
-                procesar_libro, LLMExtractor
+                procesar_libro, LLMExtractor,
             )
             from openai import OpenAI
             from pipeline.neo4j_builder import Neo4jBuilder
@@ -190,7 +261,7 @@ async def _ejecutar_pipeline(limpiar: bool, loop: asyncio.AbstractEventLoop):
                 with neo4j.driver.session() as s:
                     n_temas = s.run("MATCH (t:Tema) RETURN count(t) AS n").single()["n"]
                 if n_temas == 0:
-                    generar_grafo_desde_excel(str(EXCEL_PATH), llm, neo4j)
+                    generar_grafo_desde_excel(str(EXCEL_PATH), neo4j)
                 else:
                     logging.warning(f"Grafo ya existe ({n_temas} temas). Saltando generación.")
 

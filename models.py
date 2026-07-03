@@ -1,7 +1,7 @@
 import enum
 from sqlalchemy import (
-    Column, Integer, String, DateTime, Float, Boolean,
-    Enum as SAEnum, ForeignKey, JSON,
+    Column, Integer, String, Text, DateTime, Float, Boolean,
+    Enum as SAEnum, ForeignKey, JSON, UniqueConstraint,
 )
 from sqlalchemy.sql import func
 from database import Base
@@ -57,3 +57,32 @@ class BKTEstado(Base):
     confirmadas_correctas = Column(Integer, default=0)
     completado = Column(Boolean, default=False)
     nivel_confirmado = Column(SAEnum(Nivel), nullable=True)
+
+
+class StudentProgress(Base):
+    __tablename__ = "student_progress"
+
+    id = Column(Integer, primary_key=True, index=True)
+    student_id = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
+    node_id = Column(String, nullable=False)
+    dominado = Column(Boolean, default=False)
+    p_dominio = Column(Float, default=0.0)
+    nivel_confirmado = Column(SAEnum(Nivel), nullable=True)
+    fecha_ultima_actividad = Column(DateTime(timezone=True), server_default=func.now())
+
+    __table_args__ = (
+        UniqueConstraint("student_id", "node_id", name="uq_student_node"),
+    )
+
+
+class TutorMensaje(Base):
+    __tablename__ = "tutor_mensajes"
+
+    id                = Column(Integer, primary_key=True, index=True)
+    student_id        = Column(Integer, ForeignKey("usuarios.id"), nullable=False)
+    node_id           = Column(String, nullable=False)
+    rol               = Column(String, nullable=False)  # "user" | "assistant"
+    contenido         = Column(Text, nullable=False)
+    tipo_respuesta    = Column(String, nullable=True)   # correcto|no_entiende|error_comun|pregunta|inicial
+    p_dominio_momento = Column(Float, nullable=True)
+    timestamp         = Column(DateTime(timezone=True), server_default=func.now())

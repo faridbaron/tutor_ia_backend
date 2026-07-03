@@ -63,13 +63,93 @@ class Neo4jBuilder:
             session.run("MATCH (n) DETACH DELETE n")
         logger.warning("Base de datos Neo4j limpiada completamente.")
 
+    def regenerar_grafo_temas(self, grafo: dict):
+        """
+        Migra Neo4j al modelo de 228 nodos (tema_BASICO / tema_MEDIO / tema_ALTO)
+        sin tocar Pinecone ni borrar los Chunk nodes.
+
+        Pasos:
+        1. Borra relaciones REQUIERE_PREVIO
+        2. Borra nodos Tema (DETACH elimina también TIENE_CONTENIDO)
+        3. Crea 228 nuevos Tema nodes
+        4. Re-vincula Chunks existentes usando dificultad (1→BASICO, 2→MEDIO, 3→ALTO)
+           + el tema_canonico base (sin sufijo)
+        """
+        DIF_SUFIJO = {1: "BASICO", 2: "MEDIO", 3: "ALTO"}
+
+        with self.driver.session() as session:
+            # 1. Borrar relaciones y nodos Tema
+            session.run("MATCH ()-[r:REQUIERE_PREVIO]->() DELETE r")
+            session.run("MATCH (t:Tema) DETACH DELETE t")
+            logger.info("Temas anteriores eliminados.")
+
+            # 2. Crear nuevos nodos Tema
+            for nodo in grafo.get("nodos", []):
+                session.run("""
+                    MERGE (t:Tema {tema_canonico: $tema_canonico})
+                    SET t.nombre_display = $nombre_display,
+                        t.descripcion    = $descripcion,
+                        t.dificultad     = $dificultad,
+                        t.tiempo_horas   = $tiempo_horas,
+                        t.unidad         = $unidad,
+                        t.chunks_count   = 0
+                """, {
+                    "tema_canonico":  nodo["tema_canonico"],
+                    "nombre_display": nodo.get("nombre_display", nodo["tema_canonico"]),
+                    "descripcion":    nodo.get("descripcion", ""),
+                    "dificultad":     nodo.get("dificultad", 1),
+                    "tiempo_horas":   nodo.get("tiempo_estimado_horas", 1),
+                    "unidad":         nodo.get("unidad", ""),
+                })
+
+            # 3. Crear relaciones REQUIERE_PREVIO
+            for rel in grafo.get("relaciones", []):
+                session.run("""
+                    MATCH (desde:Tema {tema_canonico: $desde})
+                    MATCH (hacia:Tema {tema_canonico: $hacia})
+                    MERGE (desde)-[:REQUIERE_PREVIO]->(hacia)
+                """, rel)
+
+            logger.info(f"Nuevos nodos: {len(grafo['nodos'])}, "
+                        f"relaciones: {len(grafo['relaciones'])}")
+
+            # 4. Re-vincular Chunks: base_canonico + dificultad → nuevo node_id
+            result = session.run("""
+                MATCH (c:Chunk)
+                WHERE c.tema_canonico IS NOT NULL AND c.dificultad IS NOT NULL
+                WITH c,
+                  c.tema_canonico + '_' +
+                  CASE c.dificultad
+                    WHEN 1 THEN 'BASICO'
+                    WHEN 2 THEN 'MEDIO'
+                    WHEN 3 THEN 'ALTO'
+                    ELSE 'BASICO'
+                  END AS nuevo_tema_id
+                MATCH (t:Tema {tema_canonico: nuevo_tema_id})
+                MERGE (t)-[:TIENE_CONTENIDO]->(c)
+                WITH t
+                SET t.chunks_count = t.chunks_count + 1
+                RETURN count(*) AS n
+            """)
+            vinculados = result.single()["n"]
+            logger.info(f"Chunks re-vinculados: {vinculados}")
+
+            # Chunks que no encontraron Tema (tema_canonico del LLM no coincide)
+            huerfanos = session.run("""
+                MATCH (c:Chunk)
+                WHERE NOT ()-[:TIENE_CONTENIDO]->(c)
+                RETURN count(c) AS n
+            """).single()["n"]
+            if huerfanos:
+                logger.warning(f"Chunks huérfanos (sin Tema): {huerfanos}")
+
     # ──────────────────────────────────────────────────────────
-    # CARGAR GRAFO DE TEMAS (desde Excel / PROMPT_GRAFO_PREREQUISITOS)
+    # CARGAR GRAFO DE TEMAS
     # ──────────────────────────────────────────────────────────
 
     def cargar_grafo_temas(self, grafo: dict):
         """
-        Recibe el JSON del PROMPT_GRAFO_PREREQUISITOS y lo carga en Neo4j.
+        Recibe el grafo generado desde el Excel y lo carga en Neo4j.
         grafo = {"nodos": [...], "relaciones": [...]}
         """
         with self.driver.session() as session:
