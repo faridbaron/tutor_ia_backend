@@ -31,7 +31,7 @@ openai==2.43.0
 openpyxl==3.1.5
 orjson==3.11.9
 passlib[bcrypt]==1.7.4
-pinecone==9.1.0
+pinecone==7.3.0
 psycopg2-binary==2.9.12
 pyasn1==0.6.1
 pydantic==2.13.4
