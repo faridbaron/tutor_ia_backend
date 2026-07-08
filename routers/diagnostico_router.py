@@ -117,6 +117,17 @@ def iniciar_diagnostico(
             detail="Ya tienes una sesión en progreso para esta unidad",
         )
 
+    completada = db.query(DiagnosticoSesion).filter(
+        DiagnosticoSesion.student_id == current_user.id,
+        DiagnosticoSesion.unidad_id == req.unidad_id,
+        DiagnosticoSesion.estado == "completado",
+    ).first()
+    if completada:
+        raise HTTPException(
+            status_code=400,
+            detail="Ya completaste la evaluación diagnóstica de esta unidad",
+        )
+
     kc_orden = _kc_orden(req.unidad_id)
     banco = BANCO_POR_UNIDAD[req.unidad_id]
 
@@ -351,21 +362,9 @@ def responder_pregunta(
     }
 
 
-@router.get("/resultado/{sesion_id}")
-def obtener_resultado(
-    sesion_id: str,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user),
-):
-    sesion = db.query(DiagnosticoSesion).filter(
-        DiagnosticoSesion.id == sesion_id,
-        DiagnosticoSesion.student_id == current_user.id,
-    ).first()
-    if not sesion:
-        raise HTTPException(status_code=404, detail="Sesión no encontrada")
-
+def _resultado_de_sesion(sesion: DiagnosticoSesion, db: Session) -> dict:
     kc_orden = _kc_orden(sesion.unidad_id)
-    estados = _estados_ordenados(db, sesion_id, kc_orden)
+    estados = _estados_ordenados(db, sesion.id, kc_orden)
 
     detalle = []
     for e in estados:
@@ -406,6 +405,40 @@ def obtener_resultado(
         "kc_mas_debil": kc_debil,
         "sesion_completada": sesion.estado == "completado",
     }
+
+
+@router.get("/resultado/{sesion_id}")
+def obtener_resultado(
+    sesion_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    sesion = db.query(DiagnosticoSesion).filter(
+        DiagnosticoSesion.id == sesion_id,
+        DiagnosticoSesion.student_id == current_user.id,
+    ).first()
+    if not sesion:
+        raise HTTPException(status_code=404, detail="Sesión no encontrada")
+
+    return _resultado_de_sesion(sesion, db)
+
+
+@router.get("/resultado-unidad/{unidad_id}")
+def obtener_resultado_unidad(
+    unidad_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    """Resultado de la última evaluación completada por el estudiante en esta unidad."""
+    sesion = db.query(DiagnosticoSesion).filter(
+        DiagnosticoSesion.student_id == current_user.id,
+        DiagnosticoSesion.unidad_id == unidad_id,
+        DiagnosticoSesion.estado == "completado",
+    ).order_by(DiagnosticoSesion.fecha_fin.desc()).first()
+    if not sesion:
+        raise HTTPException(status_code=404, detail="No hay evaluación completada para esta unidad")
+
+    return _resultado_de_sesion(sesion, db)
 
 
 @router.get("/sesion-activa")

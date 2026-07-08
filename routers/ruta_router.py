@@ -39,6 +39,20 @@ def _nivel_diagnostico(unidad_id: str, student_id: int, db: Session) -> Nivel:
     return Nivel.BASICO
 
 
+def _estado_diagnostico(unidad_id: str, student_id: int, db: Session) -> str:
+    """'no_iniciado' | 'en_progreso' | 'completado' para esta unidad."""
+    sesion = (
+        db.query(DiagnosticoSesion)
+        .filter(
+            DiagnosticoSesion.student_id == student_id,
+            DiagnosticoSesion.unidad_id == unidad_id,
+        )
+        .order_by(DiagnosticoSesion.fecha_inicio.desc())
+        .first()
+    )
+    return sesion.estado if sesion else "no_iniciado"
+
+
 def _topo_sort(nodos: list[dict], local_prereqs: dict[str, list[str]]) -> list[dict]:
     """Ordenamiento topológico de Kahn. Nodos sin prereqs van primero."""
     node_map = {n["tema_canonico"]: n for n in nodos}
@@ -260,6 +274,7 @@ def get_progreso_completo(
     for u_num in [1, 2, 3]:
         unidad_id = f"unidad_{u_num}"
         nivel = _nivel_diagnostico(unidad_id, current_user.id, db)
+        estado_diag = _estado_diagnostico(unidad_id, current_user.id, db)
         max_dif = NIVEL_MAX_DIFICULTAD[nivel.value]
 
         nodos = neo4j_service.get_nodos_unidad(u_num, max_dif)
@@ -280,6 +295,7 @@ def get_progreso_completo(
         resultado.append({
             "unidad_id": unidad_id,
             "nivel_diagnostico": nivel.value,
+            "diagnostico_estado": estado_diag,
             "total_nodos": total,
             "nodos_dominados": dominados_count,
             "porcentaje": round(dominados_count / total * 100) if total > 0 else 0,
