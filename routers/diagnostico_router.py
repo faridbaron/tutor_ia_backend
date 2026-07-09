@@ -18,7 +18,7 @@ from services.progress_service import nivelar_unidad
 from bkt.engine import (
     BKT_PARAMS, KC_ORDEN_POR_UNIDAD, NIVEL_ORDEN,
     DOMINIO_UMBRAL, DESCENSO_UMBRAL, MAX_PREGUNTAS_POR_KC, MIN_PREGUNTAS_POR_KC,
-    actualizar_p_dominio, seleccionar_pregunta, nivel_global,
+    actualizar_p_dominio, seleccionar_pregunta, nivel_global, nivel_promedio,
 )
 
 router = APIRouter(prefix="/diagnostico", tags=["diagnostico"])
@@ -261,7 +261,7 @@ def responder_pregunta(
             e.kc_dominio: _nivel_str(e.nivel_confirmado or e.nivel_actual)
             for e in estados_frescos
         }
-        nivel_g = nivel_global(niveles)
+        nivel_g = nivel_promedio(niveles)
 
         sesion.estado = "completado"
         sesion.fecha_fin = datetime.utcnow()
@@ -308,7 +308,7 @@ def responder_pregunta(
                 e.kc_dominio: _nivel_str(e.nivel_confirmado or e.nivel_actual)
                 for e in estados_frescos
             }
-            nivel_g = nivel_global(niveles)
+            nivel_g = nivel_promedio(niveles)
             sesion.estado = "completado"
             sesion.fecha_fin = datetime.utcnow()
             sesion.nivel_resultado_global = Nivel(nivel_g)

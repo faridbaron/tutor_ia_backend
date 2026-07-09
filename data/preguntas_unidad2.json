@@ -6,12 +6,12 @@
     "kc": "tablas_de_verdad",
     "tipo": "Conceptual",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Completa la tabla de verdad para A OR B:\nA=V, B=V → ?\nA=V, B=F → ?\nA=F, B=V → ?\nA=F, B=F → ?",
+    "enunciado": "Completa la tabla de verdad para `A OR B`:\n`A=V, B=V` → ?\n`A=V, B=F` → ?\n`A=F, B=V` → ?\n`A=F, B=F` → ?",
     "opciones": [
-      "A) V, V, V, V",
-      "B) V, V, V, F",
-      "C) V, F, F, F",
-      "D) F, V, V, V"
+      "A) `V, V, V, V`",
+      "B) `V, V, V, F`",
+      "C) `V, F, F, F`",
+      "D) `F, V, V, V`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "OR es VERDADERO cuando al menos una de las dos condiciones es verdadera. Solo es FALSO cuando AMBAS son FALSAS: V OR F = V, F OR V = V, F OR F = F.",
@@ -24,12 +24,12 @@
     "kc": "tablas_de_verdad",
     "tipo": "Análisis",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Una compuerta digital NAND produce: NOT(A AND B). Construye su tabla de verdad. ¿Cuándo produce la compuerta NAND el resultado FALSO?",
+    "enunciado": "Una compuerta digital `NAND` produce `NOT(A AND B)`. Construye su tabla de verdad. ¿Cuándo produce la compuerta NAND el resultado **FALSO**?",
     "opciones": [
-      "A) Cuando A=F y B=F",
-      "B) Cuando A=V y B=V solamente",
-      "C) Cuando A=F o B=F",
-      "D) Siempre produce VERDADERO"
+      "A) Cuando `A=F` y `B=F`",
+      "B) Únicamente cuando `A=V` y `B=V`",
+      "C) Cuando `A=F` o `B=F` (al menos una es falsa)",
+      "D) Cuando `A` y `B` tienen valores distintos entre sí"
     ],
     "respuesta_correcta": "B",
     "explicacion": "NAND = NOT(AND). AND solo es V cuando ambas son V. NOT(V)=F. Por lo tanto NAND produce FALSO únicamente cuando A=V AND B=V. En los otros 3 casos produce VERDADERO.",
@@ -42,15 +42,15 @@
     "kc": "tablas_de_verdad",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un sistema de control requiere que la salida sea VERDADERA cuando exactamente una de tres entradas (A, B, C) sea verdadera (XOR de 3 entradas). Usando solo AND, OR y NOT, ¿cuál expresión implementa correctamente esta lógica?",
+    "enunciado": "Un sistema de control requiere que la salida sea VERDADERA cuando **exactamente una** de tres entradas (A, B, C) sea verdadera. Usando solo `AND`, `OR` y `NOT`, ¿cuál expresión implementa correctamente esta lógica?",
     "opciones": [
-      "A) A OR B OR C",
-      "B) (A AND NOT(B) AND NOT(C)) OR (NOT(A) AND B AND NOT(C)) OR (NOT(A) AND NOT(B) AND C)",
-      "C) NOT(A AND B AND C)",
-      "D) A XOR B XOR C"
+      "A) `A OR B OR C`",
+      "B) `(A AND NOT(B) AND NOT(C)) OR (NOT(A) AND B AND NOT(C)) OR (NOT(A) AND NOT(B) AND C)`",
+      "C) `(A OR B OR C) AND NOT(A AND B AND C)`",
+      "D) `(A AND B) OR (B AND C) OR (A AND C)`"
     ],
     "respuesta_correcta": "B",
-    "explicacion": "Para que exactamente una sea V, hay 3 casos: solo A, solo B, o solo C. Cada caso se expresa como un AND que incluye la que es V y los NOT de las otras dos. El OR combina los tres casos.",
+    "explicacion": "Para que exactamente una sea V, hay 3 casos: solo A, solo B, o solo C. Cada caso se expresa como un AND que incluye la que es V y los NOT de las otras dos. El OR combina los tres casos. La opción C es verdadera también cuando hay dos verdaderas, y la D exige al menos dos verdaderas.",
     "habilidad_evaluada": "Construcción de expresiones booleanas para funciones lógicas personalizadas usando operadores básicos"
   },
   {
@@ -60,12 +60,12 @@
     "kc": "expresiones_booleanas_simples",
     "tipo": "Conceptual",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Si edad=20 y tiene_carnet=VERDADERO, ¿cuál expresión es VERDADERA?",
+    "enunciado": "Si `edad=20` y `tiene_carnet=VERDADERO`, ¿cuál expresión es **VERDADERA**?",
     "opciones": [
-      "A) edad < 18",
-      "B) NOT(tiene_carnet)",
-      "C) edad >= 18 AND tiene_carnet",
-      "D) edad == 18"
+      "A) `edad < 18`",
+      "B) `NOT(tiene_carnet)`",
+      "C) `edad >= 18 AND tiene_carnet`",
+      "D) `edad == 18`"
     ],
     "respuesta_correcta": "C",
     "explicacion": "edad>=18: 20>=18=V. tiene_carnet=V. V AND V = V. Las otras: edad<18 es F, NOT(V)=F, edad==18 es F.",
@@ -78,12 +78,12 @@
     "kc": "expresiones_booleanas_simples",
     "tipo": "Análisis",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un sistema filtra usuarios. La condición de acceso es:\n(saldo >= 1000 OR es_premium) AND NOT(cuenta_bloqueada)\n¿A cuántos de estos usuarios se les permite el acceso?\nUser1: saldo=500, es_premium=V, bloqueada=F\nUser2: saldo=2000, es_premium=F, bloqueada=V\nUser3: saldo=0, es_premium=F, bloqueada=F\nUser4: saldo=100, es_premium=V, bloqueada=F",
+    "enunciado": "Un sistema filtra usuarios. La condición de acceso es:\n`(saldo >= 1000 OR es_premium) AND NOT(cuenta_bloqueada)`\n¿A cuántos de estos usuarios se les permite el acceso?\n- User1: `saldo=500, es_premium=V, bloqueada=F`\n- User2: `saldo=2000, es_premium=F, bloqueada=V`\n- User3: `saldo=0, es_premium=F, bloqueada=F`\n- User4: `saldo=100, es_premium=V, bloqueada=F`",
     "opciones": [
-      "A) 1 usuario (User1)",
+      "A) 1 usuario (solo User1)",
       "B) 2 usuarios (User1 y User4)",
-      "C) 3 usuarios",
-      "D) Ninguno"
+      "C) 3 usuarios (User1, User3 y User4)",
+      "D) Ninguno de los cuatro usuarios"
     ],
     "respuesta_correcta": "B",
     "explicacion": "User1: (F OR V) AND NOT(F) = V AND V = V. User2: (V OR F) AND NOT(V) = V AND F = F. User3: (F OR F) AND NOT(F) = F AND V = F. User4: (F OR V) AND NOT(F) = V AND V = V. Solo User1 y User4 tienen acceso.",
@@ -96,15 +96,15 @@
     "kc": "expresiones_booleanas_simples",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un sistema de préstamos aprueba si: (ingreso > 3*cuota) AND (historial_crediticio != 'malo') AND NOT(tiene_deuda_vencida OR tiene_embargo).\nCarlos: ingreso=3000000, cuota=900000, historial='regular', deuda_vencida=F, embargo=F. ¿Se aprueba su préstamo?",
+    "enunciado": "Un sistema de préstamos aprueba si: `(ingreso > 3*cuota) AND (historial != 'malo') AND NOT(tiene_deuda_vencida OR tiene_embargo)`.\nCarlos: `ingreso=3000000, cuota=900000, historial='regular', deuda_vencida=F, embargo=F`. ¿Se aprueba su préstamo?",
     "opciones": [
-      "A) Sí se aprueba; todas las condiciones se cumplen",
-      "B) No se aprueba; falla la primera condición",
-      "C) No se aprueba; falla la condición de historial: 'regular' != 'malo' es VERDADERO pero el sistema rechaza historiales no 'buenos'",
-      "D) No se aprueba; tiene deuda vencida"
+      "A) Sí se aprueba; todas las condiciones se cumplen simultáneamente",
+      "B) No se aprueba; falla la primera condición del ingreso frente a la cuota",
+      "C) No se aprueba; el historial `'regular'` no es `'bueno'`, y el sistema exige historial bueno",
+      "D) No se aprueba; su registro presenta una deuda vencida activa"
     ],
     "respuesta_correcta": "A",
-    "explicacion": "Verificación: ingreso>3*cuota: 3000000>3*900000=2700000 → V. historial!='malo': 'regular'!='malo' → V. NOT(F OR F) = NOT(F) = V. V AND V AND V = V. El préstamo SÍ se aprueba.",
+    "explicacion": "Verificación: ingreso>3*cuota: 3000000>3*900000=2700000 → V. historial!='malo': 'regular'!='malo' → V. NOT(F OR F) = NOT(F) = V. V AND V AND V = V. El préstamo SÍ se aprueba. La condición solo excluye 'malo', no exige 'bueno'.",
     "habilidad_evaluada": "Evaluación cuidadosa de expresiones booleanas complejas evitando suposiciones adicionales"
   },
   {
@@ -114,12 +114,12 @@
     "kc": "decision_simple",
     "tipo": "Conceptual",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "¿Qué hace la siguiente estructura?\nSI temperatura > 35:\n  Mostrar 'Alerta de calor'",
+    "enunciado": "¿Qué hace la siguiente estructura?\n\n```\nSI temperatura > 35:\n  Mostrar 'Alerta de calor'\n```",
     "opciones": [
-      "A) Siempre muestra 'Alerta de calor'",
-      "B) Muestra 'Alerta de calor' solo cuando la temperatura es mayor que 35 grados",
-      "C) Muestra 'Alerta de calor' cuando la temperatura es igual a 35",
-      "D) Siempre oculta el mensaje"
+      "A) Muestra `'Alerta de calor'` siempre, sin importar la temperatura",
+      "B) Muestra `'Alerta de calor'` solo cuando la temperatura es mayor que 35 grados",
+      "C) Muestra `'Alerta de calor'` cuando la temperatura es exactamente igual a 35",
+      "D) Muestra `'Alerta de calor'` cuando la temperatura es menor o igual a 35 grados"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La estructura IF ejecuta el bloque interior SOLO cuando la condición es VERDADERA. Si temperatura<=35, el mensaje no se muestra y el programa continúa normalmente.",
@@ -132,12 +132,12 @@
     "kc": "decision_simple",
     "tipo": "Análisis",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Algoritmo:\nnota = 3.5\nSI nota >= 3.0:\n  aprobado = VERDADERO\n  bonus = nota * 10\nMostrar aprobado\nMostrar bonus\n¿Cuáles son los valores mostrados? ¿Qué pasaría con nota=2.5?",
+    "enunciado": "Algoritmo:\n\n```\nnota = 3.5\nSI nota >= 3.0:\n  aprobado = VERDADERO\n  bonus = nota * 10\nMostrar aprobado\nMostrar bonus\n```\n\n¿Cuáles son los valores mostrados? ¿Qué pasaría con `nota=2.5`?",
     "opciones": [
-      "A) Muestra: VERDADERO y 35. Con nota=2.5: error porque bonus no está definido",
-      "B) Muestra: VERDADERO y 35. Con nota=2.5: muestra FALSO y 0",
-      "C) Muestra: VERDADERO y 3.5",
-      "D) Siempre muestra VERDADERO"
+      "A) Muestra: `VERDADERO` y `35`. Con `nota=2.5`: error, porque `bonus` no llega a definirse",
+      "B) Muestra: `VERDADERO` y `35`. Con `nota=2.5`: muestra `FALSO` y `0`",
+      "C) Muestra: `VERDADERO` y `3.5`. Con `nota=2.5`: muestra `FALSO` y `3.5`",
+      "D) Muestra: `VERDADERO` y `35`. Con `nota=2.5`: no muestra nada y el programa termina bien"
     ],
     "respuesta_correcta": "A",
     "explicacion": "Con nota=3.5: condición V, aprobado=V, bonus=35. Se muestran ambos. Con nota=2.5: condición F, el bloque no ejecuta. 'aprobado' y 'bonus' nunca se asignaron → error de variable no definida al intentar mostrarlas.",
@@ -150,12 +150,12 @@
     "kc": "decision_simple",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un sistema de pagos tiene 3 condiciones independientes cada una con su propio IF:\nSI monto > 1000000: aplicar_auditoria()\nSI moneda != 'COP': convertir_divisa()\nSI es_internacional: notificar_banco()\n¿Cuántas funciones pueden ejecutarse en una sola transacción y bajo qué condiciones se ejecutan las tres?",
+    "enunciado": "Un sistema de pagos tiene 3 condiciones independientes, cada una con su propio IF:\n\n```\nSI monto > 1000000: aplicar_auditoria()\nSI moneda != 'COP': convertir_divisa()\nSI es_internacional: notificar_banco()\n```\n\n¿Cuántas funciones pueden ejecutarse en una sola transacción y bajo qué condiciones se ejecutan las tres?",
     "opciones": [
-      "A) Máximo 1 función por transacción",
-      "B) Las tres pueden ejecutarse si: monto>1000000 Y moneda!='COP' Y es_internacional=V. Al ser IFs independientes (no else-if), cada uno se evalúa siempre",
-      "C) Solo 2 porque las condiciones son mutuamente excluyentes",
-      "D) Ninguna si el monto es pequeño"
+      "A) Máximo 1 función por transacción, porque solo se cumple un IF a la vez",
+      "B) Las tres pueden ejecutarse si `monto>1000000` Y `moneda!='COP'` Y `es_internacional=V`. Al ser IFs independientes (no else-if), cada uno se evalúa siempre",
+      "C) Solo 2 funciones, porque las condiciones son mutuamente excluyentes entre sí",
+      "D) Ninguna función se ejecuta si el monto de la transacción es pequeño"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Al ser tres IFs separados (no else-if), los tres se evalúan SIEMPRE independientemente. Si una transacción cumple las tres condiciones simultáneamente, las tres funciones se ejecutan.",
@@ -168,12 +168,12 @@
     "kc": "decision_compuesta",
     "tipo": "Conceptual",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "SI precio > 50000:\n  descuento = precio * 0.1\nSINO:\n  descuento = 0\nSi precio=30000, ¿cuál es el descuento?",
+    "enunciado": "```\nSI precio > 50000:\n  descuento = precio * 0.1\nSINO:\n  descuento = 0\n```\n\nSi `precio=30000`, ¿cuál es el `descuento`?",
     "opciones": [
-      "A) 3000 (10% de 30000)",
-      "B) 0",
-      "C) 30000",
-      "D) 50000"
+      "A) `3000` (el 10% de 30000)",
+      "B) `0`",
+      "C) `30000` (el precio completo)",
+      "D) `5000` (el 10% del umbral 50000)"
     ],
     "respuesta_correcta": "B",
     "explicacion": "precio=30000 no es > 50000, entonces la condición es FALSA. Se ejecuta el SINO: descuento=0. El bloque del IF no se ejecuta.",
@@ -186,12 +186,12 @@
     "kc": "decision_compuesta",
     "tipo": "Análisis",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un sistema de calificación:\nSI promedio >= 4.5: grado = 'Sobresaliente'\nSINO: SI promedio >= 3.5: grado = 'Notable'\nSINO: SI promedio >= 3.0: grado = 'Aprobado'\nSINO: grado = 'Reprobado'\n¿Qué grado obtiene un estudiante con promedio=3.5?",
+    "enunciado": "Un sistema de calificación:\n\n```\nSI promedio >= 4.5: grado = 'Sobresaliente'\nSINO: SI promedio >= 3.5: grado = 'Notable'\nSINO: SI promedio >= 3.0: grado = 'Aprobado'\nSINO: grado = 'Reprobado'\n```\n\n¿Qué grado obtiene un estudiante con `promedio=3.5`?",
     "opciones": [
-      "A) Sobresaliente",
-      "B) Notable",
-      "C) Aprobado",
-      "D) Reprobado"
+      "A) `Sobresaliente`",
+      "B) `Notable`",
+      "C) `Aprobado`",
+      "D) `Reprobado`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "3.5 >= 4.5 → F. Primer SINO: 3.5 >= 3.5 → V. Grado = 'Notable'. La comparación >= incluye el valor límite exacto.",
@@ -204,12 +204,12 @@
     "kc": "decision_compuesta",
     "tipo": "Bebras",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Función que clasifica un número:\nSI n % 2 == 0:\n  SI n % 3 == 0: return 'múltiplo de 6'\n  SINO: return 'par no múltiplo de 6'\nSINO:\n  SI n % 3 == 0: return 'impar múltiplo de 3'\n  SINO: return 'impar no múltiplo de 3'\n¿Cuántas combinaciones distintas de clasificación posibles existen y qué valor entre 1-10 no pertenece a ninguna de las 4 categorías?",
+    "enunciado": "Función que clasifica un número:\n\n```\nSI n % 2 == 0:\n  SI n % 3 == 0: return 'múltiplo de 6'\n  SINO: return 'par no múltiplo de 6'\nSINO:\n  SI n % 3 == 0: return 'impar múltiplo de 3'\n  SINO: return 'impar no múltiplo de 3'\n```\n\n¿Cuántas categorías distintas produce y cómo se reparten los números del 1 al 10?",
     "opciones": [
-      "A) 2 categorías; el 1 no pertenece a ninguna",
-      "B) 4 categorías; todos los números del 1-10 pertenecen a exactamente una categoría",
-      "C) 3 categorías; el 0 no pertenece a ninguna",
-      "D) 4 categorías; el 7 pertenece a dos categorías"
+      "A) 2 categorías; el número `1` no encaja en ninguna de ellas",
+      "B) 4 categorías; cada número del 1 al 10 pertenece a exactamente una categoría",
+      "C) 3 categorías; el número `0` queda fuera de todas ellas",
+      "D) 4 categorías; el número `7` encaja simultáneamente en dos de ellas"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Las 4 categorías son mutuamente excluyentes y exhaustivas para cualquier entero: múltiplo de 6 (6,12...), par no múltiplo de 6 (2,4,8,10...), impar múltiplo de 3 (3,9,15...), impar no múltiplo de 3 (1,5,7,11...). Todo número cae en exactamente una categoría.",
@@ -222,12 +222,12 @@
     "kc": "decisiones_anidadas",
     "tipo": "Conceptual",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "¿Cuándo es apropiado usar decisiones anidadas (IF dentro de otro IF)?",
+    "enunciado": "¿Cuándo es apropiado usar decisiones anidadas (un `IF` dentro de otro `IF`)?",
     "opciones": [
-      "A) Cuando queremos ejecutar una instrucción solo una vez",
-      "B) Cuando una segunda condición solo tiene sentido evaluarla si una primera condición ya fue verdadera",
-      "C) Para reemplazar variables en el programa",
-      "D) Cuando el programa no tiene ciclos"
+      "A) Cuando se quiere ejecutar una misma instrucción una sola vez",
+      "B) Cuando una segunda condición solo tiene sentido evaluarla si una primera condición ya resultó verdadera",
+      "C) Cuando se necesita repetir un bloque de instrucciones varias veces",
+      "D) Cuando el programa debe evaluar dos condiciones totalmente independientes entre sí"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Las decisiones anidadas son apropiadas cuando la segunda condición depende contextualmente de la primera. Por ejemplo: verificar si es mayor de edad (primera) y luego si tiene licencia (segunda, solo relevante para mayores de edad).",
@@ -240,12 +240,12 @@
     "kc": "decisiones_anidadas",
     "tipo": "Diagrama",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Sistema de beca:\nSI promedio >= 4.0:\n  SI tiene_carta: categoria='Prioridad Alta'\n  SINO: categoria='Prioridad Media'\nSINO:\n  SI experiencia_laboral: categoria='Prioridad Media'\n  SINO: categoria='No clasificado'\nEstudiante: promedio=3.8, experiencia=SÍ. ¿Cuál es su categoría?",
+    "enunciado": "Sistema de beca:\n\n```\nSI promedio >= 4.0:\n  SI tiene_carta: categoria='Prioridad Alta'\n  SINO: categoria='Prioridad Media'\nSINO:\n  SI experiencia_laboral: categoria='Prioridad Media'\n  SINO: categoria='No clasificado'\n```\n\nEstudiante: `promedio=3.8`, `experiencia=SÍ`. ¿Cuál es su categoría?",
     "opciones": [
-      "A) Prioridad Alta",
-      "B) Prioridad Media",
-      "C) No clasificado",
-      "D) El sistema no puede clasificarlo"
+      "A) `Prioridad Alta`",
+      "B) `Prioridad Media`",
+      "C) `No clasificado`",
+      "D) `Prioridad Baja`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "promedio=3.8 < 4.0 → rama SINO. experiencia_laboral=SÍ → categoría='Prioridad Media'.",
@@ -258,12 +258,12 @@
     "kc": "decisiones_anidadas",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un sistema de seguridad tiene 3 niveles de autenticación anidados:\nNivel 1: SI contraseña_correcta:\n  Nivel 2: SI huella_digital_ok:\n    Nivel 3: SI ubicacion_autorizada: acceso='Total'\n    SINO: acceso='Remoto limitado'\n  SINO: acceso='Solo consulta'\nSINO: acceso='Denegado'\nPara un usuario con contraseña correcta, huella inválida y ubicación autorizada:\n¿Cuántos niveles de decisión se evalúan y cuál es el acceso?",
+    "enunciado": "Un sistema de seguridad tiene 3 niveles de autenticación anidados:\n\n```\nNivel 1: SI contraseña_correcta:\n  Nivel 2: SI huella_digital_ok:\n    Nivel 3: SI ubicacion_autorizada: acceso='Total'\n    SINO: acceso='Remoto limitado'\n  SINO: acceso='Solo consulta'\nSINO: acceso='Denegado'\n```\n\nPara un usuario con contraseña correcta, huella inválida y ubicación autorizada, ¿cuántos niveles de decisión se evalúan y cuál es el acceso?",
     "opciones": [
-      "A) 3 niveles evaluados; acceso='Remoto limitado'",
-      "B) 2 niveles evaluados; acceso='Solo consulta'",
-      "C) 1 nivel evaluado; acceso='Denegado'",
-      "D) 3 niveles evaluados; acceso='Total'"
+      "A) 3 niveles evaluados; acceso=`'Remoto limitado'`",
+      "B) 2 niveles evaluados; acceso=`'Solo consulta'`",
+      "C) 1 nivel evaluado; acceso=`'Denegado'`",
+      "D) 3 niveles evaluados; acceso=`'Total'`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Nivel 1: contraseña correcta → V, continúa. Nivel 2: huella inválida → F, rama SINO: acceso='Solo consulta'. El Nivel 3 NUNCA se evalúa porque el Nivel 2 falló. Solo se evalúan 2 niveles.",
@@ -276,12 +276,12 @@
     "kc": "decisiones_multiples",
     "tipo": "Conceptual",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "¿Cuándo es más apropiado usar una estructura SWITCH (o múltiple else-if) en lugar de un solo IF-ELSE?",
+    "enunciado": "¿Cuándo es más apropiado usar una estructura `SWITCH` (o múltiples `else-if`) en lugar de un solo `IF-ELSE`?",
     "opciones": [
-      "A) Cuando solo hay dos posibles valores",
+      "A) Cuando la variable solo puede tomar dos posibles valores",
       "B) Cuando una variable puede tomar muchos valores discretos distintos y cada uno requiere una acción diferente",
-      "C) Cuando se necesita repetir instrucciones",
-      "D) Cuando la condición usa operadores AND u OR"
+      "C) Cuando se necesita repetir un bloque de instrucciones muchas veces",
+      "D) Cuando la condición combina varias comparaciones con operadores `AND` u `OR`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "El SWITCH es ideal cuando una variable puede tomar múltiples valores específicos (como día de la semana, mes del año, opción de menú) y cada valor dispara una acción diferente. Hace el código más legible que múltiples IF-ELSE anidados.",
@@ -294,12 +294,12 @@
     "kc": "decisiones_multiples",
     "tipo": "Caso práctico",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un menú de cajero automático:\n1: Consultar saldo\n2: Retirar dinero\n3: Depositar\n4: Transferir\nOtro: Opción inválida\nSi el usuario ingresa 3, ¿qué proceso se activa y cuántas condiciones se evalúan con ELSE-IF antes de llegar a la respuesta?",
+    "enunciado": "Un menú de cajero automático:\n\n```\n1: Consultar saldo\n2: Retirar dinero\n3: Depositar\n4: Transferir\nOtro: Opción inválida\n```\n\nSi el usuario ingresa `3`, ¿qué proceso se activa y cuántas condiciones se evalúan con `else-if` antes de llegar a la respuesta?",
     "opciones": [
-      "A) Depositar; se evalúan 3 condiciones (1, 2 y 3)",
-      "B) Depositar; se evalúan 2 condiciones (1 y 2 fallan, 3 es verdadera)",
-      "C) Retirar dinero; solo se evalúa 1 condición",
-      "D) Opción inválida; todas fallan"
+      "A) `Depositar`; se evalúan 3 condiciones (los casos 1, 2 y 3)",
+      "B) `Depositar`; se evalúan 2 condiciones (1 y 2 fallan, y 3 es verdadera)",
+      "C) `Retirar dinero`; se evalúa una sola condición",
+      "D) `Opción inválida`; todas las condiciones del menú fallan"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Con ELSE-IF: se evalúa caso 1 (opción!=1 → FALSO), luego caso 2 (opción!=2 → FALSO), luego caso 3 (opción==3 → VERDADERO). Activa: Depositar. Se evaluaron 2 condiciones que fallaron antes de llegar a la verdadera.",
@@ -312,12 +312,12 @@
     "kc": "decisiones_multiples",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un sistema de tarifas de transporte aplica descuentos según categoría:\n- 'estudiante': 50%\n- 'adulto_mayor': 40%\n- 'discapacidad': 60%\n- 'funcionario': 20%\n- Otro: precio normal\nSi hay 1000 transacciones por minuto y el 70% son categoría 'adulto_mayor', ¿qué optimización en la estructura de decisión reduciría el tiempo de procesamiento?",
+    "enunciado": "Un sistema de tarifas de transporte aplica descuentos según categoría:\n- `'estudiante'`: 50%\n- `'adulto_mayor'`: 40%\n- `'discapacidad'`: 60%\n- `'funcionario'`: 20%\n- Otro: precio normal\n\nSi hay 1000 transacciones por minuto y el 70% son categoría `'adulto_mayor'`, ¿qué optimización en la estructura de decisión reduciría el tiempo de procesamiento?",
     "opciones": [
-      "A) Ninguna; el orden de los casos en switch no importa",
-      "B) Colocar 'adulto_mayor' como el primer caso evaluado, ya que el 70% de las transacciones llegarán a la primera condición y terminarán inmediatamente sin evaluar los demás casos",
-      "C) Usar un solo IF para todas las categorías",
-      "D) Eliminar el caso 'otro' para acelerar el proceso"
+      "A) Ninguna; el orden de los casos en un `switch` no afecta el tiempo de ejecución",
+      "B) Colocar `'adulto_mayor'` como el primer caso evaluado: así el 70% de las transacciones termina en la primera comparación, sin evaluar los demás casos",
+      "C) Reemplazar toda la estructura por un único `IF` que agrupe todas las categorías",
+      "D) Eliminar el caso `Otro` para que el sistema tenga menos comparaciones que recorrer"
     ],
     "respuesta_correcta": "B",
     "explicacion": "En estructuras else-if, el procesador evalúa condiciones en orden hasta encontrar la verdadera. Si 'adulto_mayor' es el 70% del tráfico y está en primer lugar, el 70% de las transacciones terminan en 1 comparación. Ordenar por frecuencia reduce el tiempo promedio de evaluación.",
@@ -330,12 +330,12 @@
     "kc": "condiciones_compuestas",
     "tipo": "Conceptual",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Condición: edad >= 18 AND tiene_ID\nSi edad=16 y tiene_ID=VERDADERO, ¿cuál es el resultado?",
+    "enunciado": "Condición: `edad >= 18 AND tiene_ID`.\nSi `edad=16` y `tiene_ID=VERDADERO`, ¿cuál es el resultado?",
     "opciones": [
-      "A) VERDADERO, porque tiene ID",
-      "B) FALSO, porque AND requiere que AMBAS condiciones sean verdaderas y edad<18",
-      "C) VERDADERO, porque la edad es suficiente",
-      "D) Error, no se puede evaluar"
+      "A) `VERDADERO`, porque el usuario tiene su documento de identidad",
+      "B) `FALSO`, porque `AND` exige que ambas condiciones sean verdaderas y `edad < 18`",
+      "C) `VERDADERO`, porque la edad de 16 años ya es suficiente",
+      "D) `FALSO`, porque `tiene_ID` es en realidad la condición que falla"
     ],
     "respuesta_correcta": "B",
     "explicacion": "AND: FALSO AND VERDADERO = FALSO. Aunque tiene_ID es V, edad>=18 es F (16<18). La condición completa es FALSA.",
@@ -348,12 +348,12 @@
     "kc": "condiciones_compuestas",
     "tipo": "Análisis",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Condición de descuento especial:\n(es_cliente_vip OR compras_total > 500000) AND (NOT tiene_deuda) AND (dia_semana == 'Sabado' OR dia_semana == 'Domingo')\nCliente: es_vip=F, compras=600000, deuda=F, dia='Domingo'. ¿Obtiene descuento?",
+    "enunciado": "Condición de descuento especial:\n`(es_cliente_vip OR compras_total > 500000) AND (NOT tiene_deuda) AND (dia_semana == 'Sabado' OR dia_semana == 'Domingo')`\nCliente: `es_vip=F, compras=600000, deuda=F, dia='Domingo'`. ¿Obtiene descuento?",
     "opciones": [
-      "A) No, porque no es cliente VIP",
-      "B) Sí, porque: (F OR V)=V, AND NOT(F)=V, AND (F OR V)=V → V AND V AND V = V",
-      "C) No, porque la condición de día falla",
-      "D) No, porque la compra total no es exactamente 500000"
+      "A) No, porque el cliente no está marcado como VIP",
+      "B) Sí, porque: `(F OR V)=V`, `AND NOT(F)=V`, `AND (F OR V)=V` → V AND V AND V = V",
+      "C) No, porque la condición sobre el día de la semana no se cumple",
+      "D) No, porque la compra total no es exactamente igual a 500000"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Evaluación: (es_vip OR compras>500000) = (F OR V) = V. NOT(deuda) = NOT(F) = V. (día=='Sabado' OR día=='Domingo') = (F OR V) = V. V AND V AND V = VERDADERO. El cliente SÍ obtiene el descuento.",
@@ -366,12 +366,12 @@
     "kc": "condiciones_compuestas",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un formulario de solicitud de crédito aprueba si:\n(ingreso_mensual >= 2 * cuota AND historial == 'bueno') OR\n(ingreso_mensual >= 3 * cuota AND historial != 'malo') OR\n(aval_disponible AND ingreso_mensual >= cuota)\nDos solicitantes:\n- Ana: ingreso=2.5*cuota, historial='regular', aval=NO\n- Bob: ingreso=1.5*cuota, historial='bueno', aval=SÍ\n¿Quién es aprobado?",
+    "enunciado": "Un formulario de solicitud de crédito aprueba si:\n`(ingreso >= 2*cuota AND historial == 'bueno')` OR\n`(ingreso >= 3*cuota AND historial != 'malo')` OR\n`(aval_disponible AND ingreso >= cuota)`\nDos solicitantes:\n- Ana: `ingreso=2.5*cuota, historial='regular', aval=NO`\n- Bob: `ingreso=1.5*cuota, historial='bueno', aval=SÍ`\n¿Quién es aprobado?",
     "opciones": [
-      "A) Solo Ana",
-      "B) Solo Bob",
-      "C) Ambos son aprobados",
-      "D) Ninguno es aprobado"
+      "A) Solo Ana es aprobada",
+      "B) Solo Bob es aprobado",
+      "C) Ambos solicitantes son aprobados",
+      "D) Ninguno de los dos es aprobado"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Ana: Cond1:(2.5>=2=V AND 'regular'=='bueno'=F)=F. Cond2:(2.5>=3=F)=F. Cond3:(NO AND ...)=F. Ana→RECHAZADA. Bob: Cond1:(1.5>=2=F)=F. Cond2:(1.5>=3=F)=F. Cond3:(SÍ=V AND 1.5>=1=V)=V. Bob→APROBADO.",
@@ -384,12 +384,12 @@
     "kc": "cortocircuito_logico",
     "tipo": "Conceptual",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "En la evaluación de: FALSO AND (expresión_costosa), ¿se evalúa la expresión_costosa?",
+    "enunciado": "En la evaluación de `FALSO AND (expresión_costosa)`, ¿se llega a evaluar la `expresión_costosa`?",
     "opciones": [
-      "A) Sí, siempre se evalúan todas las expresiones",
-      "B) No: si el primer operando del AND es FALSO, el resultado ya es FALSO sin importar el segundo; la segunda expresión no se evalúa",
-      "C) Solo si la expresión_costosa es simple",
-      "D) Depende del lenguaje de programación"
+      "A) Sí, porque siempre se evalúan todos los operandos de una condición",
+      "B) No: si el primer operando del `AND` es `FALSO`, el resultado ya es `FALSO` sin importar el segundo, que no se evalúa",
+      "C) Solo se evalúa si la `expresión_costosa` es lo bastante simple",
+      "D) Sí, porque el operando de la derecha siempre se evalúa primero"
     ],
     "respuesta_correcta": "B",
     "explicacion": "El cortocircuito lógico (short-circuit evaluation) en AND: si el primer operando es FALSO, el resultado completo ya es FALSO. El sistema se ahorra evaluar la segunda expresión.",
@@ -402,12 +402,12 @@
     "kc": "cortocircuito_logico",
     "tipo": "Caso práctico",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Código:\nSI usuario != null AND usuario.edad >= 18:\n  permitir_acceso()\n¿Por qué es importante que 'usuario != null' esté ANTES de 'usuario.edad >= 18' en la condición AND?",
+    "enunciado": "Código:\n\n```\nSI usuario != null AND usuario.edad >= 18:\n  permitir_acceso()\n```\n\n¿Por qué es importante que `usuario != null` esté ANTES de `usuario.edad >= 18` en la condición `AND`?",
     "opciones": [
-      "A) No importa el orden; el resultado es el mismo",
-      "B) Por cortocircuito: si usuario==null (condición 1 es FALSA), AND hace que la segunda no se evalúe, evitando el error de acceder a .edad en un objeto null (NullPointerException)",
-      "C) Para que el código sea más legible",
-      "D) Porque AND evalúa siempre de derecha a izquierda"
+      "A) No importa el orden; el resultado de la condición es el mismo en ambos casos",
+      "B) Por cortocircuito: si `usuario==null` la segunda parte no se evalúa, evitando el error de acceder a `.edad` en un objeto nulo (`NullPointerException`)",
+      "C) Únicamente para que el código sea más legible para otros programadores",
+      "D) Porque el operador `AND` siempre evalúa sus operandos de derecha a izquierda"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Si usuario es null y se evalúa usuario.edad primero, el sistema intenta acceder a una propiedad de un objeto que no existe → error fatal (NullPointerException). El cortocircuito AND evita evaluar la segunda condición cuando la primera ya es FALSA.",
@@ -420,12 +420,12 @@
     "kc": "cortocircuito_logico",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un sistema evalúa: (A OR B OR C OR D) donde cada condición requiere una consulta a la base de datos (300ms cada una). En el peor caso (todas FALSAS), ¿cuántas consultas se hacen y cuánto tiempo tarda? ¿Cómo el cortocircuito ayuda en el mejor caso (A=VERDADERO)?",
+    "enunciado": "Un sistema evalúa `(A OR B OR C OR D)` donde cada condición requiere una consulta a la base de datos (300ms cada una). En el peor caso (todas FALSAS), ¿cuántas consultas se hacen y cuánto tarda? ¿Cómo ayuda el cortocircuito en el mejor caso (`A=VERDADERO`)?",
     "opciones": [
-      "A) Siempre hace 4 consultas (1200ms)",
-      "B) Peor caso: 4 consultas (1200ms). Mejor caso (A=V): 1 consulta (300ms) por cortocircuito en OR: si el primer operando es V, el OR ya es V y no se evalúa el resto",
-      "C) Siempre hace 1 consulta",
-      "D) El OR no tiene cortocircuito, solo el AND lo tiene"
+      "A) Siempre hace las 4 consultas (1200ms), sin importar el valor de cada condición",
+      "B) Peor caso: 4 consultas (1200ms). Mejor caso (`A=V`): 1 consulta (300ms) por cortocircuito en `OR`: si el primer operando es V, el resto no se evalúa",
+      "C) Siempre hace una sola consulta (300ms), porque el `OR` se detiene de inmediato",
+      "D) El `OR` no tiene cortocircuito; ese comportamiento solo aplica al operador `AND`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "OR tiene cortocircuito: si el primer operando es VERDADERO, el resultado ya es VERDADERO. En el mejor caso, con A=V, solo se hace 1 consulta (300ms). En el peor caso (todas FALSAS), se hacen las 4 consultas (1200ms).",
@@ -438,12 +438,12 @@
     "kc": "evaluacion_de_expresiones_booleanas_complejas",
     "tipo": "Análisis",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Evalúa: NOT(VERDADERO OR FALSO) AND (FALSO OR VERDADERO)",
+    "enunciado": "Evalúa: `NOT(VERDADERO OR FALSO) AND (FALSO OR VERDADERO)`",
     "opciones": [
-      "A) VERDADERO",
-      "B) FALSO",
-      "C) No se puede evaluar",
-      "D) Depende de los valores"
+      "A) `VERDADERO`",
+      "B) `FALSO`",
+      "C) El resultado depende del orden en que se evalúen los operadores",
+      "D) La expresión no se puede evaluar por estar mal formada"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Paso a paso: (V OR F)=V; NOT(V)=F; (F OR V)=V; F AND V=FALSO. El resultado final es FALSO.",
@@ -456,12 +456,12 @@
     "kc": "evaluacion_de_expresiones_booleanas_complejas",
     "tipo": "Análisis",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Sistema de control de vuelo. Despegue aprobado si:\n(combustible > 80 AND NOT alerta_motor) AND (visibilidad >= 3 OR (pista_libre AND viento <= 20))\nValores: combustible=90, alerta_motor=FALSO, visibilidad=1, pista_libre=V, viento=18. ¿Se aprueba?",
+    "enunciado": "Sistema de control de vuelo. Despegue aprobado si:\n`(combustible > 80 AND NOT alerta_motor) AND (visibilidad >= 3 OR (pista_libre AND viento <= 20))`\nValores: `combustible=90, alerta_motor=FALSO, visibilidad=1, pista_libre=V, viento=18`. ¿Se aprueba?",
     "opciones": [
-      "A) No, porque la visibilidad es menor a 3",
-      "B) Sí, porque todas las subexpresiones combinadas resultan en VERDADERO",
-      "C) No, porque NOT(alerta_motor) no aplica",
-      "D) Sí, solo porque el combustible supera 80"
+      "A) No, porque la visibilidad de 1 es menor que el mínimo de 3",
+      "B) Sí, porque la rama de pista libre y viento bajo compensa la baja visibilidad y todo el conjunto da VERDADERO",
+      "C) No, porque `NOT(alerta_motor)` no llega a evaluarse en la expresión",
+      "D) Sí, pero únicamente porque el combustible supera el umbral de 80"
     ],
     "respuesta_correcta": "B",
     "explicacion": "combustible>80=V; NOT(F)=V; V AND V=V [izquierda]. visibilidad>=3: 1>=3=F; pista_libre=V; viento<=20: 18<=20=V; V AND V=V; F OR V=V [derecha]. V AND V=VERDADERO. Sí se aprueba.",
@@ -474,12 +474,12 @@
     "kc": "evaluacion_de_expresiones_booleanas_complejas",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un algoritmo de detección de fraude marca una transacción como sospechosa si:\n((monto > promedio_historico * 3) OR (pais != pais_habitual AND hora_inusual)) AND\nNOT(preautorizada) AND (intentos_fallidos_hoy > 0 OR patron_nuevo_dispositivo)\nTransacción: monto=50000, promedio=15000, pais='CO', pais_habitual='CO', hora_inusual=F,\npreautorizada=F, intentos_hoy=0, patron_nuevo=V. ¿Es marcada como sospechosa?",
+    "enunciado": "Un algoritmo de detección de fraude marca una transacción como sospechosa si:\n`((monto > promedio_historico * 3) OR (pais != pais_habitual AND hora_inusual)) AND NOT(preautorizada) AND (intentos_fallidos_hoy > 0 OR patron_nuevo_dispositivo)`\nTransacción: `monto=50000, promedio=15000, pais='CO', pais_habitual='CO', hora_inusual=F, preautorizada=F, intentos_hoy=0, patron_nuevo=V`. ¿Es marcada como sospechosa?",
     "opciones": [
-      "A) No es sospechosa; el monto no es suficiente",
-      "B) Sí es sospechosa: monto>3*15000=V, AND NOT(F)=V, AND (0>0=F OR V=V)=V → V AND V AND V = V",
-      "C) No es sospechosa; el país es el habitual",
-      "D) No se puede determinar con esos datos"
+      "A) No es sospechosa; el monto no alcanza el umbral necesario",
+      "B) Sí es sospechosa: `monto>3*15000=V`, `AND NOT(F)=V`, `AND (0>0=F OR V=V)=V` → V AND V AND V = V",
+      "C) No es sospechosa, porque el país coincide con el país habitual del cliente",
+      "D) No es posible determinarlo con los datos proporcionados en el enunciado"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Grupo1: monto>3*15000: 50000>45000=V; (pais!='CO'=F AND hora_inusual=F)=F; V OR F=V. Grupo2: NOT(F)=V. Grupo3: (0>0=F OR patron_nuevo=V)=V. V AND V AND V=VERDADERO.",
@@ -494,10 +494,10 @@
     "dominio": "KC_PROPOSITIONAL_LOGIC",
     "enunciado": "¿Cuál es la ventaja de encapsular una condición compleja dentro de una función con nombre descriptivo?",
     "opciones": [
-      "A) El código se ejecuta más rápido",
-      "B) El código se vuelve más legible: en lugar de leer una condición larga, se lee un nombre descriptivo que explica su propósito",
-      "C) Elimina la necesidad de pruebas",
-      "D) Evita el uso de variables"
+      "A) Hace que la condición se evalúe con mayor velocidad en tiempo de ejecución",
+      "B) El código se vuelve más legible: en vez de leer una condición larga, se lee un nombre descriptivo que explica su propósito",
+      "C) Elimina la necesidad de escribir pruebas para esa parte del código",
+      "D) Permite evaluar la condición sin necesidad de usar variables"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Ejemplo: SI puede_acceder_al_sistema(usuario) es más legible que SI usuario!=null AND usuario.activo AND usuario.rol=='admin' AND NOT(sesion_expirada). La función encapsula la complejidad.",
@@ -510,12 +510,12 @@
     "kc": "logica_condicional_integrada_con_funciones",
     "tipo": "Caso práctico",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Función calcular_descuento(cliente):\nSI es_vip(cliente) Y compra_minima_cumplida(cliente): RETORNAR 0.20\nSINO SI es_frecuente(cliente): RETORNAR 0.10\nSINO: RETORNAR 0.0\nes_vip retorna FALSO para María, es_frecuente retorna VERDADERO. ¿Qué descuento recibe María?",
+    "enunciado": "Función `calcular_descuento(cliente)`:\n\n```\nSI es_vip(cliente) Y compra_minima_cumplida(cliente): RETORNAR 0.20\nSINO SI es_frecuente(cliente): RETORNAR 0.10\nSINO: RETORNAR 0.0\n```\n\n`es_vip` retorna `FALSO` para María y `es_frecuente` retorna `VERDADERO`. ¿Qué descuento recibe María?",
     "opciones": [
-      "A) 20%",
-      "B) 10%",
-      "C) 0%",
-      "D) No se puede determinar"
+      "A) `20%`",
+      "B) `10%`",
+      "C) `0%`",
+      "D) `30%`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "es_vip(María)=FALSO → primera condición FALSA (AND cortocircuita). es_frecuente(María)=VERDADERO → retorna 0.10 (10%).",
@@ -528,12 +528,12 @@
     "kc": "logica_condicional_integrada_con_funciones",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Refactorización: una función original de 50 líneas con condiciones anidadas 5 niveles de profundidad. Un ingeniero propone dividirla en 6 funciones más pequeñas, cada una con máximo 1-2 niveles de anidamiento. ¿Qué principio de ingeniería de software justifica esta refactorización y cuáles son sus beneficios y posibles riesgos?",
+    "enunciado": "Refactorización: una función original de 50 líneas con condiciones anidadas de 5 niveles de profundidad. Un ingeniero propone dividirla en 6 funciones más pequeñas, cada una con máximo 1-2 niveles de anidamiento. ¿Qué principio de ingeniería de software justifica esto y cuáles son sus beneficios y riesgos?",
     "opciones": [
-      "A) El principio de maximizar la longitud del código; beneficio: más código, más funciones",
-      "B) El principio de responsabilidad única y descomposición; beneficios: mayor legibilidad, testabilidad y mantenibilidad; riesgo: overhead de llamadas a funciones y posibles problemas de contexto/estado compartido",
-      "C) El principio de no repetir código (DRY); beneficio único: eliminar duplicados",
-      "D) No hay justificación; las funciones largas son preferibles"
+      "A) El principio de maximizar la longitud del código; su beneficio es tener más funciones disponibles",
+      "B) El principio de **responsabilidad única** y descomposición; beneficios: legibilidad, testabilidad y mantenibilidad; riesgo: overhead de llamadas y posible estado compartido entre funciones",
+      "C) El principio de no repetir código (DRY); su único beneficio es eliminar líneas duplicadas",
+      "D) Ninguno; las funciones largas de una sola pieza siempre son preferibles a varias pequeñas"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La refactorización aplica el Principio de Responsabilidad Única. Beneficios: código más legible, cada función se puede probar independientemente, cambios localizados. Riesgos: overhead de múltiples llamadas y posibles bugs por estado compartido.",
@@ -548,10 +548,10 @@
     "dominio": "KC_PROPOSITIONAL_LOGIC",
     "enunciado": "¿Por qué es importante validar los datos de entrada antes de procesarlos?",
     "opciones": [
-      "A) Para hacer el programa más lento",
+      "A) Para reducir intencionalmente la velocidad del programa y evitar sobrecargas",
       "B) Para garantizar que los datos tienen el formato y rango esperados, evitando errores de ejecución y resultados incorrectos",
-      "C) Porque el usuario siempre ingresa datos incorrectos",
-      "D) Solo es necesario en programas grandes"
+      "C) Porque se asume que el usuario siempre ingresa datos incorrectos a propósito",
+      "D) Porque la validación solo es necesaria en programas de gran tamaño"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La validación previene: errores de ejecución (división por cero, índice fuera de rango), resultados incorrectos (cálculo con datos inválidos), y vulnerabilidades de seguridad.",
@@ -564,12 +564,12 @@
     "kc": "validacion_de_datos_de_entrada",
     "tipo": "Análisis",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Diseña la validación para registrar la edad de un estudiante universitario. El sistema debe aceptar solo valores entre 15 y 80 años (entero). ¿Cuál expresión de validación es correcta?",
+    "enunciado": "Diseña la validación para registrar la edad de un estudiante universitario. El sistema debe aceptar solo valores enteros entre 15 y 80 años. ¿Cuál expresión de validación es correcta?",
     "opciones": [
-      "A) SI edad > 0: procesar",
-      "B) SI edad >= 15 AND edad <= 80: procesar SINO: mostrar error 'Edad debe estar entre 15 y 80 años'",
-      "C) SI edad != 0: procesar",
-      "D) SI edad >= 18: procesar"
+      "A) `SI edad > 0: procesar` (basta con que sea positiva)",
+      "B) `SI edad >= 15 AND edad <= 80: procesar SINO: mostrar error 'Edad debe estar entre 15 y 80 años'`",
+      "C) `SI edad != 0: procesar` (basta con que no sea cero)",
+      "D) `SI edad >= 18: procesar` (basta con verificar la mayoría de edad)"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La validación correcta verifica el rango completo: límite inferior (>=15) Y límite superior (<=80). Además, debe informar al usuario sobre el error específico con un mensaje descriptivo.",
@@ -582,12 +582,12 @@
     "kc": "validacion_de_datos_de_entrada",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un sistema de transferencia bancaria requiere validar: (1) monto > 0, (2) monto <= saldo_disponible, (3) cuenta_destino válida (10 dígitos numéricos), (4) monto <= limite_diario_restante, (5) cuenta_destino != cuenta_origen.\n¿En qué orden deben ejecutarse estas validaciones para maximizar la eficiencia y la seguridad?",
+    "enunciado": "Un sistema de transferencia bancaria debe validar: (1) `monto > 0`, (2) `monto <= saldo_disponible`, (3) cuenta_destino válida (10 dígitos), (4) `monto <= limite_diario_restante`, (5) `cuenta_destino != cuenta_origen`.\n¿En qué orden deben ejecutarse estas validaciones para maximizar la eficiencia y la seguridad?",
     "opciones": [
-      "A) El orden no importa; todas deben validarse siempre",
-      "B) Orden óptimo: primero las más baratas computacionalmente (1,5,3 son locales) y luego las que requieren consultas al sistema (2,4 requieren consultar BD). También: (1) antes que (2) porque si monto<=0 no tiene sentido verificar si alcanza el saldo",
-      "C) Primero validar cuenta_destino porque es lo más importante",
-      "D) Solo validar (1) y (2); las otras son opcionales"
+      "A) El orden es indiferente; todas las validaciones deben ejecutarse siempre por completo",
+      "B) Primero las más baratas (1, 5, 3 son locales) y luego las que requieren consultar la BD (2, 4). Además, (1) antes que (2): si `monto<=0` no tiene sentido verificar el saldo",
+      "C) Primero la validación de la cuenta destino, por ser el dato más importante de la operación",
+      "D) Basta con validar (1) y (2); las validaciones restantes son opcionales"
     ],
     "respuesta_correcta": "B",
     "explicacion": "El orden óptimo combina dos criterios: (a) costo computacional: validaciones locales son O(1) sin BD; validaciones con BD son costosas. (b) dependencia lógica: si monto<=0, no tiene sentido consultar si alcanza el saldo. Orden sugerido: 1→5→3→2→4.",
@@ -600,12 +600,12 @@
     "kc": "manejo_de_casos_borde_y_excepciones_logicas",
     "tipo": "Conceptual",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "¿Qué es un 'caso borde' en el contexto de prueba de algoritmos?",
+    "enunciado": "¿Qué es un **caso borde** en el contexto de prueba de algoritmos?",
     "opciones": [
-      "A) Un error de sintaxis en el código",
-      "B) Un valor límite o extremo en el rango de entrada (como 0, negativo, el valor máximo, o lista vacía) que puede revelar comportamientos incorrectos del algoritmo",
-      "C) Un caso donde el algoritmo tarda demasiado tiempo",
-      "D) Una excepción de hardware"
+      "A) Un error de sintaxis que impide que el código compile",
+      "B) Un valor límite o extremo del rango de entrada (como 0, un negativo, el valor máximo o una lista vacía) que puede revelar comportamientos incorrectos",
+      "C) Un caso en el que el algoritmo tarda demasiado tiempo en ejecutarse",
+      "D) Una falla física del hardware durante la ejecución del programa"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Los casos borde son valores en los límites del rango esperado: el mínimo, el máximo, cero, negativos, listas vacías, o valores nulos. Estos casos frecuentemente revelan errores que no aparecen con datos típicos.",
@@ -620,10 +620,10 @@
     "dominio": "KC_PROPOSITIONAL_LOGIC",
     "enunciado": "Una función calcula el promedio de una lista. ¿Cuáles son los casos borde que deben probarse?",
     "opciones": [
-      "A) Solo probar con lista de 10 elementos",
-      "B) Lista vacía (división por cero), lista con un solo elemento, lista con todos los valores iguales, lista con el máximo número de elementos permitido, lista con valores negativos",
-      "C) Solo probar con números positivos",
-      "D) Probar con lista de 100 elementos aleatorios"
+      "A) Únicamente probar con una lista de 10 elementos representativa",
+      "B) Lista vacía (división por cero), lista de un solo elemento, lista con todos los valores iguales, lista del tamaño máximo permitido y lista con valores negativos",
+      "C) Únicamente probar con listas que contengan números positivos",
+      "D) Únicamente probar con una lista de 100 elementos generados al azar"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Los casos borde para promedio incluyen: lista vacía (causa división por cero → debe manejarse), un elemento (caso mínimo no vacío), todos iguales (el promedio debe ser ese valor), tamaño máximo (rendimiento), negativos (¿los acepta?).",
@@ -636,12 +636,12 @@
     "kc": "manejo_de_casos_borde_y_excepciones_logicas",
     "tipo": "Bebras",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un algoritmo de búsqueda binaria en lista ordenada usa: inicio=0, fin=N-1, medio=(inicio+fin)/2 (entera).\nSI lista[medio]==buscado: encontrado. SI buscado<lista[medio]: fin=medio. SINO: inicio=medio.\n¿En qué caso borde el algoritmo nunca termina (bucle infinito)?",
+    "enunciado": "Un algoritmo de búsqueda binaria en lista ordenada usa: `inicio=0`, `fin=N-1`, `medio=(inicio+fin)/2` (entera).\n\n```\nSI lista[medio]==buscado: encontrado\nSI buscado < lista[medio]: fin = medio\nSINO: inicio = medio\n```\n\n¿En qué caso borde el algoritmo nunca termina (bucle infinito)?",
     "opciones": [
-      "A) Caso A: elemento no existe",
-      "B) Caso D: cuando el elemento está en la última posición, el algoritmo puede entrar en bucle infinito porque inicio=medio no avanza cuando N=2",
-      "C) Caso B: lista de un elemento",
-      "D) Nunca entra en bucle infinito"
+      "A) Cuando el elemento buscado no existe dentro de la lista",
+      "B) Cuando el elemento está en la última posición y `N=2`: `inicio=medio` no avanza y la iteración se repite idéntica",
+      "C) Cuando la lista tiene un único elemento",
+      "D) El algoritmo nunca entra en bucle infinito, sin importar la entrada"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Con lista [1,3] buscando 3: inicio=0, fin=1. medio=(0+1)/2=0. lista[0]=1≠3. 3>1 → inicio=medio=0. PERO inicio sigue siendo 0, fin sigue siendo 1. La siguiente iteración es idéntica → bucle infinito. El error es usar inicio=medio en lugar de inicio=medio+1.",
@@ -654,12 +654,12 @@
     "kc": "que_es_un_ciclo_y_para_que_sirve",
     "tipo": "Conceptual",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "¿Cuál es la ventaja principal de usar un ciclo para imprimir 100 veces el mensaje 'Bienvenido'?",
+    "enunciado": "¿Cuál es la ventaja principal de usar un ciclo para imprimir 100 veces el mensaje `'Bienvenido'`?",
     "opciones": [
-      "A) El ciclo imprime más rápido que instrucciones individuales",
-      "B) Permite repetir una instrucción múltiples veces escribiendo el código solo una vez, reduciendo errores y facilitando cambios",
-      "C) Mejora la calidad del texto impreso",
-      "D) Permite imprimir diferentes mensajes cada vez"
+      "A) El ciclo imprime a mayor velocidad que 100 instrucciones individuales",
+      "B) Permite repetir la instrucción muchas veces escribiendo el código una sola vez, lo que reduce errores y facilita los cambios",
+      "C) Mejora la calidad visual del texto que se imprime en pantalla",
+      "D) Permite imprimir un mensaje distinto en cada una de las repeticiones"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Un ciclo permite expresar repetición sin duplicar código. En lugar de 100 líneas idénticas, se escribe la instrucción una vez dentro del ciclo. Si hay que cambiar el mensaje, se cambia en un solo lugar.",
@@ -672,12 +672,12 @@
     "kc": "que_es_un_ciclo_y_para_que_sirve",
     "tipo": "Análisis",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Un algoritmo sin ciclo para sumar los números del 1 al 1000 necesita 999 sumas escritas explícitamente. Con un ciclo, necesita solo 3 líneas. Si ahora se requiere sumar del 1 al 1,000,000, ¿cuántas líneas adicionales necesita el algoritmo CON ciclo?",
+    "enunciado": "Un algoritmo sin ciclo para sumar los números del 1 al 1000 necesita 999 sumas escritas explícitamente. Con un ciclo, necesita solo 3 líneas. Si ahora se requiere sumar del 1 al 1,000,000, ¿cuántas líneas adicionales necesita el algoritmo **CON** ciclo?",
     "opciones": [
-      "A) 999,999 líneas adicionales",
-      "B) 0 líneas adicionales: solo se cambia el número límite del ciclo (de 1000 a 1,000,000)",
-      "C) 3 líneas adicionales",
-      "D) 1000 líneas adicionales"
+      "A) `999,999` líneas adicionales, una por cada nuevo número",
+      "B) `0` líneas adicionales: solo se cambia el número límite del ciclo (de 1000 a 1,000,000)",
+      "C) `3` líneas adicionales, una por cada línea original del ciclo",
+      "D) `1000` líneas adicionales para cubrir el nuevo rango"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La potencia de los ciclos es que el código no crece con el tamaño del problema. Para sumar del 1 al N, el ciclo siempre tiene el mismo número de líneas; solo cambia el valor de N.",
@@ -690,12 +690,12 @@
     "kc": "que_es_un_ciclo_y_para_que_sirve",
     "tipo": "Razonamiento",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Un algoritmo de cifrado aplica una transformación a cada byte de un archivo de 1GB (1,073,741,824 bytes). La transformación tarda 1 nanosegundo por byte. Sin considerar otras optimizaciones, ¿cuánto tiempo tarda el ciclo y qué tipo de complejidad representa?",
+    "enunciado": "Un algoritmo de cifrado aplica una transformación a cada byte de un archivo de 1GB (1,073,741,824 bytes). La transformación tarda 1 nanosegundo por byte. Sin considerar otras optimizaciones, ¿cuánto tarda el ciclo y qué tipo de complejidad representa?",
     "opciones": [
-      "A) 1 segundo; complejidad O(1)",
-      "B) Aproximadamente 1.07 segundos; complejidad O(N) — el tiempo crece linealmente con el tamaño del archivo",
-      "C) 1073 segundos; complejidad O(N²)",
-      "D) Instantáneo porque los ciclos son muy rápidos"
+      "A) Aproximadamente 1 segundo; complejidad `O(1)` constante",
+      "B) Aproximadamente 1.07 segundos; complejidad `O(N)` — el tiempo crece linealmente con el tamaño del archivo",
+      "C) Aproximadamente 1073 segundos; complejidad `O(N²)` cuadrática",
+      "D) Prácticamente instantáneo, porque los ciclos se ejecutan muy rápido en hardware moderno"
     ],
     "respuesta_correcta": "B",
     "explicacion": "1,073,741,824 bytes × 1ns = 1.07 segundos aproximadamente. La complejidad es O(N) lineal: si el archivo duplica su tamaño, el tiempo también se duplica.",
@@ -708,12 +708,12 @@
     "kc": "concepto_de_contador",
     "tipo": "Conceptual",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "En un ciclo para contar cuántos números pares hay entre 1 y 20, ¿cuál es el rol del contador?",
+    "enunciado": "En un ciclo para contar cuántos números pares hay entre 1 y 20, ¿cuál es el rol del **contador**?",
     "opciones": [
-      "A) Almacena la suma de todos los números pares",
-      "B) Lleva la cuenta del número de veces que se cumple una condición (en este caso, cuántos números son pares)",
-      "C) Almacena el último número par encontrado",
-      "D) Controla cuántas veces se repite el ciclo"
+      "A) Almacenar la suma total de todos los números pares encontrados",
+      "B) Llevar la cuenta del número de veces que se cumple una condición (cuántos números son pares)",
+      "C) Almacenar el último número par que se encontró en el recorrido",
+      "D) Controlar cuántas veces en total se repite el ciclo, sea par o impar"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Un contador registra cuántas veces ocurre un evento. En este caso, cada vez que se encuentra un número par, el contador aumenta en 1. Al final del ciclo, el contador contiene el total de números pares encontrados.",
@@ -726,12 +726,12 @@
     "kc": "concepto_de_contador",
     "tipo": "Análisis",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Algoritmo:\ncontador_pares = 0; contador_impares = 0\nPARA i DESDE 1 HASTA 10:\n  SI i % 2 == 0: contador_pares += 1\n  SINO: contador_impares += 1\nMostrar contador_pares, contador_impares\n¿Qué valores muestra?",
+    "enunciado": "Algoritmo:\n\n```\ncontador_pares = 0; contador_impares = 0\nPARA i DESDE 1 HASTA 10:\n  SI i % 2 == 0: contador_pares += 1\n  SINO: contador_impares += 1\nMostrar contador_pares, contador_impares\n```\n\n¿Qué valores muestra?",
     "opciones": [
-      "A) pares=4, impares=6",
-      "B) pares=5, impares=5",
-      "C) pares=6, impares=4",
-      "D) pares=10, impares=0"
+      "A) `pares=4, impares=6`",
+      "B) `pares=5, impares=5`",
+      "C) `pares=6, impares=4`",
+      "D) `pares=10, impares=0`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Del 1 al 10: pares son 2,4,6,8,10 (5 números); impares son 1,3,5,7,9 (5 números). contador_pares=5, contador_impares=5.",
@@ -744,12 +744,12 @@
     "kc": "concepto_de_contador",
     "tipo": "Bebras",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Un algoritmo cuenta palabras en un texto usando un contador de espacios:\ntexto = 'el gato come pescado fresco'\ncontador = 1\nPARA cada caracter en texto:\n  SI caracter == ' ': contador += 1\nMostrar contador\n¿Funciona correctamente este algoritmo? ¿Qué casos borde lo hacen fallar?",
+    "enunciado": "Un algoritmo cuenta palabras en un texto usando un contador de espacios:\n\n```\ntexto = 'el gato come pescado fresco'\ncontador = 1\nPARA cada caracter en texto:\n  SI caracter == ' ': contador += 1\nMostrar contador\n```\n\n¿Funciona correctamente este algoritmo? ¿Qué casos borde lo hacen fallar?",
     "opciones": [
-      "A) Funciona perfectamente en todos los casos",
-      "B) Falla con: texto vacío (reporta 1 en lugar de 0), espacios múltiples consecutivos (cuenta como palabras adicionales), y texto con solo espacios",
-      "C) Solo falla con texto vacío",
-      "D) Solo falla cuando el texto tiene más de 100 palabras"
+      "A) Funciona perfectamente en todos los casos posibles de entrada",
+      "B) Falla con: texto vacío (reporta 1 en lugar de 0), espacios múltiples consecutivos (cuenta palabras de más) y texto con solo espacios",
+      "C) Solo falla cuando el texto de entrada está completamente vacío",
+      "D) Solo falla cuando el texto contiene más de 100 palabras"
     ],
     "respuesta_correcta": "B",
     "explicacion": "El algoritmo asume exactamente un espacio entre palabras, pero falla con: (1) texto vacío: reporta 1 cuando debería reportar 0; (2) espacios dobles: cuenta como 2 palabras; (3) texto con solo espacios: reporta incorrectamente.",
@@ -762,12 +762,12 @@
     "kc": "concepto_de_acumulador",
     "tipo": "Conceptual",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "¿Cuál es la diferencia entre un contador y un acumulador?",
+    "enunciado": "¿Cuál es la diferencia entre un **contador** y un **acumulador**?",
     "opciones": [
-      "A) No hay diferencia; son lo mismo",
-      "B) El contador siempre aumenta de 1 en 1; el acumulador suma valores variables (puede sumar 1, 10, 100 o cualquier cantidad)",
-      "C) El acumulador solo se usa en ciclos while; el contador en ciclos for",
-      "D) El contador almacena el último valor; el acumulador almacena todos los valores"
+      "A) No existe ninguna diferencia; son dos nombres para lo mismo",
+      "B) El contador aumenta de 1 en 1; el acumulador suma valores variables (puede sumar 1, 10, 100 o cualquier cantidad)",
+      "C) El acumulador solo funciona en ciclos `while` y el contador solo en ciclos `for`",
+      "D) El contador guarda el último valor recibido; el acumulador guarda todos los valores en una lista"
     ],
     "respuesta_correcta": "B",
     "explicacion": "El contador aumenta en una cantidad fija (generalmente 1) para contar ocurrencias. El acumulador suma valores que varían: suma ventas del día (cada venta tiene un monto diferente), suma temperaturas, etc.",
@@ -780,12 +780,12 @@
     "kc": "concepto_de_acumulador",
     "tipo": "Análisis",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Ventas del día: 15000, 32000, 8000, 47000, 21000.\nAcumulador inicia en 0. ¿Cuál es el valor después de procesar la tercera venta?",
+    "enunciado": "Ventas del día: `15000, 32000, 8000, 47000, 21000`.\nEl acumulador inicia en 0. ¿Cuál es su valor después de procesar la **tercera** venta?",
     "opciones": [
-      "A) 8000",
-      "B) 47000",
-      "C) 55000",
-      "D) 123000"
+      "A) `8000` (solo la tercera venta)",
+      "B) `47000` (la venta de mayor valor hasta ahora)",
+      "C) `55000` (suma de las tres primeras ventas)",
+      "D) `123000` (suma de las cinco ventas del día)"
     ],
     "respuesta_correcta": "C",
     "explicacion": "Venta 1: 0+15000=15000. Venta 2: 15000+32000=47000. Venta 3: 47000+8000=55000.",
@@ -798,12 +798,12 @@
     "kc": "concepto_de_acumulador",
     "tipo": "Razonamiento",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Un sistema calcula el promedio acumulado hora a hora sin guardar todas las lecturas:\npromedio_actual = 0; n = 0\nAl recibir nueva_temp:\n  n += 1\n  promedio_actual = promedio_actual + (nueva_temp - promedio_actual) / n\n¿Por qué esta fórmula es equivalente al promedio normal pero más eficiente en memoria? ¿Cuánto usa con 1,000,000 de lecturas vs guardar todas?",
+    "enunciado": "Un sistema calcula el promedio acumulado hora a hora sin guardar todas las lecturas:\n\n```\npromedio_actual = 0; n = 0\nAl recibir nueva_temp:\n  n += 1\n  promedio_actual = promedio_actual + (nueva_temp - promedio_actual) / n\n```\n\n¿Por qué esta fórmula equivale al promedio normal pero es más eficiente en memoria? ¿Cuánta memoria usa con 1,000,000 de lecturas frente a guardarlas todas?",
     "opciones": [
-      "A) No son equivalentes; producen resultados diferentes",
-      "B) Son equivalentes matemáticamente. El acumulador online usa O(1) memoria (solo 2 variables) vs O(N) para guardar todas las lecturas. Con 1M de lecturas: 2 valores vs 1,000,000 valores en memoria",
-      "C) El acumulador online es menos preciso",
-      "D) No hay diferencia de memoria entre las dos aproximaciones"
+      "A) No son equivalentes; la fórmula online produce un promedio distinto al real",
+      "B) Son equivalentes matemáticamente. El acumulador online usa `O(1)` memoria (2 variables) vs `O(N)` de guardar todas; con 1M de lecturas: 2 valores vs 1,000,000",
+      "C) Son equivalentes, pero el acumulador online pierde precisión con muchos datos",
+      "D) Ambos enfoques usan exactamente la misma cantidad de memoria"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La fórmula promedio_actual += (nueva - actual)/n es algebraicamente equivalente a suma_total/n. Pero al no guardar todos los valores, usa memoria O(1) independientemente de cuántas lecturas haya. Esta técnica se llama 'algoritmo online'.",
@@ -816,12 +816,12 @@
     "kc": "ciclo_for_estructura_basica",
     "tipo": "Conceptual",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "¿Cuántas veces ejecuta el cuerpo el siguiente ciclo?\nPARA i DESDE 1 HASTA 5:\n  Mostrar i",
+    "enunciado": "¿Cuántas veces ejecuta el cuerpo el siguiente ciclo?\n\n```\nPARA i DESDE 1 HASTA 5:\n  Mostrar i\n```",
     "opciones": [
-      "A) 4 veces",
-      "B) 5 veces",
-      "C) 6 veces",
-      "D) Depende del valor de i"
+      "A) `4` veces",
+      "B) `5` veces",
+      "C) `6` veces",
+      "D) `2` veces"
     ],
     "respuesta_correcta": "B",
     "explicacion": "El ciclo for itera con i=1,2,3,4,5. Eso son exactamente 5 iteraciones (del 1 al 5 inclusive). El cuerpo del ciclo se ejecuta 5 veces.",
@@ -834,12 +834,12 @@
     "kc": "ciclo_for_estructura_basica",
     "tipo": "Análisis",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "PARA i DESDE 0 HASTA 9 CON PASO 2:\n  Mostrar i * i\n¿Qué valores muestra y cuántas iteraciones realiza?",
+    "enunciado": "```\nPARA i DESDE 0 HASTA 9 CON PASO 2:\n  Mostrar i * i\n```\n\n¿Qué valores muestra y cuántas iteraciones realiza?",
     "opciones": [
-      "A) 0,1,4,9,16,25,36,49,64,81 — 10 iteraciones",
-      "B) 0,4,16,36,64 — 5 iteraciones (i=0,2,4,6,8)",
-      "C) 0,2,4,6,8 — 5 iteraciones",
-      "D) 1,4,9,16,25 — 5 iteraciones"
+      "A) `0,1,4,9,16,25,36,49,64,81` — 10 iteraciones",
+      "B) `0,4,16,36,64` — 5 iteraciones (`i=0,2,4,6,8`)",
+      "C) `0,2,4,6,8` — 5 iteraciones",
+      "D) `1,4,9,16,25` — 5 iteraciones"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Con paso 2, i toma valores: 0,2,4,6,8 (cuando i=10, ya no cumple hasta 9). Cuadrados: 0,4,16,36,64. Total: 5 iteraciones.",
@@ -852,12 +852,12 @@
     "kc": "ciclo_for_estructura_basica",
     "tipo": "Bebras",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Dos ciclos anidados:\nPARA i DESDE 1 HASTA N:\n  PARA j DESDE 1 HASTA i:\n    operacion()\n¿Cuántas veces se ejecuta operacion() para N=5? ¿Cuál es la fórmula general para N?",
+    "enunciado": "Dos ciclos anidados:\n\n```\nPARA i DESDE 1 HASTA N:\n  PARA j DESDE 1 HASTA i:\n    operacion()\n```\n\n¿Cuántas veces se ejecuta `operacion()` para `N=5`? ¿Cuál es la fórmula general para N?",
     "opciones": [
-      "A) N operaciones; fórmula: N",
-      "B) N² operaciones; fórmula: N²",
-      "C) N*(N+1)/2 operaciones; para N=5: 15",
-      "D) 2N operaciones; para N=5: 10"
+      "A) `N` operaciones; fórmula general: `N`",
+      "B) `N²` operaciones; fórmula general: `N²` (para `N=5` → 25)",
+      "C) `N*(N+1)/2` operaciones; para `N=5` → 15",
+      "D) `2N` operaciones; para `N=5` → 10"
     ],
     "respuesta_correcta": "C",
     "explicacion": "Iteración i=1: j=1 (1 vez). i=2: j=1,2 (2 veces). i=3: 3 veces. i=4: 4 veces. i=5: 5 veces. Total=1+2+3+4+5=15=N*(N+1)/2. Esta es la suma de los primeros N naturales.",
@@ -870,12 +870,12 @@
     "kc": "ciclo_while_estructura_y_condicion_de_parada",
     "tipo": "Conceptual",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "¿Cuántas veces ejecuta el cuerpo:\nn = 1\nMIENTRAS n < 5:\n  n = n * 2",
+    "enunciado": "¿Cuántas veces ejecuta el cuerpo?\n\n```\nn = 1\nMIENTRAS n < 5:\n  n = n * 2\n```",
     "opciones": [
-      "A) 5 veces",
-      "B) 3 veces (n: 1→2→4→8, en n=8 ya no cumple n<5)",
-      "C) 4 veces",
-      "D) Nunca"
+      "A) `5` veces",
+      "B) `3` veces (`n: 1→2→4→8`; en `n=8` ya no cumple `n<5`)",
+      "C) `4` veces",
+      "D) `0` veces; nunca entra al ciclo"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Traza: n=1 (1<5=V, n=2); n=2 (2<5=V, n=4); n=4 (4<5=V, n=8); n=8 (8<5=F, para). El cuerpo se ejecuta 3 veces.",
@@ -888,12 +888,12 @@
     "kc": "ciclo_while_estructura_y_condicion_de_parada",
     "tipo": "Análisis",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Un sistema pide al usuario ingresar un número entre 1 y 10. Si el número no es válido, vuelve a pedir.\nnumero = 0\nMIENTRAS numero < 1 OR numero > 10:\n  Pedir numero al usuario\nSi el usuario ingresa: 15, -3, 5. ¿Cuántas veces se solicita el número y cuál es el valor final?",
+    "enunciado": "Un sistema pide al usuario un número entre 1 y 10. Si no es válido, vuelve a pedir.\n\n```\nnumero = 0\nMIENTRAS numero < 1 OR numero > 10:\n  Pedir numero al usuario\n```\n\nSi el usuario ingresa: `15, -3, 5`, ¿cuántas veces se solicita el número y cuál es el valor final?",
     "opciones": [
-      "A) 1 vez; valor final = 15",
-      "B) 3 veces; valor final = 5",
-      "C) 2 veces; valor final = -3",
-      "D) El ciclo es infinito porque la condición inicial es verdadera"
+      "A) 1 vez; valor final = `15`",
+      "B) 3 veces; valor final = `5`",
+      "C) 2 veces; valor final = `-3`",
+      "D) El ciclo es infinito porque la condición inicial ya es verdadera"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Inicio: numero=0 → 0<1=V → pide. Ingresa 15: 15>10=V → vuelve a pedir. Ingresa -3: -3<1=V → vuelve. Ingresa 5: 5>=1 AND 5<=10 → condición FALSA → sale. Se solicitó 3 veces; valor final=5.",
@@ -906,12 +906,12 @@
     "kc": "ciclo_while_estructura_y_condicion_de_parada",
     "tipo": "Razonamiento",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Algoritmo de Euclides para MCD:\na = 48; b = 18\nMIENTRAS b != 0:\n  temp = b\n  b = a % b\n  a = temp\nMostrar a\n¿Cuántas iteraciones realiza y cuál es el resultado? ¿Qué garantiza que este while siempre termina?",
+    "enunciado": "Algoritmo de Euclides para el MCD:\n\n```\na = 48; b = 18\nMIENTRAS b != 0:\n  temp = b\n  b = a % b\n  a = temp\nMostrar a\n```\n\n¿Cuántas iteraciones realiza y cuál es el resultado? ¿Qué garantiza que este `while` siempre termina?",
     "opciones": [
-      "A) 3 iteraciones; resultado=6. Termina porque b siempre decrece estrictamente (a%b < b siempre)",
-      "B) 2 iteraciones; resultado=18",
-      "C) 4 iteraciones; resultado=2",
-      "D) Es un ciclo infinito porque b podría no llegar a 0"
+      "A) 3 iteraciones; resultado=`6`. Termina porque `b` decrece estrictamente (`a % b < b` siempre)",
+      "B) 2 iteraciones; resultado=`18`, el valor inicial de b",
+      "C) 4 iteraciones; resultado=`2`, el MCD de los dos números",
+      "D) Es un ciclo infinito, porque `b` podría no llegar nunca a 0"
     ],
     "respuesta_correcta": "A",
     "explicacion": "Iter1: temp=18, b=48%18=12, a=18. Iter2: temp=12, b=18%12=6, a=12. Iter3: temp=6, b=12%6=0, a=6. b=0→para. MCD=6. La garantía: el residuo a%b siempre es estrictamente menor que b, por lo que b decrece hasta llegar a 0.",
@@ -924,12 +924,12 @@
     "kc": "ciclo_do_while_y_cuando_usarlo",
     "tipo": "Conceptual",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "¿Cuál es la diferencia principal entre un ciclo WHILE y un ciclo DO-WHILE?",
+    "enunciado": "¿Cuál es la diferencia principal entre un ciclo `WHILE` y un ciclo `DO-WHILE`?",
     "opciones": [
-      "A) El do-while repite más veces que el while",
-      "B) El do-while ejecuta el cuerpo al menos una vez antes de verificar la condición; el while verifica la condición primero y puede no ejecutar el cuerpo nunca",
-      "C) El while es más rápido que el do-while",
-      "D) Son exactamente iguales"
+      "A) El `do-while` siempre realiza una repetición más que el `while` equivalente",
+      "B) El `do-while` ejecuta el cuerpo al menos una vez antes de verificar la condición; el `while` verifica primero y puede no ejecutar el cuerpo nunca",
+      "C) El `while` se ejecuta con mayor velocidad que el `do-while`",
+      "D) Son estructuras exactamente iguales, solo cambia el nombre"
     ],
     "respuesta_correcta": "B",
     "explicacion": "While: evalúa la condición ANTES de ejecutar el cuerpo (si la condición es falsa desde el inicio, el cuerpo nunca se ejecuta). Do-While: ejecuta el cuerpo PRIMERO y luego evalúa si continuar (garantiza al menos una ejecución).",
@@ -942,12 +942,12 @@
     "kc": "ciclo_do_while_y_cuando_usarlo",
     "tipo": "Caso práctico",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "¿Por qué un menú interactivo es un caso ideal para un DO-WHILE?",
+    "enunciado": "¿Por qué un menú interactivo es un caso ideal para un `DO-WHILE`?",
     "opciones": [
       "A) Porque el menú siempre necesita ejecutarse exactamente 5 veces",
-      "B) Porque el menú debe mostrarse al menos una vez (el usuario no puede elegir sin verlo); do-while garantiza que el menú se muestra antes de verificar si continuar",
-      "C) Porque el while no puede usarse con menús",
-      "D) Porque el do-while es más eficiente para menús"
+      "B) Porque el menú debe mostrarse al menos una vez (el usuario no puede elegir sin verlo); el `do-while` garantiza mostrarlo antes de verificar si continuar",
+      "C) Porque un ciclo `while` no puede utilizarse para mostrar menús interactivos",
+      "D) Porque el `do-while` procesa las opciones del menú con mayor eficiencia"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Un menú necesita mostrarse antes de que el usuario pueda elegir si continuar o salir. El do-while es más natural: muestra el menú → el usuario elige → si elige 'salir', termina.",
@@ -960,12 +960,12 @@
     "kc": "ciclo_do_while_y_cuando_usarlo",
     "tipo": "Razonamiento",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Un sistema de reintentos de conexión a un servidor:\nDO:\n  resultado = intentar_conectar(servidor)\n  intentos += 1\nWHILE (resultado == 'FALLO' AND intentos < 3)\nSi el servidor siempre falla, ¿cuántos intentos hace? Si conecta en el primer intento, ¿cuántos hace? ¿Qué modificación haría el sistema esperar 2 segundos entre intentos?",
+    "enunciado": "Un sistema de reintentos de conexión a un servidor:\n\n```\nDO:\n  resultado = intentar_conectar(servidor)\n  intentos += 1\nWHILE (resultado == 'FALLO' AND intentos < 3)\n```\n\nSi el servidor siempre falla, ¿cuántos intentos hace? Si conecta al primer intento, ¿cuántos hace? ¿Qué modificación haría esperar 2 segundos entre intentos?",
     "opciones": [
-      "A) Siempre hace exactamente 3 intentos sin importar el resultado",
-      "B) Si siempre falla: 3 intentos. Si conecta al primero: 1 intento. Para esperar entre intentos: agregar 'esperar(2)' al final del cuerpo del DO antes del WHILE",
+      "A) Hace siempre exactamente 3 intentos, sin importar el resultado de la conexión",
+      "B) Si siempre falla: 3 intentos. Si conecta al primero: 1 intento. Para esperar entre intentos: agregar `esperar(2)` al final del cuerpo del `DO`",
       "C) Si siempre falla: 2 intentos. Si conecta al primero: 0 intentos",
-      "D) El ciclo es infinito porque nunca verifica el éxito"
+      "D) El ciclo es infinito, porque nunca llega a verificar si la conexión tuvo éxito"
     ],
     "respuesta_correcta": "B",
     "explicacion": "DO-WHILE garantiza al menos un intento. Si falla 3 veces: intentos=3, resultado='FALLO' AND 3<3=F → para (3 intentos). Si conecta al primero: resultado='OK' → condición FALSA → para (1 intento). Para esperar: incluir esperar(2) dentro del cuerpo DO.",
@@ -980,10 +980,10 @@
     "dominio": "KC_LOOPS_AND_ITERATION",
     "enunciado": "Para procesar exactamente los 12 meses del año y calcular el total de ventas, ¿cuál ciclo es más apropiado?",
     "opciones": [
-      "A) while, porque la condición puede cambiar",
-      "B) do-while, porque se necesita al menos un mes",
-      "C) for, porque el número de iteraciones es fijo y conocido (12)",
-      "D) Los tres son igualmente apropiados"
+      "A) `while`, porque la condición de parada podría cambiar durante el proceso",
+      "B) `do-while`, porque se necesita procesar al menos un mes antes de verificar",
+      "C) `for`, porque el número de iteraciones es fijo y conocido de antemano (12)",
+      "D) Cualquiera de los tres es igualmente apropiado para este caso"
     ],
     "respuesta_correcta": "C",
     "explicacion": "El ciclo for es ideal cuando el número de iteraciones se conoce de antemano. Procesar exactamente 12 meses es un ejemplo perfecto: for i desde 1 hasta 12. El for hace explícita la cantidad de repeticiones.",
@@ -996,12 +996,12 @@
     "kc": "diferencias_entre_for_while_y_do_while",
     "tipo": "Análisis",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Clasifica cada situación con el ciclo más apropiado:\nA) Leer datos de un sensor hasta que la temperatura supere 100°C\nB) Mostrar los múltiplos de 3 entre 1 y 99\nC) Pedir al usuario que adivine un número (siempre pide al menos una vez)",
+    "enunciado": "Clasifica cada situación con el ciclo más apropiado:\n- A) Leer datos de un sensor hasta que la temperatura supere 100°C\n- B) Mostrar los múltiplos de 3 entre 1 y 99\n- C) Pedir al usuario que adivine un número (siempre pide al menos una vez)",
     "opciones": [
-      "A) A:for, B:while, C:do-while",
-      "B) A:while, B:for, C:do-while",
-      "C) A:do-while, B:for, C:while",
-      "D) Todos: while"
+      "A) A:`for`, B:`while`, C:`do-while`",
+      "B) A:`while`, B:`for`, C:`do-while`",
+      "C) A:`do-while`, B:`for`, C:`while`",
+      "D) Los tres casos: `while`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "A: while — condición de parada basada en evento externo desconocido. B: for — número exacto de iteraciones calculable (33 múltiplos). C: do-while — debe ejecutarse al menos una vez antes de verificar si el usuario acertó.",
@@ -1014,12 +1014,12 @@
     "kc": "diferencias_entre_for_while_y_do_while",
     "tipo": "Razonamiento",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Un sistema de monitoreo revisa el estado de 1000 servidores continuamente (sin número definido de ciclos globales) y dentro de cada revisión procesa exactamente los 1000 servidores. ¿Cuál sería la estructura de ciclos más apropiada y por qué?",
+    "enunciado": "Un sistema de monitoreo revisa el estado de 1000 servidores continuamente (sin un número definido de ciclos globales) y dentro de cada revisión procesa exactamente los 1000 servidores. ¿Cuál sería la estructura de ciclos más apropiada y por qué?",
     "opciones": [
-      "A) Dos ciclos for anidados",
-      "B) Ciclo externo: while(sistema_activo) — sin límite predefinido. Ciclo interno: for i desde 1 hasta 1000 — número fijo de servidores. La elección refleja la naturaleza de cada proceso",
-      "C) Dos ciclos do-while para garantizar al menos una ejecución",
-      "D) Un solo ciclo for de 1,000,000 iteraciones"
+      "A) Dos ciclos `for` anidados, uno con límite fijo y otro con un límite muy grande",
+      "B) Externo `while(sistema_activo)` (sin límite predefinido) e interno `for i desde 1 hasta 1000` (número fijo). Cada elección refleja la naturaleza de su repetición",
+      "C) Dos ciclos `do-while`, para garantizar que ambos niveles se ejecuten al menos una vez",
+      "D) Un solo ciclo `for` de 1,000,000 de iteraciones que combine ambos niveles"
     ],
     "respuesta_correcta": "B",
     "explicacion": "El ciclo externo (while) es apropiado porque el sistema corre mientras esté activo (sin número predefinido). El ciclo interno (for) es apropiado porque siempre revisa exactamente 1000 servidores por ronda.",
@@ -1032,12 +1032,12 @@
     "kc": "contadores_y_acumuladores_dentro_de_ciclos",
     "tipo": "Análisis",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Algoritmo:\ncontador = 0; suma = 0\nPARA i DESDE 1 HASTA 5:\n  SI i % 2 != 0:\n    contador += 1\n    suma += i\nMostrar contador, suma\n¿Qué muestra?",
+    "enunciado": "Algoritmo:\n\n```\ncontador = 0; suma = 0\nPARA i DESDE 1 HASTA 5:\n  SI i % 2 != 0:\n    contador += 1\n    suma += i\nMostrar contador, suma\n```\n\n¿Qué muestra?",
     "opciones": [
-      "A) contador=2, suma=6",
-      "B) contador=3, suma=9",
-      "C) contador=5, suma=15",
-      "D) contador=3, suma=6"
+      "A) `contador=2, suma=6`",
+      "B) `contador=3, suma=9`",
+      "C) `contador=5, suma=15`",
+      "D) `contador=3, suma=6`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Números impares del 1 al 5: 1, 3, 5. contador: 3. suma: 1+3+5=9. Los pares (2,4) no se procesan.",
@@ -1050,12 +1050,12 @@
     "kc": "contadores_y_acumuladores_dentro_de_ciclos",
     "tipo": "Caso práctico",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Un sistema registra temperaturas por 7 días y calcula: total de días con temperatura > 25°C, la suma total de temperaturas y el promedio.\nTemperaturas: 22, 28, 31, 19, 26, 30, 24.\n¿Cuáles son los tres resultados?",
+    "enunciado": "Un sistema registra temperaturas por 7 días y calcula: el número de días con temperatura `> 25°C`, la suma total de temperaturas y el promedio.\nTemperaturas: `22, 28, 31, 19, 26, 30, 24`.\n¿Cuáles son los tres resultados?",
     "opciones": [
-      "A) días_calurosos=3, suma=180, promedio=25.7",
-      "B) días_calurosos=4, suma=180, promedio=25.71",
-      "C) días_calurosos=4, suma=184, promedio=26.3",
-      "D) días_calurosos=3, suma=175, promedio=25"
+      "A) `días_calurosos=3, suma=180, promedio=25.7`",
+      "B) `días_calurosos=4, suma=180, promedio=25.71`",
+      "C) `días_calurosos=4, suma=184, promedio=26.3`",
+      "D) `días_calurosos=3, suma=175, promedio=25.0`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Días >25°C: 28✓,31✓,26✓,30✓ = 4 días. Suma: 22+28+31+19+26+30+24=180. Promedio: 180/7≈25.71.",
@@ -1068,12 +1068,12 @@
     "kc": "contadores_y_acumuladores_dentro_de_ciclos",
     "tipo": "Razonamiento",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Un sistema financiero procesa 10,000 transacciones clasificadas en grandes (>1M), medianas (100K-1M) y pequeñas (<=100K). Resultados: grandes: contador=50, suma=200M; medianas: contador=2000, suma=800M; pequeñas: contador=7950, suma=100M.\n¿Cuál categoría tiene el mayor monto promedio por transacción?",
+    "enunciado": "Un sistema financiero procesa 10,000 transacciones clasificadas en grandes (>1M), medianas (100K-1M) y pequeñas (<=100K). Resultados: grandes: `contador=50, suma=200M`; medianas: `contador=2000, suma=800M`; pequeñas: `contador=7950, suma=100M`.\n¿Cuál categoría tiene el mayor monto promedio por transacción?",
     "opciones": [
-      "A) Pequeñas, porque hay más transacciones",
-      "B) Grandes: 200M/50 = 4,000,000 promedio. Medianas: 800M/2000 = 400,000. Pequeñas: 100M/7950 ≈ 12,578. Las grandes tienen el mayor promedio",
-      "C) Medianas, porque tienen la mayor suma total",
-      "D) Todas tienen el mismo promedio"
+      "A) Las pequeñas, porque son las más numerosas de las tres categorías",
+      "B) Las grandes: `200M/50 = 4,000,000`. Medianas: `800M/2000 = 400,000`. Pequeñas: `100M/7950 ≈ 12,578`. Las grandes tienen el mayor promedio",
+      "C) Las medianas, porque acumulan la mayor suma total de dinero",
+      "D) Todas las categorías tienen exactamente el mismo monto promedio"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Promedio grandes: 200,000,000/50 = 4,000,000. Promedio medianas: 800,000,000/2,000 = 400,000. Promedio pequeñas: 100,000,000/7,950 ≈ 12,578. El mayor promedio corresponde a las grandes.",
@@ -1086,12 +1086,12 @@
     "kc": "ciclos_con_condiciones_compuestas",
     "tipo": "Conceptual",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "MIENTRAS (intentos < 3 AND NOT encontrado):\n  buscar()\n¿Cuándo termina este ciclo?",
+    "enunciado": "```\nMIENTRAS (intentos < 3 AND NOT encontrado):\n  buscar()\n```\n\n¿Cuándo termina este ciclo?",
     "opciones": [
-      "A) Solo cuando intentos llega a 3",
-      "B) Solo cuando encontrado es VERDADERO",
-      "C) Cuando intentos >= 3 O cuando encontrado es VERDADERO, lo que ocurra primero",
-      "D) Nunca termina"
+      "A) Solamente cuando `intentos` llega a 3",
+      "B) Solamente cuando `encontrado` se vuelve `VERDADERO`",
+      "C) Cuando `intentos >= 3` O cuando `encontrado` es `VERDADERO`, lo que ocurra primero",
+      "D) Nunca termina, porque la condición combina dos comparaciones"
     ],
     "respuesta_correcta": "C",
     "explicacion": "La condición del while es (intentos<3 AND NOT encontrado). El ciclo continúa mientras AMBAS sean verdaderas. Termina cuando ALGUNA sea falsa: intentos>=3 O encontrado=V.",
@@ -1104,12 +1104,12 @@
     "kc": "ciclos_con_condiciones_compuestas",
     "tipo": "Análisis",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Algoritmo de búsqueda:\ni = 0; encontrado = FALSO\nMIENTRAS i < 5 AND NOT encontrado:\n  SI lista[i] == objetivo: encontrado = VERDADERO\n  i += 1\nMostrar i, encontrado\nlista=[4,7,2,9,1], objetivo=9. ¿Qué muestra?",
+    "enunciado": "Algoritmo de búsqueda:\n\n```\ni = 0; encontrado = FALSO\nMIENTRAS i < 5 AND NOT encontrado:\n  SI lista[i] == objetivo: encontrado = VERDADERO\n  i += 1\nMostrar i, encontrado\n```\n\n`lista=[4,7,2,9,1]`, `objetivo=9`. ¿Qué muestra?",
     "opciones": [
-      "A) i=3, encontrado=FALSO",
-      "B) i=4, encontrado=VERDADERO",
-      "C) i=5, encontrado=VERDADERO",
-      "D) i=0, encontrado=FALSO"
+      "A) `i=3, encontrado=FALSO`",
+      "B) `i=4, encontrado=VERDADERO`",
+      "C) `i=5, encontrado=VERDADERO`",
+      "D) `i=0, encontrado=FALSO`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "i=0: lista[0]=4≠9; i=1. i=1: lista[1]=7≠9; i=2. i=2: lista[2]=2≠9; i=3. i=3: lista[3]=9==9 → encontrado=V, i=4. Condición: 4<5=V pero NOT(V)=F → para. Muestra: i=4, encontrado=VERDADERO.",
@@ -1122,12 +1122,12 @@
     "kc": "ciclos_con_condiciones_compuestas",
     "tipo": "Bebras",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Sistema de descarga:\ndescargas_ok = 0; fallos = 0; i = 0\nMIENTRAS i < total_archivos AND fallos < 3 AND descargas_ok < cuota_maxima:\n  resultado = descargar(archivo[i])\n  SI resultado == 'OK': descargas_ok += 1\n  SINO: fallos += 1\n  i += 1\nDado: total=10, cuota_maxima=5, fallos_permitidos=3.\nArchivos: OK,OK,FALLO,OK,FALLO,OK,OK,OK,FALLO,OK\n¿Por qué razón termina el ciclo y cuántos archivos se procesaron?",
+    "enunciado": "Sistema de descarga:\n\n```\ndescargas_ok = 0; fallos = 0; i = 0\nMIENTRAS i < total_archivos AND fallos < 3 AND descargas_ok < cuota_maxima:\n  resultado = descargar(archivo[i])\n  SI resultado == 'OK': descargas_ok += 1\n  SINO: fallos += 1\n  i += 1\n```\n\nDado: `total=10, cuota_maxima=5, fallos_permitidos=3`. Archivos: `OK,OK,FALLO,OK,FALLO,OK,OK,OK,FALLO,OK`. ¿Por qué razón termina el ciclo y cuántos archivos se procesaron?",
     "opciones": [
-      "A) Termina por fallos>=3 después de procesar 9 archivos",
-      "B) Termina por descargas_ok>=5 (cuota máxima) después de procesar 7 archivos",
-      "C) Termina por i>=total_archivos después de los 10 archivos",
-      "D) Termina por fallos>=3 después de 7 archivos"
+      "A) Termina por `fallos>=3` después de procesar 9 archivos",
+      "B) Termina por `descargas_ok>=5` (cuota máxima) después de procesar 7 archivos",
+      "C) Termina por `i>=total_archivos` tras procesar los 10 archivos",
+      "D) Termina por `fallos>=3` después de procesar 7 archivos"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Traza: i=0:OK(ok=1), i=1:OK(ok=2), i=2:FALLO(f=1), i=3:OK(ok=3), i=4:FALLO(f=2), i=5:OK(ok=4), i=6:OK(ok=5). descargas_ok=5=cuota_maxima → NOT(5<5)=FALSO → ciclo termina. Se procesaron 7 archivos.",
@@ -1142,10 +1142,10 @@
     "dominio": "KC_PATTERN_RECOGNITION",
     "enunciado": "En un ciclo que recorre 100 números, ¿cómo se contaría cuántos son divisibles por 7?",
     "opciones": [
-      "A) Guardando todos los números divisibles en una lista",
-      "B) Inicializando contador=0 y dentro del ciclo: SI numero % 7 == 0: contador += 1",
-      "C) Dividiendo 100 entre 7",
-      "D) Revisando si 100 es divisible por 7"
+      "A) Guardando todos los números divisibles dentro de una nueva lista",
+      "B) Inicializando `contador=0` y, dentro del ciclo: `SI numero % 7 == 0: contador += 1`",
+      "C) Dividiendo directamente `100` entre `7` y tomando la parte entera",
+      "D) Revisando únicamente si el número `100` es divisible por `7`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "El patrón estándar para contar ocurrencias con condición: inicializar contador en 0, y dentro del ciclo, incrementar el contador solo cuando se cumple la condición (número divisible por 7, usando el operador módulo).",
@@ -1158,12 +1158,12 @@
     "kc": "uso_de_contadores_para_contar_ocurrencias",
     "tipo": "Bebras",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Un texto tiene los caracteres: 'a','l','g','o','r','i','t','m','o'. ¿Cuántas vocales tiene? ¿Cuántas consonantes?",
+    "enunciado": "Un texto tiene los caracteres: `'a','l','g','o','r','i','t','m','o'`. ¿Cuántas vocales tiene? ¿Cuántas consonantes?",
     "opciones": [
-      "A) vocales=3, consonantes=6",
-      "B) vocales=4, consonantes=5",
-      "C) vocales=5, consonantes=4",
-      "D) vocales=2, consonantes=7"
+      "A) `vocales=3, consonantes=6`",
+      "B) `vocales=4, consonantes=5`",
+      "C) `vocales=5, consonantes=4`",
+      "D) `vocales=2, consonantes=7`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Las vocales son: a, o, i, o (4 vocales). Las consonantes: l, g, r, t, m (5 consonantes). Total: 9 caracteres.",
@@ -1176,12 +1176,12 @@
     "kc": "uso_de_contadores_para_contar_ocurrencias",
     "tipo": "Razonamiento",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Un sistema cuenta la frecuencia de cada palabra en un texto de 10,000 palabras para encontrar las 5 más frecuentes. Un enfoque usa un arreglo de contadores; otro usa un mapa (palabra→contador). ¿Cuál enfoque es más apropiado y por qué?",
+    "enunciado": "Un sistema cuenta la frecuencia de cada palabra en un texto de 10,000 palabras para encontrar las 5 más frecuentes. Un enfoque usa un arreglo de contadores; otro usa un mapa (`palabra → contador`). ¿Cuál enfoque es más apropiado y por qué?",
     "opciones": [
-      "A) El arreglo, porque es más rápido de acceder",
-      "B) El mapa (diccionario), porque permite usar la palabra directamente como clave sin necesitar un índice numérico previo; escala naturalmente a vocabularios de cualquier tamaño",
-      "C) El arreglo, porque ocupa menos memoria",
-      "D) Son equivalentes; cualquiera sirve igual de bien"
+      "A) El arreglo, porque acceder a una posición por índice es más rápido",
+      "B) El mapa (diccionario), porque permite usar la palabra directamente como clave sin necesitar un índice previo, y escala a vocabularios de cualquier tamaño",
+      "C) El arreglo, porque ocupa una cantidad de memoria menor y fija",
+      "D) Son equivalentes; cualquiera de los dos sirve igual de bien para este caso"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Con un arreglo, necesitarías asignar un índice a cada palabra posible, requiriendo un vocabulario predefinido. Un mapa/diccionario permite agregar dinámicamente nuevas palabras como claves. Es la estructura natural para el conteo de frecuencias con vocabulario variable.",
@@ -1194,12 +1194,12 @@
     "kc": "acumulacion_de_resultados_en_ciclos",
     "tipo": "Conceptual",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "¿Cuál es el error en este algoritmo que intenta encontrar el número máximo en una lista?\nmáx = 0\nPARA cada num EN lista:\n  SI num > máx: máx = num\nMostrar máx",
+    "enunciado": "¿Cuál es el error en este algoritmo que intenta encontrar el número máximo de una lista?\n\n```\nmáx = 0\nPARA cada num EN lista:\n  SI num > máx: máx = num\nMostrar máx\n```",
     "opciones": [
-      "A) Ningún error; funciona correctamente",
-      "B) El error es inicializar máx=0: si todos los números de la lista son negativos, el resultado será incorrecto (reportaría 0 en lugar del máximo negativo)",
-      "C) El error es usar > en lugar de >=",
-      "D) El for no funciona para buscar máximos"
+      "A) No hay ningún error; el algoritmo funciona correctamente en todos los casos",
+      "B) El error es inicializar `máx=0`: si todos los números son negativos, reportaría `0` en lugar del máximo negativo real",
+      "C) El error es usar `>` en vez de `>=` en la comparación",
+      "D) El error es usar un ciclo `PARA`; los máximos requieren un ciclo `MIENTRAS`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Si la lista es [-5,-3,-8], el máximo real es -3. Pero máx=0 y ningún número negativo supera 0, por lo que máx permanece en 0: resultado incorrecto. La inicialización correcta es máx=lista[0].",
@@ -1212,12 +1212,12 @@
     "kc": "acumulacion_de_resultados_en_ciclos",
     "tipo": "Análisis",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Algoritmo para encontrar máximo y mínimo simultáneamente:\nlista = [7, 2, 9, 1, 5, 8, 3]\nmáx = lista[0]; mín = lista[0]\nPARA i DESDE 1 HASTA 6:\n  SI lista[i] > máx: máx = lista[i]\n  SI lista[i] < mín: mín = lista[i]\nMostrar máx, mín\n¿Cuáles son los valores mostrados?",
+    "enunciado": "Algoritmo para encontrar máximo y mínimo simultáneamente:\n\n```\nlista = [7, 2, 9, 1, 5, 8, 3]\nmáx = lista[0]; mín = lista[0]\nPARA i DESDE 1 HASTA 6:\n  SI lista[i] > máx: máx = lista[i]\n  SI lista[i] < mín: mín = lista[i]\nMostrar máx, mín\n```\n\n¿Cuáles son los valores mostrados?",
     "opciones": [
-      "A) máx=9, mín=1",
-      "B) máx=8, mín=2",
-      "C) máx=9, mín=2",
-      "D) máx=7, mín=1"
+      "A) `máx=9, mín=1`",
+      "B) `máx=8, mín=2`",
+      "C) `máx=9, mín=2`",
+      "D) `máx=7, mín=1`"
     ],
     "respuesta_correcta": "A",
     "explicacion": "Recorriendo: lista=[7,2,9,1,5,8,3]. máx evoluciona: 7→7→9→9→9→9→9. mín evoluciona: 7→2→2→1→1→1→1. Resultado: máx=9, mín=1.",
@@ -1230,12 +1230,12 @@
     "kc": "acumulacion_de_resultados_en_ciclos",
     "tipo": "Bebras",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Un algoritmo calcula la desviación estándar en dos pasadas. Un ingeniero propone hacerlo en una sola pasada usando: suma=0, suma_cuadrados=0. Al final: promedio=suma/N, varianza=(suma_cuadrados/N)-(promedio²). ¿Es válido este enfoque y qué ventaja tiene?",
+    "enunciado": "Un algoritmo calcula la desviación estándar en dos pasadas. Un ingeniero propone hacerlo en una sola pasada con: `suma=0`, `suma_cuadrados=0`. Al final: `promedio=suma/N`, `varianza=(suma_cuadrados/N)-(promedio²)`. ¿Es válido este enfoque y qué ventaja tiene?",
     "opciones": [
-      "A) No es válido; la varianza en una pasada da resultados incorrectos",
-      "B) Es válido (identidad algebraica demostrable). Ventaja: recorre los datos solo una vez (O(N) vs O(2N)), crítico cuando los datos vienen de un stream y no pueden almacenarse",
-      "C) Es válido pero más lento que el método de dos pasadas",
-      "D) Solo funciona con datos enteros"
+      "A) No es válido; calcular la varianza en una sola pasada produce resultados incorrectos",
+      "B) Es válido (identidad algebraica demostrable). Ventaja: recorre los datos una sola vez (`O(N)` vs `O(2N)`), clave cuando los datos vienen de un stream y no pueden almacenarse",
+      "C) Es válido, pero resulta más lento que el método clásico de dos pasadas",
+      "D) Es válido únicamente cuando todos los datos son números enteros"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La fórmula E[X²]-(E[X])² es algebraicamente equivalente a la varianza. La ventaja es fundamental en streaming: si los datos llegan de un sensor y no se pueden almacenar, el método de una pasada calcula la varianza acumulando solo suma y suma_cuadrados.",
@@ -1250,10 +1250,10 @@
     "dominio": "KC_PATTERN_RECOGNITION",
     "enunciado": "Un algoritmo calcula la suma de los números del 1 al 10. Para generalizarlo y que calcule la suma del 1 al N (cualquier N), ¿qué se debe cambiar?",
     "opciones": [
-      "A) Reescribir todo el algoritmo",
-      "B) Reemplazar el límite fijo 10 por una variable N que el usuario puede ingresar",
-      "C) Agregar más ciclos",
-      "D) Cambiar el operador suma por otro"
+      "A) Reescribir por completo el algoritmo desde cero para el nuevo caso",
+      "B) Reemplazar el límite fijo `10` por una variable `N` que el usuario pueda ingresar",
+      "C) Agregar ciclos adicionales, uno por cada rango de números posible",
+      "D) Reemplazar el operador de suma por otro operador aritmético"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La generalización consiste en reemplazar constantes específicas por variables. El algoritmo base permanece igual; solo el límite del ciclo cambia de 10 a N. Esto hace el algoritmo reutilizable para cualquier valor.",
@@ -1266,12 +1266,12 @@
     "kc": "generalizar_soluciones_para_distintos_datos",
     "tipo": "Análisis",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Función calcular_suma_pares(lista):\nsuma = 0\nPARA cada num EN lista:\n  SI num % 2 == 0: suma += num\nRETORNAR suma\n¿Cómo generalizarías esta función para que sume elementos que cumplan CUALQUIER condición, no solo ser par?",
+    "enunciado": "Función `calcular_suma_pares(lista)`:\n\n```\nsuma = 0\nPARA cada num EN lista:\n  SI num % 2 == 0: suma += num\nRETORNAR suma\n```\n\n¿Cómo generalizarías esta función para que sume elementos que cumplan CUALQUIER condición, no solo ser par?",
     "opciones": [
-      "A) No se puede generalizar; hay que hacer una función para cada condición",
-      "B) Agregar un parámetro 'condición' a la función: calcular_suma_condicional(lista, condicion) y verificar SI condicion(num) en lugar de SI num%2==0",
-      "C) Usar múltiples if-else para todas las condiciones posibles",
-      "D) Hacer que la función acepte el número 2 como parámetro"
+      "A) No se puede generalizar; hay que crear una función distinta para cada condición",
+      "B) Agregar un parámetro `condicion`: `calcular_suma_condicional(lista, condicion)` y verificar `SI condicion(num)` en lugar de `SI num%2==0`",
+      "C) Usar una larga cadena de `if-else` que cubra todas las condiciones posibles",
+      "D) Hacer que la función reciba el número `2` como parámetro configurable"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Al pasar la condición como parámetro (función de orden superior), la misma función puede sumar pares, impares, múltiplos de 3, números negativos, etc. Este es el patrón 'filter-accumulate', fundamental en programación funcional.",
@@ -1284,12 +1284,12 @@
     "kc": "generalizar_soluciones_para_distintos_datos",
     "tipo": "Razonamiento",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Un patrón recurrente en sistemas: 'validar entrada → procesar → generar reporte'. Este patrón se repite para: gestión de empleados, inventario de productos y contabilidad de ventas. Un arquitecto propone un framework genérico con tres funciones abstractas: validar(datos), procesar(datos) e informar(resultados). ¿Qué principios de diseño de software aplica esta solución?",
+    "enunciado": "Un patrón recurrente en sistemas: `'validar entrada → procesar → generar reporte'`. Se repite en: gestión de empleados, inventario de productos y contabilidad de ventas. Un arquitecto propone un framework genérico con tres funciones abstractas: `validar(datos)`, `procesar(datos)` e `informar(resultados)`. ¿Qué principios de diseño aplica esta solución?",
     "opciones": [
-      "A) Solo el principio de economía de código (escribir menos)",
-      "B) Aplica: (1) Abstracción — interfaz genérica independiente de la implementación, (2) Reutilización — el flujo se implementa una vez, (3) Separación de responsabilidades — cada módulo gestiona su lógica, (4) Extensibilidad — agregar nuevos módulos sin cambiar el framework",
-      "C) Solo aplica el principio de seguridad",
-      "D) No aplica ningún principio formal; es solo sentido común"
+      "A) Solo el principio de economía de código, es decir, escribir la menor cantidad de líneas",
+      "B) Aplica: (1) **Abstracción** — interfaz genérica independiente de la implementación, (2) **Reutilización** — el flujo se implementa una vez, (3) **Separación de responsabilidades**, (4) **Extensibilidad** — agregar módulos sin tocar el framework",
+      "C) Únicamente el principio de seguridad de los datos que se procesan",
+      "D) No aplica ningún principio formal de diseño; es solo sentido común práctico"
     ],
     "respuesta_correcta": "B",
     "explicacion": "El diseño aplica múltiples principios: Abstracción, Reutilización (el flujo no se repite), Separación de responsabilidades (cada módulo es responsable de su dominio), y Extensibilidad abierta/cerrada (agregar módulos sin modificar el framework).",
@@ -1304,10 +1304,10 @@
     "dominio": "KC_PROBLEM_DECOMPOSITION",
     "enunciado": "¿Cuál es la principal ventaja de definir una función en lugar de repetir el mismo código en múltiples partes del programa?",
     "opciones": [
-      "A) Las funciones hacen el programa más lento",
-      "B) Permiten reutilizar código: se escribe una vez y se llama desde múltiples lugares; si hay un error o cambio, se corrige en un solo lugar",
-      "C) Las funciones solo sirven para cálculos matemáticos",
-      "D) Evitan el uso de variables"
+      "A) Las funciones hacen que el programa se ejecute con mayor lentitud pero más orden",
+      "B) Permiten reutilizar código: se escribe una vez y se llama desde varios lugares; ante un error o cambio, se corrige en un solo sitio",
+      "C) Las funciones sirven únicamente para realizar cálculos matemáticos",
+      "D) Las funciones permiten escribir programas sin necesidad de declarar variables"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La reutilización de código es el beneficio principal: una función encapsula lógica que puede invocarse múltiples veces. Un cambio o corrección en la función se refleja en todos los lugares que la usan.",
@@ -1320,12 +1320,12 @@
     "kc": "definicion_de_una_funcion",
     "tipo": "Análisis",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Función calcular_imc(peso_kg, altura_m):\n  imc = peso_kg / (altura_m * altura_m)\n  SI imc < 18.5: categoria = 'Bajo peso'\n  SINO SI imc < 25: categoria = 'Normal'\n  SINO SI imc < 30: categoria = 'Sobrepeso'\n  SINO: categoria = 'Obesidad'\n  RETORNAR imc, categoria\n¿Cuántos parámetros tiene y cuántos valores retorna? ¿Qué retorna para peso=70, altura=1.75?",
+    "enunciado": "Función `calcular_imc(peso_kg, altura_m)`:\n\n```\nimc = peso_kg / (altura_m * altura_m)\nSI imc < 18.5: categoria = 'Bajo peso'\nSINO SI imc < 25: categoria = 'Normal'\nSINO SI imc < 30: categoria = 'Sobrepeso'\nSINO: categoria = 'Obesidad'\nRETORNAR imc, categoria\n```\n\n¿Cuántos parámetros tiene y cuántos valores retorna? ¿Qué retorna para `peso=70, altura=1.75`?",
     "opciones": [
-      "A) 2 parámetros, 1 retorno; IMC=22.86, Normal",
-      "B) 2 parámetros, 2 retornos; IMC=22.86, Normal",
-      "C) 1 parámetro, 2 retornos",
-      "D) 3 parámetros, 1 retorno"
+      "A) 2 parámetros, 1 retorno; `IMC=22.86`, `Normal`",
+      "B) 2 parámetros, 2 retornos; `IMC=22.86`, `Normal`",
+      "C) 1 parámetro, 2 retornos; `IMC=22.86`, `Sobrepeso`",
+      "D) 3 parámetros, 1 retorno; `IMC=22.86`, `Normal`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La función tiene 2 parámetros (peso_kg, altura_m) y retorna 2 valores (imc, categoria). Para peso=70, altura=1.75: imc=70/(1.75²)=70/3.0625≈22.86. 22.86≥18.5 y <25 → 'Normal'.",
@@ -1340,10 +1340,10 @@
     "dominio": "KC_PROBLEM_DECOMPOSITION",
     "enunciado": "Una función de 80 líneas hace: (1) validar datos, (2) calcular el resultado, (3) formatear la salida, y (4) guardar en base de datos. Un equipo propone refactorizarla en 4 funciones de ~20 líneas cada una. ¿Cuáles son los 3 principales beneficios y cuál es un posible costo?",
     "opciones": [
-      "A) Beneficio: código más corto. Costo: más lento",
-      "B) Beneficios: (1) Testabilidad individual de cada responsabilidad, (2) Mantenibilidad (cambios localizados), (3) Legibilidad (cada función tiene un propósito claro). Costo: ligero overhead de llamadas a función y mayor número de interfaces entre funciones",
-      "C) No hay beneficios reales; solo complica el código",
-      "D) Beneficio único: el código ocupa menos espacio en disco"
+      "A) Beneficio: código más corto en total. Costo: el programa se ejecuta más lento",
+      "B) Beneficios: (1) testabilidad individual, (2) mantenibilidad (cambios localizados), (3) legibilidad. Costo: ligero overhead de llamadas y más interfaces entre funciones",
+      "C) No hay beneficios reales; dividir la función solo complica innecesariamente el código",
+      "D) Beneficio único: el código ocupa menos espacio en el disco duro del servidor"
     ],
     "respuesta_correcta": "B",
     "explicacion": "La refactorización aplica el Principio de Responsabilidad Única. Beneficios: testabilidad, mantenibilidad, legibilidad. Costo: el overhead de llamadas es mínimo en la práctica, pero hay más interfaces que mantener.",
@@ -1356,12 +1356,12 @@
     "kc": "parametros_de_entrada_de_una_funcion",
     "tipo": "Conceptual",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "¿Qué es un parámetro de entrada en una función?",
+    "enunciado": "¿Qué es un **parámetro de entrada** en una función?",
     "opciones": [
-      "A) El resultado que produce la función",
+      "A) El resultado o valor final que produce la función al terminar",
       "B) Una variable que recibe información del exterior para que la función pueda operar con datos específicos",
-      "C) Una variable que siempre vale 0 al inicio",
-      "D) El nombre de la función"
+      "C) Una variable interna que siempre vale 0 al inicio de la función",
+      "D) El nombre con el que se identifica y se invoca la función"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Los parámetros de entrada son las 'puertas de acceso' de la función: permiten pasarle datos específicos cada vez que se invoca. Sin parámetros, la función siempre operaría con los mismos datos fijos.",
@@ -1374,12 +1374,12 @@
     "kc": "parametros_de_entrada_de_una_funcion",
     "tipo": "Análisis",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Función: calcular_descuento(precio, porcentaje, tope_máximo)\nSI precio * porcentaje/100 > tope_máximo:\n  RETORNAR tope_máximo\nSINO:\n  RETORNAR precio * porcentaje/100\n¿Cuánto descuento retorna para: precio=500000, porcentaje=25, tope_máximo=50000?",
+    "enunciado": "Función `calcular_descuento(precio, porcentaje, tope_máximo)`:\n\n```\nSI precio * porcentaje/100 > tope_máximo:\n  RETORNAR tope_máximo\nSINO:\n  RETORNAR precio * porcentaje/100\n```\n\n¿Cuánto descuento retorna para `precio=500000, porcentaje=25, tope_máximo=50000`?",
     "opciones": [
-      "A) 125000 (25% de 500000)",
-      "B) 50000 (el tope máximo, porque 125000 > 50000)",
-      "C) 500000",
-      "D) 25000"
+      "A) `125000` (el 25% de 500000)",
+      "B) `50000` (el tope máximo, porque 125000 > 50000)",
+      "C) `500000` (el precio completo del producto)",
+      "D) `25000` (la mitad del tope máximo)"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Calculando: precio*porcentaje/100 = 500000*25/100 = 125000. 125000 > tope_máximo(50000) → retorna 50000. El parámetro tope_máximo limita el descuento.",
@@ -1392,12 +1392,12 @@
     "kc": "parametros_de_entrada_de_una_funcion",
     "tipo": "Razonamiento",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Una función ordenar(lista, criterio, ascendente) ordena cualquier lista según un criterio y dirección. Se llama:\nordenar(empleados, 'salario', VERDADERO)\nordenar(productos, 'precio', FALSO)\nordenar(estudiantes, 'promedio', VERDADERO)\n¿Qué principio de diseño permite que una sola función maneje todos estos casos?",
+    "enunciado": "Una función `ordenar(lista, criterio, ascendente)` ordena cualquier lista según un criterio y dirección. Se llama:\n\n```\nordenar(empleados, 'salario', VERDADERO)\nordenar(productos, 'precio', FALSO)\nordenar(estudiantes, 'promedio', VERDADERO)\n```\n\n¿Qué principio de diseño permite que una sola función maneje todos estos casos?",
     "opciones": [
-      "A) El principio de seguridad; evita errores",
-      "B) El principio de generalización mediante parámetros: los parámetros 'criterio' y 'ascendente' convierten una función específica en una genérica. Ventaja: un cambio en el algoritmo de ordenamiento se aplica a todos los casos simultáneamente",
-      "C) El principio de velocidad; los parámetros hacen la función más rápida",
-      "D) No hay ventaja; es mejor tener funciones específicas para cada caso"
+      "A) El principio de seguridad, ya que reduce la posibilidad de cometer errores",
+      "B) La generalización mediante parámetros: `criterio` y `ascendente` convierten una función específica en genérica; mejorar el algoritmo base beneficia a todos los casos a la vez",
+      "C) El principio de velocidad, porque los parámetros aceleran la ejecución de la función",
+      "D) Ninguna ventaja; es preferible tener una función distinta y específica para cada caso"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Parametrizar el criterio y la dirección convierte la función de 'ordenar por salario ascendente' a 'ordenar por cualquier campo en cualquier dirección'. Si se mejora el algoritmo base, los tres casos se benefician simultáneamente.",
@@ -1412,10 +1412,10 @@
     "dominio": "KC_PROBLEM_DECOMPOSITION",
     "enunciado": "¿Qué ocurre exactamente cuando se 'llama' o 'invoca' una función?",
     "opciones": [
-      "A) El programa termina",
-      "B) El flujo del programa salta a la función, ejecuta su cuerpo y regresa al punto donde fue llamada para continuar",
-      "C) La función se borra de la memoria",
-      "D) El programa espera que el usuario ingrese datos"
+      "A) El programa finaliza su ejecución por completo en ese punto",
+      "B) El flujo salta a la función, ejecuta su cuerpo y regresa al punto donde fue llamada para continuar",
+      "C) La función se elimina de la memoria una vez que se invoca",
+      "D) El programa se detiene y queda a la espera de datos del usuario"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Al invocar una función: (1) el programa guarda el punto de retorno, (2) salta al inicio de la función, (3) ejecuta su cuerpo con los argumentos dados, (4) al llegar al RETORNAR, vuelve al punto donde fue llamada y continúa.",
@@ -1428,12 +1428,12 @@
     "kc": "llamado_de_funciones",
     "tipo": "Análisis",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "def es_primo(n):\n  SI n < 2: RETORNAR FALSO\n  PARA i DESDE 2 HASTA n-1:\n    SI n % i == 0: RETORNAR FALSO\n  RETORNAR VERDADERO\nResultado de llamar es_primo(7):",
+    "enunciado": "```\ndef es_primo(n):\n  SI n < 2: RETORNAR FALSO\n  PARA i DESDE 2 HASTA n-1:\n    SI n % i == 0: RETORNAR FALSO\n  RETORNAR VERDADERO\n```\n\n¿Cuál es el resultado de llamar `es_primo(7)`?",
     "opciones": [
-      "A) FALSO, porque 7 es impar",
-      "B) VERDADERO, porque 7 no es divisible por 2,3,4,5,6",
-      "C) FALSO, porque el ciclo siempre retorna FALSO",
-      "D) Error, porque 7 es mayor que 2"
+      "A) `FALSO`, porque 7 es un número impar",
+      "B) `VERDADERO`, porque 7 no es divisible por 2, 3, 4, 5 ni 6",
+      "C) `FALSO`, porque el ciclo siempre termina retornando FALSO",
+      "D) `VERDADERO`, pero solo porque 7 es mayor que 2"
     ],
     "respuesta_correcta": "B",
     "explicacion": "n=7>=2. Ciclo: i=2: 7%2=1≠0; i=3: 7%3=1≠0; i=4: 7%4=3≠0; i=5: 7%5=2≠0; i=6: 7%6=1≠0. Ciclo termina sin retornar FALSO. Se llega a RETORNAR VERDADERO. 7 es primo.",
@@ -1446,12 +1446,12 @@
     "kc": "llamado_de_funciones",
     "tipo": "Bebras",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "def f(n):\n  SI n <= 1: RETORNAR n\n  RETORNAR f(n-1) + f(n-2)\n¿Cuántas veces se llama la función f() en total para calcular f(5)?",
+    "enunciado": "```\ndef f(n):\n  SI n <= 1: RETORNAR n\n  RETORNAR f(n-1) + f(n-2)\n```\n\n¿Cuántas veces se llama la función `f()` en total para calcular `f(5)`?",
     "opciones": [
-      "A) 5 llamadas",
-      "B) 10 llamadas",
-      "C) 15 llamadas",
-      "D) La función no termina"
+      "A) `5` llamadas, una por cada valor de n",
+      "B) `10` llamadas en total",
+      "C) `15` llamadas en total",
+      "D) Infinitas llamadas; la función nunca termina"
     ],
     "respuesta_correcta": "C",
     "explicacion": "Árbol de llamadas: f(5) llama a f(4) y f(3). f(4) llama a f(3) y f(2). f(3) llama a f(2) y f(1). f(2) llama a f(1) y f(0). Contando todas las llamadas incluyendo f(5) misma: 15 en total. Los Fibonacci tienen árbol de llamadas de tamaño exponencial.",
@@ -1464,12 +1464,12 @@
     "kc": "funciones_que_retornan_un_valor",
     "tipo": "Conceptual",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Una función calcular_area_circulo(radio) debe retornar el área (π*radio²). Si radio=3, ¿qué retorna aproximadamente?",
+    "enunciado": "Una función `calcular_area_circulo(radio)` debe retornar el área (`π * radio²`). Si `radio=3`, ¿qué retorna aproximadamente?",
     "opciones": [
-      "A) 9",
-      "B) 18.85",
-      "C) 28.27",
-      "D) 6"
+      "A) `9` (el radio al cuadrado, sin multiplicar por π)",
+      "B) `18.85` (el perímetro `2·π·radio`)",
+      "C) `28.27` (el área `π·3²`)",
+      "D) `6` (el diámetro del círculo)"
     ],
     "respuesta_correcta": "C",
     "explicacion": "área = π * 3² = 3.14159 * 9 ≈ 28.27. La función recibe radio=3 como parámetro, calcula la fórmula y retorna el valor numérico aproximado 28.27.",
@@ -1482,12 +1482,12 @@
     "kc": "funciones_que_retornan_un_valor",
     "tipo": "Análisis",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "def clasificar_temperatura(temp):\n  SI temp >= 35: RETORNAR 'Muy caliente'\n  SI temp >= 25: RETORNAR 'Cálido'\n  SI temp >= 15: RETORNAR 'Templado'\n  RETORNAR 'Frío'\n¿Cuántos RETORNAR puede alcanzar en una sola llamada y cuál retorna para temp=20?",
+    "enunciado": "```\ndef clasificar_temperatura(temp):\n  SI temp >= 35: RETORNAR 'Muy caliente'\n  SI temp >= 25: RETORNAR 'Cálido'\n  SI temp >= 15: RETORNAR 'Templado'\n  RETORNAR 'Frío'\n```\n\n¿Cuántos `RETORNAR` puede alcanzar en una sola llamada y cuál retorna para `temp=20`?",
     "opciones": [
-      "A) Puede alcanzar múltiples RETORNARs; retorna 'Cálido' para temp=20",
-      "B) Solo alcanza exactamente 1 RETORNAR por llamada; retorna 'Templado' para temp=20",
-      "C) Retorna todos los valores siempre",
-      "D) Retorna 'Frío' para temp=20"
+      "A) Puede alcanzar varios `RETORNAR`; para `temp=20` retorna `'Cálido'`",
+      "B) Alcanza exactamente 1 `RETORNAR` por llamada; para `temp=20` retorna `'Templado'`",
+      "C) Retorna todos los valores acumulados en cada llamada a la función",
+      "D) Alcanza 1 `RETORNAR`; para `temp=20` retorna `'Frío'`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "En cada llamada, la función retorna exactamente una vez al encontrar el primer RETORNAR cuya condición es verdadera. Para temp=20: 20>=35=F; 20>=25=F; 20>=15=V → RETORNAR 'Templado'. Solo se ejecutó 1 RETORNAR.",
@@ -1500,12 +1500,12 @@
     "kc": "funciones_que_retornan_un_valor",
     "tipo": "Razonamiento",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Función: busqueda_binaria(lista_ordenada, objetivo) retorna el índice del objetivo o -1 si no existe. Si la función se llama con una lista de 1,000,000 elementos, ¿cuántas comparaciones como máximo realiza en el peor caso?",
+    "enunciado": "La función `busqueda_binaria(lista_ordenada, objetivo)` retorna el índice del objetivo o `-1` si no existe. Si se llama con una lista de 1,000,000 de elementos, ¿cuántas comparaciones realiza como máximo en el peor caso?",
     "opciones": [
-      "A) 1,000,000 comparaciones; igual que búsqueda lineal",
-      "B) Aproximadamente 20 comparaciones (log₂(1,000,000)≈20) vs 1,000,000 de la lineal. La búsqueda binaria es O(log N): enormemente más eficiente",
-      "C) 500,000 comparaciones; la mitad que la lineal",
-      "D) 1 comparación siempre porque salta directamente al elemento"
+      "A) `1,000,000` comparaciones, igual que la búsqueda lineal",
+      "B) Aproximadamente `20` comparaciones (`log₂(1,000,000) ≈ 20`); la búsqueda binaria es `O(log N)`, mucho más eficiente",
+      "C) `500,000` comparaciones, la mitad que la búsqueda lineal",
+      "D) `1` comparación siempre, porque salta directo al elemento buscado"
     ],
     "respuesta_correcta": "B",
     "explicacion": "log₂(1,000,000) ≈ 19.93, redondeado a 20. En el peor caso, la búsqueda binaria hace ≈20 comparaciones para 1M de elementos, vs 1,000,000 de la búsqueda lineal. Esta diferencia (O(log N) vs O(N)) es lo que hace la búsqueda binaria práctica.",
@@ -1518,12 +1518,12 @@
     "kc": "division_de_un_problema_en_subproblemas",
     "tipo": "Conceptual",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "¿Cuál es la idea fundamental de la estrategia 'dividir y conquistar'?",
+    "enunciado": "¿Cuál es la idea fundamental de la estrategia **'dividir y conquistar'**?",
     "opciones": [
-      "A) Dividir el equipo de trabajo en grupos separados",
-      "B) Dividir un problema complejo en subproblemas más pequeños y manejables, resolver cada uno de forma independiente y combinar las soluciones",
-      "C) Conquistar mercados con software",
-      "D) Dividir el código en archivos separados"
+      "A) Repartir el equipo de trabajo en grupos que actúan de forma separada",
+      "B) Dividir un problema complejo en subproblemas más pequeños, resolver cada uno de forma independiente y combinar las soluciones",
+      "C) Conquistar la mayor cantidad de mercado posible con un producto de software",
+      "D) Separar físicamente el código fuente del programa en varios archivos distintos"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Dividir y conquistar es una estrategia algorítmica fundamental: si el problema es demasiado grande para resolverse directamente, se divide en partes más pequeñas, cada parte se resuelve y las soluciones se combinan.",
@@ -1536,12 +1536,12 @@
     "kc": "division_de_un_problema_en_subproblemas",
     "tipo": "Análisis",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Problema: 'Desarrollar una app de e-commerce'. Un ingeniero lo divide en: (1) Gestión de usuarios, (2) Catálogo de productos, (3) Carrito de compras, (4) Pagos, (5) Notificaciones.\n¿Cuál subproblema tiene más dependencias con otros y cuál podría desarrollarse de forma completamente independiente?",
+    "enunciado": "Problema: 'Desarrollar una app de e-commerce'. Un ingeniero lo divide en: (1) Gestión de usuarios, (2) Catálogo de productos, (3) Carrito de compras, (4) Pagos, (5) Notificaciones.\n¿Cuál subproblema tiene más dependencias con otros y cuál podría desarrollarse de forma más independiente?",
     "opciones": [
-      "A) Todos son independientes entre sí",
-      "B) El carrito de compras depende de usuarios (quién compra) y catálogo (qué compra) → más dependencias. El catálogo de productos puede desarrollarse independientemente",
-      "C) Los pagos son completamente independientes",
-      "D) Las notificaciones tienen más dependencias"
+      "A) Todos los subproblemas son completamente independientes entre sí",
+      "B) El carrito depende de usuarios (quién compra) y del catálogo (qué compra) → más dependencias. El catálogo puede desarrollarse de forma más independiente",
+      "C) Los pagos son el módulo totalmente independiente de todos los demás",
+      "D) Las notificaciones son el subproblema con la mayor cantidad de dependencias"
     ],
     "respuesta_correcta": "B",
     "explicacion": "El carrito depende de: usuarios (para saber a quién pertenece), catálogo (para saber qué productos añadir) y se conecta con pagos. Tiene las mayores dependencias. El catálogo define la estructura de productos sin depender de los otros módulos.",
@@ -1554,12 +1554,12 @@
     "kc": "division_de_un_problema_en_subproblemas",
     "tipo": "Razonamiento",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "El algoritmo mergesort divide recursivamente una lista hasta sublistas de 1 elemento, luego las fusiona ordenadamente. Para ordenar una lista de 8 elementos:\n¿Cuántos niveles de división hay? ¿Cuántas fusiones (merges) se realizan en total? ¿Por qué esta estrategia es O(N log N) y mejor que burbuja O(N²)?",
+    "enunciado": "El algoritmo `mergesort` divide recursivamente una lista hasta sublistas de 1 elemento, luego las fusiona ordenadamente. Para ordenar una lista de 8 elementos: ¿cuántos niveles de división hay? ¿Cuántas fusiones se realizan en total? ¿Por qué es `O(N log N)` y mejor que burbuja `O(N²)`?",
     "opciones": [
-      "A) 2 niveles, 4 fusiones; mejor que burbuja con N>=4",
-      "B) 3 niveles de división, 7 fusiones. O(N log N): log N niveles × N trabajo por nivel. Para N=1000: mergesort=10,000 ops vs burbuja=1,000,000 ops",
-      "C) 4 niveles, 8 fusiones; es igual de eficiente que burbuja",
-      "D) 1 nivel, 2 fusiones; O(N) siempre"
+      "A) 2 niveles y 4 fusiones; solo es mejor que burbuja cuando `N >= 4`",
+      "B) 3 niveles de división y 7 fusiones. `O(N log N)`: log N niveles × N trabajo por nivel. Para N=1000: mergesort ≈10,000 ops vs burbuja ≈1,000,000 ops",
+      "C) 4 niveles y 8 fusiones; es igual de eficiente que el ordenamiento burbuja",
+      "D) 1 nivel y 2 fusiones; su complejidad es `O(N)` en todos los casos"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Niveles: 8→4→2→1 = 3 niveles de división. Fusiones: 4+2+1=7 fusiones totales. Complejidad: en cada nivel se realizan N=8 comparaciones en total y hay log₂(8)=3 niveles → O(N log N). Para N=1000: mergesort ≈10,000 operaciones vs burbuja ≈500,000.",

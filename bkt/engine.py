@@ -83,3 +83,15 @@ def nivel_global(niveles_por_kc: dict) -> str:
             if idx < minimo:
                 minimo = idx
     return NIVEL_ORDEN[minimo]
+
+
+NIVEL_VALOR = {"BASICO": 0, "MEDIO": 1, "ALTO": 2}
+
+
+def nivel_promedio(niveles_por_kc: dict) -> str:
+    valores = [NIVEL_VALOR[n] for n in niveles_por_kc.values() if n in NIVEL_VALOR]
+    if not valores:
+        return "BASICO"
+    promedio = sum(valores) / len(valores)
+    idx = min(2, int(promedio + 0.5))  # redondeo hacia arriba en empates (.5)
+    return NIVEL_ORDEN[idx]
