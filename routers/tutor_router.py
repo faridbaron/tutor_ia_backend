@@ -166,16 +166,21 @@ def chat(
             StudentProgress.student_id == current_user.id,
             StudentProgress.node_id    == req.node_id,
         ).first()
-        dominado = p_nuevo >= 0.75
+        dominado_nuevo = p_nuevo >= 0.75
         if prog:
-            prog.p_dominio = p_nuevo
-            prog.dominado  = dominado
+            if prog.dominado:
+                # Ya estaba dominado: el chat (repaso/preguntas) no debe hacer
+                # retroceder un progreso ya alcanzado.
+                prog.p_dominio = max(p_nuevo, prog.p_dominio)
+            else:
+                prog.p_dominio = p_nuevo
+                prog.dominado  = dominado_nuevo
         else:
             db.add(StudentProgress(
                 student_id = current_user.id,
                 node_id    = req.node_id,
                 p_dominio  = p_nuevo,
-                dominado   = dominado,
+                dominado   = dominado_nuevo,
             ))
         db.commit()
 
