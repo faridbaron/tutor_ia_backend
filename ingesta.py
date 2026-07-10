@@ -126,26 +126,18 @@ def _generar_grafo_dict(ruta_excel: str) -> dict:
         return f"{_canonico(tema)}_{NIVEL_SUFIJO[nivel.lower()]}"
 
     def _split_prereqs(texto: str) -> list[str]:
-        """Divide la lista de prerrequisitos respetando comas dentro de paréntesis."""
-        partes, actual, depth = [], [], 0
-        for ch in texto:
-            if ch == "(":
-                depth += 1
-                actual.append(ch)
-            elif ch == ")":
-                depth -= 1
-                actual.append(ch)
-            elif ch == "," and depth == 0:
-                p = "".join(actual).strip()
-                if p:
-                    partes.append(p)
-                actual = []
-            else:
-                actual.append(ch)
-        p = "".join(actual).strip()
-        if p:
-            partes.append(p)
-        return partes
+        """Divide la lista de prerrequisitos 'Tema (Nivel), Tema (Nivel), ...'.
+
+        No se puede partir ingenuamente por cualquier coma: algunos nombres de
+        tema tienen comas propias (ej. "Ciclos con vectores: llenar, buscar,
+        modificar"). Cada prerrequisito individual siempre termina en
+        "(Básico|Medio|Alto)", así que se usa ese sufijo como delimitador real
+        en vez de la coma, evitando cortar nombres de tema por la mitad.
+        """
+        import unicodedata as _ud
+        texto = _ud.normalize("NFC", texto.strip())
+        patron = _re.compile(r"(.+?\((?:Básico|Medio|Alto)\))(?:\s*,\s*|\s*$)")
+        return [m.group(1).strip() for m in patron.finditer(texto)]
 
     def _parse_prereq(texto: str):
         import unicodedata as _ud
