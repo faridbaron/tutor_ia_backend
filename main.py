@@ -22,7 +22,6 @@ import models
 from routers.auth import router as auth_router
 from routers.diagnostico_router import router as diagnostico_router
 from routers.ruta_router import router as ruta_router
-from routers.tutor_router import router as tutor_router
 from routers.estudio_router import router as estudio_router
 from auth import require_admin
 
@@ -46,7 +45,6 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(diagnostico_router)
 app.include_router(ruta_router)
-app.include_router(tutor_router)
 app.include_router(estudio_router)
 
 # ── Configuración ──────────────────────────────────────────────

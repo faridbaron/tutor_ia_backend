@@ -10,6 +10,7 @@ from database import get_db
 from auth import get_current_user
 from models import StudentProgress, User
 from services import neo4j_service
+from services.progress_service import NIVEL_MAX_DIFICULTAD
 from tutor.graph import _split_node_id
 
 router = APIRouter(prefix="/estudio", tags=["estudio"])
@@ -38,6 +39,18 @@ class ChatBurbujaRequest(BaseModel):
     node_id: str
     mensaje: str
     historial: list[dict] = []
+
+class ChatUnidadRequest(BaseModel):
+    unidad_id: str
+    mensaje: str
+    historial: list[dict] = []
+
+
+NIVEL_TXT = {
+    "BASICO": "Usa lenguaje muy simple y ejemplos cotidianos. El estudiante es principiante.",
+    "MEDIO":  "Usa lenguaje técnico moderado con ejemplos de programación.",
+    "ALTO":   "Puedes usar terminología avanzada y profundizar en detalles.",
+}
 
 
 # ── helpers ──────────────────────────────────────────────────────────
@@ -406,6 +419,71 @@ def chat_burbuja(
                 "- Si preguntan sobre el ejercicio propuesto o el quiz, responde: "
                 "'Eso debes resolverlo tú. ¿Tienes alguna duda sobre el concepto?'\n"
                 "- Si la pregunta no es sobre el tema, redirige amablemente.\n"
+                "- Respuestas cortas y claras, máximo 4 oraciones."
+            ),
+        }
+    ]
+
+    for h in req.historial[-6:]:
+        messages.append({"role": h["rol"], "content": h["contenido"]})
+    messages.append({"role": "user", "content": req.mensaje})
+
+    resp = client.chat.completions.create(
+        model="gpt-4o",
+        temperature=0.4,
+        messages=messages,
+    )
+
+    return {"respuesta": resp.choices[0].message.content.strip()}
+
+
+@router.post("/chat-unidad")
+def chat_unidad(
+    req: ChatUnidadRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    from routers.ruta_router import _nivel_diagnostico, _unidad_num
+
+    unidad_num = _unidad_num(req.unidad_id)
+    nivel = _nivel_diagnostico(req.unidad_id, current_user.id, db).value
+    max_dif = NIVEL_MAX_DIFICULTAD[nivel]
+
+    nodos = neo4j_service.get_nodos_unidad(unidad_num, max_dif)
+    node_ids = [n["tema_canonico"] for n in nodos]
+    if not node_ids:
+        raise HTTPException(404, f"Sin contenido para {req.unidad_id}")
+
+    client = _openai()
+    index = _pinecone_index()
+
+    vec = client.embeddings.create(
+        model=EMBEDDING_MODEL,
+        input=req.mensaje,
+    ).data[0].embedding
+
+    res = index.query(
+        vector=vec,
+        top_k=5,
+        filter={"tema_canonico": {"$in": node_ids}, "dificultad": {"$lte": max_dif}},
+        include_metadata=True,
+    )
+
+    contexto = "\n\n".join(
+        m.metadata.get("contenido", "") for m in res.matches if m.metadata and m.metadata.get("contenido")
+    )
+
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                f"Eres un tutor de lógica computacional. El estudiante está en la unidad {unidad_num} "
+                "y puede preguntar sobre cualquier tema de esta unidad, no solo uno en particular.\n"
+                f"Nivel del estudiante: {nivel}. {NIVEL_TXT.get(nivel, '')}\n"
+                f"Responde usando este contenido como referencia:\n\n{contexto}\n\n"
+                "REGLAS:\n"
+                "- Solo responde preguntas relacionadas con los temas de esta unidad.\n"
+                "- Si la pregunta no es sobre la unidad, redirige amablemente.\n"
                 "- Respuestas cortas y claras, máximo 4 oraciones."
             ),
         }
