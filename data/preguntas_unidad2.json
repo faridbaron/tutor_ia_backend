@@ -528,10 +528,10 @@
     "kc": "logica_condicional_integrada_con_funciones",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Refactorización: una función original de 50 líneas con condiciones anidadas de 5 niveles de profundidad. Un ingeniero propone dividirla en 6 funciones más pequeñas, cada una con máximo 1-2 niveles de anidamiento. ¿Qué principio de ingeniería de software justifica esto y cuáles son sus beneficios y riesgos?",
+    "enunciado": "Refactorización: una función original de 50 líneas con condiciones anidadas de 5 niveles de profundidad. Un ingeniero propone dividirla en 6 funciones más pequeñas, cada una con máximo 1-2 niveles de anidamiento. \n¿Qué principio de ingeniería de software justifica esto y cuáles son sus beneficios y riesgos?",
     "opciones": [
       "A) El principio de maximizar la longitud del código; su beneficio es tener más funciones disponibles",
-      "B) El principio de **responsabilidad única** y descomposición; beneficios: legibilidad, testabilidad y mantenibilidad; riesgo: overhead de llamadas y posible estado compartido entre funciones",
+      "B) El principio de responsabilidad única y descomposición; beneficios: legibilidad, testabilidad y mantenibilidad; riesgo: overhead de llamadas y posible estado compartido entre funciones",
       "C) El principio de no repetir código (DRY); su único beneficio es eliminar líneas duplicadas",
       "D) Ninguno; las funciones largas de una sola pieza siempre son preferibles a varias pequeñas"
     ],
@@ -582,7 +582,7 @@
     "kc": "validacion_de_datos_de_entrada",
     "tipo": "Razonamiento",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un sistema de transferencia bancaria debe validar: (1) `monto > 0`, (2) `monto <= saldo_disponible`, (3) cuenta_destino válida (10 dígitos), (4) `monto <= limite_diario_restante`, (5) `cuenta_destino != cuenta_origen`.\n¿En qué orden deben ejecutarse estas validaciones para maximizar la eficiencia y la seguridad?",
+    "enunciado": "Un sistema de transferencia bancaria debe validar: \n(1) `monto > 0`, \n(2) `monto <= saldo_disponible`, \n(3) cuenta_destino válida (10 dígitos), \n(4) `monto <= limite_diario_restante`, \n(5) `cuenta_destino != cuenta_origen`.\n¿En qué orden deben ejecutarse estas validaciones para maximizar la eficiencia y la seguridad?",
     "opciones": [
       "A) El orden es indiferente; todas las validaciones deben ejecutarse siempre por completo",
       "B) Primero las más baratas (1, 5, 3 son locales) y luego las que requieren consultar la BD (2, 4). Además, (1) antes que (2): si `monto<=0` no tiene sentido verificar el saldo",
@@ -636,7 +636,7 @@
     "kc": "manejo_de_casos_borde_y_excepciones_logicas",
     "tipo": "Bebras",
     "dominio": "KC_PROPOSITIONAL_LOGIC",
-    "enunciado": "Un algoritmo de búsqueda binaria en lista ordenada usa: `inicio=0`, `fin=N-1`, `medio=(inicio+fin)/2` (entera).\n\n```\nSI lista[medio]==buscado: encontrado\nSI buscado < lista[medio]: fin = medio\nSINO: inicio = medio\n```\n\n¿En qué caso borde el algoritmo nunca termina (bucle infinito)?",
+    "enunciado": "Un algoritmo de búsqueda binaria en lista ordenada falla en uno de estos casos borde: \nCaso A: elemento buscado no existe en la lista. \nCaso B: lista con un solo elemento (el buscado). \nCaso C: elemento en la primera posición. \nCaaso D: elemento en la ultima posición. \nLa implementación usa: `inicio=0`, `fin=N-1`, `medio=(inicio+fin)/2` (entera).\n\n```\nSI lista[medio]==buscado: encontrado\nSI buscado < lista[medio]: fin = medio\nSINO: inicio = medio\n```\n\n¿En qué caso borde el algoritmo nunca termina (bucle infinito)?",
     "opciones": [
       "A) Cuando el elemento buscado no existe dentro de la lista",
       "B) Cuando el elemento está en la última posición y `N=2`: `inicio=medio` no avanza y la iteración se repite idéntica",
@@ -837,7 +837,7 @@
     "enunciado": "```\nPARA i DESDE 0 HASTA 9 CON PASO 2:\n  Mostrar i * i\n```\n\n¿Qué valores muestra y cuántas iteraciones realiza?",
     "opciones": [
       "A) `0,1,4,9,16,25,36,49,64,81` — 10 iteraciones",
-      "B) `0,4,16,36,64` — 5 iteraciones (`i=0,2,4,6,8`)",
+      "B) `0,4,16,36,64` — 5 iteraciones",
       "C) `0,2,4,6,8` — 5 iteraciones",
       "D) `1,4,9,16,25` — 5 iteraciones"
     ],
@@ -1122,7 +1122,7 @@
     "kc": "ciclos_con_condiciones_compuestas",
     "tipo": "Bebras",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Sistema de descarga:\n\n```\ndescargas_ok = 0; fallos = 0; i = 0\nMIENTRAS i < total_archivos AND fallos < 3 AND descargas_ok < cuota_maxima:\n  resultado = descargar(archivo[i])\n  SI resultado == 'OK': descargas_ok += 1\n  SINO: fallos += 1\n  i += 1\n```\n\nDado: `total=10, cuota_maxima=5, fallos_permitidos=3`. Archivos: `OK,OK,FALLO,OK,FALLO,OK,OK,OK,FALLO,OK`. ¿Por qué razón termina el ciclo y cuántos archivos se procesaron?",
+    "enunciado": "Sistema de descarga:\n\n```\ndescargas_ok = 0; fallos = 0; i = 0\nMIENTRAS i < total_archivos AND fallos < 3 AND descargas_ok < cuota_maxima:\n  resultado = descargar(archivo[i])\n  SI resultado == 'OK': descargas_ok += 1\n  SINO: fallos += 1\n  i += 1\n```\n\nDado: `total=10, cuota_maxima=5, fallos_permitidos=3`. \nArchivos: `OK,OK,FALLO,OK,FALLO,OK,OK,OK,FALLO,OK`. \n¿Por qué razón termina el ciclo y cuántos archivos se procesaron?",
     "opciones": [
       "A) Termina por `fallos>=3` después de procesar 9 archivos",
       "B) Termina por `descargas_ok>=5` (cuota máxima) después de procesar 7 archivos",
@@ -1284,10 +1284,10 @@
     "kc": "generalizar_soluciones_para_distintos_datos",
     "tipo": "Razonamiento",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Un patrón recurrente en sistemas: `'validar entrada → procesar → generar reporte'`. Se repite en: gestión de empleados, inventario de productos y contabilidad de ventas. Un arquitecto propone un framework genérico con tres funciones abstractas: `validar(datos)`, `procesar(datos)` e `informar(resultados)`. ¿Qué principios de diseño aplica esta solución?",
+    "enunciado": "Un patrón recurrente en sistemas: `'validar entrada → procesar → generar reporte'`. Se repite en: gestión de empleados, inventario de productos y contabilidad de ventas. \nUn arquitecto propone un framework genérico con tres funciones abstractas: `validar(datos)`, `procesar(datos)` e `informar(resultados)`. \n¿Qué principios de diseño aplica esta solución?",
     "opciones": [
       "A) Solo el principio de economía de código, es decir, escribir la menor cantidad de líneas",
-      "B) Aplica: (1) **Abstracción** — interfaz genérica independiente de la implementación, (2) **Reutilización** — el flujo se implementa una vez, (3) **Separación de responsabilidades**, (4) **Extensibilidad** — agregar módulos sin tocar el framework",
+      "B) Aplica: (1) Abstracción, interfaz genérica independiente de la implementación, (2) Reutilización, el flujo se implementa una vez, (3) Separación de responsabilidades, (4) Extensibilidad, agregar módulos sin tocar el framework",
       "C) Únicamente el principio de seguridad de los datos que se procesan",
       "D) No aplica ningún principio formal de diseño; es solo sentido común práctico"
     ],
@@ -1338,7 +1338,7 @@
     "kc": "definicion_de_una_funcion",
     "tipo": "Razonamiento",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Una función de 80 líneas hace: (1) validar datos, (2) calcular el resultado, (3) formatear la salida, y (4) guardar en base de datos. Un equipo propone refactorizarla en 4 funciones de ~20 líneas cada una. ¿Cuáles son los 3 principales beneficios y cuál es un posible costo?",
+    "enunciado": "Una función de 80 líneas hace: (1) validar datos, (2) calcular el resultado, (3) formatear la salida, y (4) guardar en base de datos. Un equipo propone refactorizarla en 4 funciones de ~20 líneas cada una. \n¿Cuáles son los 3 principales beneficios y cuál es un posible costo?",
     "opciones": [
       "A) Beneficio: código más corto en total. Costo: el programa se ejecuta más lento",
       "B) Beneficios: (1) testabilidad individual, (2) mantenibilidad (cambios localizados), (3) legibilidad. Costo: ligero overhead de llamadas y más interfaces entre funciones",
@@ -1394,9 +1394,9 @@
     "dominio": "KC_PROBLEM_DECOMPOSITION",
     "enunciado": "Una función `ordenar(lista, criterio, ascendente)` ordena cualquier lista según un criterio y dirección. Se llama:\n\n```\nordenar(empleados, 'salario', VERDADERO)\nordenar(productos, 'precio', FALSO)\nordenar(estudiantes, 'promedio', VERDADERO)\n```\n\n¿Qué principio de diseño permite que una sola función maneje todos estos casos?",
     "opciones": [
-      "A) El principio de seguridad, ya que reduce la posibilidad de cometer errores",
+      "A) El principio de `seguridad`, ya que reduce la posibilidad de cometer errores",
       "B) La generalización mediante parámetros: `criterio` y `ascendente` convierten una función específica en genérica; mejorar el algoritmo base beneficia a todos los casos a la vez",
-      "C) El principio de velocidad, porque los parámetros aceleran la ejecución de la función",
+      "C) El principio de `velocidad`, porque los parámetros aceleran la ejecución de la función",
       "D) Ninguna ventaja; es preferible tener una función distinta y específica para cada caso"
     ],
     "respuesta_correcta": "B",
@@ -1500,7 +1500,7 @@
     "kc": "funciones_que_retornan_un_valor",
     "tipo": "Razonamiento",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "La función `busqueda_binaria(lista_ordenada, objetivo)` retorna el índice del objetivo o `-1` si no existe. Si se llama con una lista de 1,000,000 de elementos, ¿cuántas comparaciones realiza como máximo en el peor caso?",
+    "enunciado": "La función `busqueda_binaria(lista_ordenada, objetivo)` \nRetorna el índice del objetivo o `-1` si no existe. \nSi se llama con una lista de 1,000,000 de elementos, ¿cuántas comparaciones realiza como máximo en el peor caso?",
     "opciones": [
       "A) `1,000,000` comparaciones, igual que la búsqueda lineal",
       "B) Aproximadamente `20` comparaciones (`log₂(1,000,000) ≈ 20`); la búsqueda binaria es `O(log N)`, mucho más eficiente",
@@ -1554,7 +1554,7 @@
     "kc": "division_de_un_problema_en_subproblemas",
     "tipo": "Razonamiento",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "El algoritmo `mergesort` divide recursivamente una lista hasta sublistas de 1 elemento, luego las fusiona ordenadamente. Para ordenar una lista de 8 elementos: ¿cuántos niveles de división hay? ¿Cuántas fusiones se realizan en total? ¿Por qué es `O(N log N)` y mejor que burbuja `O(N²)`?",
+    "enunciado": "El algoritmo `mergesort` divide recursivamente una lista hasta sublistas de 1 elemento, luego las fusiona ordenadamente. \nPara ordenar una lista de 8 elementos: \n-¿cuántos niveles de división hay? \n-¿Cuántas fusiones se realizan en total? \n-¿Por qué es `O(N log N)` y mejor que burbuja `O(N²)`?",
     "opciones": [
       "A) 2 niveles y 4 fusiones; solo es mejor que burbuja cuando `N >= 4`",
       "B) 3 niveles de división y 7 fusiones. `O(N log N)`: log N niveles × N trabajo por nivel. Para N=1000: mergesort ≈10,000 ops vs burbuja ≈1,000,000 ops",

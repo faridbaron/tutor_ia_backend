@@ -42,7 +42,7 @@
     "kc": "definicion_y_estructura_de_un_vector",
     "tipo": "Razonamiento",
     "dominio": "KC_ABSTRACTION",
-    "enunciado": "Un sistema almacena el historial de precios de una acción en los últimos 30 días en un vector. Para detectar la tendencia reciente, necesita comparar los últimos 5 días con el promedio de los 25 anteriores. ¿Cómo accede eficientemente a: (a) los últimos 5 elementos y (b) los primeros 25, usando índices?",
+    "enunciado": "Un sistema almacena el historial de precios de una acción en los últimos 30 días en un vector. Para detectar la tendencia reciente, necesita comparar los últimos 5 días con el promedio de los 25 anteriores. \n¿Cómo accede eficientemente a: (a) los últimos 5 elementos y (b) los primeros 25, usando índices?",
     "opciones": [
       "A) Recorriendo el vector completo dos veces, una para cada grupo de días",
       "B) (a) Últimos 5: índices `[25]` a `[29]` (`N-5` a `N-1`, con `N=30`). (b) Primeros 25: índices `[0]` a `[24]`. El acceso por índice es `O(1)` — directo, sin recorrido",
@@ -204,10 +204,10 @@
     "kc": "definicion_y_estructura_de_una_matriz",
     "tipo": "Razonamiento",
     "dominio": "KC_ABSTRACTION",
-    "enunciado": "Un sistema de reconocimiento de imágenes en blanco y negro representa cada imagen como una matriz de 28×28 píxeles, donde cada valor es `0` (negro) o `255` (blanco). Una red neuronal procesa 1000 imágenes simultáneamente. ¿Cuántos valores se almacenan en total y qué estructura sería la más apropiada?",
+    "enunciado": "Un sistema de reconocimiento de imágenes en blanco y negro representa cada imagen como una matriz de 28×28 píxeles, donde cada valor es `0` (negro) o `255` (blanco). Una red neuronal procesa 1000 imágenes simultáneamente. \n¿Cuántos valores se almacenan en total y qué estructura sería la más apropiada?",
     "opciones": [
       "A) 28,000 valores; un único vector de 28,000 elementos",
-      "B) 784,000 valores (`28×28×1000`). Estructura: tensor 3D de dimensiones `[1000, 28, 28]`, donde la primera dimensión indexa la imagen y las otras dos las coordenadas del píxel",
+      "B) 784,000 valores (`28×28×1000`). Estructura: tensor 3D de dimensiones `[1000, 28, 28]`",
       "C) 56 valores (`28+28`); una matriz de `2×28`",
       "D) 1000 valores; un vector cuyos elementos son cada una de las imágenes completas"
     ],
@@ -260,10 +260,10 @@
     "dominio": "KC_ABSTRACTION",
     "enunciado": "Una tabla de distancias entre 5 ciudades se almacena en una matriz D de 5×5, donde `D[i][j]` es la distancia de la ciudad `i` a la `j`. La diagonal `D[i][i]=0`. Si las distancias son simétricas (`D[i][j]==D[j][i]`), ¿qué porcentaje de la matriz es información redundante y cómo se optimizaría?",
     "opciones": [
-      "A) 0% redundante; todos los valores de la matriz son estrictamente necesarios",
-      "B) La diagonal (5 ceros) más el triángulo inferior (10 valores) son redundantes = `15/25 = 60%`. Se optimiza guardando solo el triángulo superior (10 valores) en un vector de `N*(N-1)/2` elementos",
-      "C) 50% redundante; basta con almacenar exactamente la mitad de la matriz",
-      "D) 25% redundante; solo la diagonal principal resulta innecesaria de guardar"
+      "A) `0%` redundante; todos los valores de la matriz son estrictamente necesarios",
+      "B) `60%` redundante, la diagonal (5 ceros) más el triángulo inferior (10 valores). Se optimiza guardando solo el triángulo superior (10 valores)",
+      "C) `50%` redundante; basta con almacenar exactamente la mitad de la matriz",
+      "D) `25%` redundante; solo la diagonal principal resulta innecesaria de guardar"
     ],
     "respuesta_correcta": "B",
     "explicacion": "En una matriz 5×5=25 elementos: diagonal=5 ceros (innecesarios), triángulo superior=10 valores únicos, triángulo inferior=10 valores duplicados del superior. Redundantes: 5+10=15 de 25 (60%). Optimización: almacenar solo el triángulo superior en un vector de N*(N-1)/2=10 posiciones, usando fórmula de indexación: índice = i*N + j - i*(i+1)/2.",
@@ -312,10 +312,10 @@
     "kc": "modificacion_de_contenido_de_vectores_y_matrices",
     "tipo": "Bebras",
     "dominio": "KC_ABSTRACTION",
-    "enunciado": "Algoritmo que rota una matriz cuadrada 90° en sentido horario **in-place** (sin matriz auxiliar). Para una matriz 4×4, la rotación transforma `M[i][j] → M[j][N-1-i]`. ¿Por qué es más complejo hacerlo in-place y qué ciclo de intercambios se necesita para no perder valores?",
+    "enunciado": "Algoritmo que rota una matriz cuadrada 90° en sentido horario **in-place** (sin matriz auxiliar). Para una matriz 4×4, la rotación transforma `M[i][j] → M[j][N-1-i]`. \n¿Por qué es más complejo hacerlo in-place y qué ciclo de intercambios se necesita para no perder valores?",
     "opciones": [
       "A) Hacerlo in-place es igual de simple que hacerlo con una copia auxiliar",
-      "B) Es complejo porque al mover `M[i][j]` a `M[j][N-1-i]` se sobrescribe el valor que iba allí. Se necesita un ciclo de 4 intercambios (top→right→bottom→left→top) con una variable temporal",
+      "B) Es complejo porque al mover `M[i][j]` a `M[j][N-1-i]` se sobrescribe el valor que iba allí. Se necesita un ciclo de 4 intercambios con una variable temporal",
       "C) Es imposible sin una matriz auxiliar; siempre se requiere una copia completa",
       "D) Basta con transponer la diagonal principal para obtener la rotación de 90°"
     ],
@@ -366,10 +366,10 @@
     "kc": "representacion_de_datos_del_mundo_real_en_arreglos",
     "tipo": "Razonamiento",
     "dominio": "KC_ABSTRACTION",
-    "enunciado": "Un mapa meteorológico divide Colombia en una cuadrícula de 100×100 celdas. Cada celda almacena: temperatura, humedad, presión y precipitación. Se toman mediciones cada hora durante 30 días. ¿Cuántos valores se almacenan en total y qué dimensiones tiene la estructura completa?",
+    "enunciado": "Un mapa meteorológico divide Colombia en una cuadrícula de 100×100 celdas. Cada celda almacena: temperatura, humedad, presión y precipitación. Se toman mediciones cada hora durante 30 días. \n¿Cuántos valores se almacenan en total y qué dimensiones tiene la estructura completa?",
     "opciones": [
       "A) `100×100=10,000` valores en una matriz 2D",
-      "B) `100×100×4×24×30 = 28,800,000` valores. Estructura: arreglo 4D `[tiempo][filas][columnas][variables]` con `tiempo=720` horas",
+      "B) `100×100×4×24×30 = 28,800,000` valores. Estructura: arreglo 4D",
       "C) `100×100×4=40,000` valores, uno por celda y variable, sin dimensión temporal",
       "D) Solo 4 valores, uno por cada variable meteorológica registrada"
     ],
@@ -387,7 +387,7 @@
     "enunciado": "¿Cuál es la diferencia entre 'llenar', 'buscar' y 'modificar' elementos de un vector usando ciclos?",
     "opciones": [
       "A) Son exactamente lo mismo; solo cambia el nombre de la operación",
-      "B) **Llenar**: asigna valores a los elementos (escritura). **Buscar**: recorre comparando sin modificar (lectura). **Modificar**: cambia valores según una condición (lectura + escritura)",
+      "B) Llenar: asigna valores a los elementos (escritura). Buscar: recorre comparando sin modificar (lectura). Modificar: cambia valores según una condición (lectura + escritura)",
       "C) Buscar y modificar son la misma operación; solo llenar es diferente de las demás",
       "D) Solo 'llenar' requiere un ciclo; buscar y modificar se hacen sin recorrer el vector"
     ],
@@ -474,10 +474,10 @@
     "kc": "ciclos_anidados",
     "tipo": "Razonamiento",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Multiplicación de matrices: `C = A × B`, donde A es `F×K` y B es `K×C_col`. Cada `C[i][j]` = suma de `A[i][k] * B[k][j]` para `k` de 0 a K-1. Si A es 100×200 y B es 200×150, ¿cuántas multiplicaciones se realizan para calcular toda C? ¿Cuál es la complejidad?",
+    "enunciado": "Multiplicación de matrices: `C = A × B`, donde A es `F×K` y B es `K×C_col`. \nCada `C[i][j]` = suma de `A[i][k] * B[k][j]` para `k` de 0 a K-1. \nSi A es 100×200 y B es 200×150, ¿cuántas multiplicaciones se realizan para calcular toda C? ¿Cuál es la complejidad?",
     "opciones": [
       "A) `100×150 = 15,000` multiplicaciones",
-      "B) `100×150×200 = 3,000,000` multiplicaciones. Complejidad `O(F×K×C_col)` ≈ `O(N³)` para matrices cuadradas N×N",
+      "B) `100×150×200 = 3,000,000` multiplicaciones",
       "C) `200×200 = 40,000` multiplicaciones",
       "D) `100+150+200 = 450` multiplicaciones"
     ],
@@ -621,7 +621,7 @@
     "enunciado": "Dos algoritmos de ordenamiento burbuja:\n- A (básico): siempre hace `N-1` pasadas\n- B (optimizado): si en una pasada no hubo intercambios, se detiene porque la lista ya está ordenada\n\nPara una lista casi ordenada con solo 1 elemento fuera de lugar, ¿cuántas pasadas hace cada uno (`N=100`)?",
     "opciones": [
       "A) A: 99 pasadas, B: 99 pasadas; ambos recorren la lista el mismo número de veces",
-      "B) A: 99 pasadas siempre. B: aproximadamente 2 pasadas (una para colocar el elemento, otra para verificar que ya no hubo intercambios)",
+      "B) A: 99 pasadas siempre. B: aproximadamente 2 pasadas",
       "C) A: 50 pasadas, B: 2 pasadas",
       "D) A: 1 pasada, B: 99 pasadas"
     ],
@@ -636,7 +636,7 @@
     "kc": "optimizacion_de_ciclos",
     "tipo": "Razonamiento",
     "dominio": "KC_LOOPS_AND_ITERATION",
-    "enunciado": "Un sistema busca un valor en una lista de 10 millones de elementos. Versión A: búsqueda lineal `O(N)`. Versión B: ordena primero `O(N log N)` y luego búsqueda binaria `O(log N)`. Si se realizan 1000 búsquedas distintas sobre la misma lista, ¿cuál versión es más eficiente y a partir de cuántas búsquedas conviene ordenar primero?",
+    "enunciado": "Un sistema busca un valor en una lista de 10 millones de elementos. Versión A: búsqueda lineal `O(N)`. Versión B: ordena primero `O(N log N)` y luego búsqueda binaria `O(log N)`. \nSi se realizan 1000 búsquedas distintas sobre la misma lista, ¿cuál versión es más eficiente y a partir de cuántas búsquedas conviene ordenar primero?",
     "opciones": [
       "A) A siempre es mejor, porque evita pagar el costo inicial de ordenar la lista",
       "B) Con 1000 búsquedas, B es más eficiente: el costo de ordenar (`10M×23≈230M` ops) se amortiza entre las 1000 búsquedas. Conviene ordenar cuando `k > log N ≈ 23` búsquedas",
@@ -690,7 +690,7 @@
     "kc": "busqueda_de_elementos_en_un_vector",
     "tipo": "Razonamiento",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Un sistema de base de datos tiene 1 millón de registros. Cada búsqueda lineal tarda 1 segundo. Se propone mantener los registros ordenados para usar búsqueda binaria. Cada inserción en el vector ordenado requiere desplazar en promedio N/2 elementos. ¿Vale la pena mantener ordenado si se hacen 10,000 búsquedas y 100 inserciones diarias?",
+    "enunciado": "Un sistema de base de datos tiene 1 millón de registros. Cada búsqueda lineal tarda 1 segundo. Se propone mantener los registros ordenados para usar búsqueda binaria. \nCada inserción en el vector ordenado requiere desplazar en promedio N/2 elementos. ¿Vale la pena mantener ordenado si se hacen 10,000 búsquedas y 100 inserciones diarias?",
     "opciones": [
       "A) No vale la pena; el costo de mantener el orden en las inserciones es demasiado alto",
       "B) Sí vale la pena: sin orden, 10,000 búsquedas = `10,000 s/día`; con orden ≈ `0.2 s`. El ahorro (~10,000 s) supera con creces el costo de las 100 inserciones",
@@ -726,7 +726,7 @@
     "kc": "identificar_el_maximo_minimo_y_promedio_en_arreglos",
     "tipo": "Caso práctico",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Un sistema calcula estadísticas de temperaturas de 5 días: `[28, 35, 22, 41, 30]`. Necesita: máximo, mínimo, promedio y rango (`máx-mín`). ¿Cuántos recorridos del vector se necesitan como mínimo para calcular los 4 valores?",
+    "enunciado": "Un sistema calcula estadísticas de temperaturas de 5 días: `[28, 35, 22, 41, 30]`. Necesita: máximo, mínimo, promedio y rango (`máx-mín`). \n¿Cuántos recorridos del vector se necesitan como mínimo para calcular los 4 valores?",
     "opciones": [
       "A) 4 recorridos, uno por cada estadística que se debe calcular",
       "B) 1 recorrido: en un solo ciclo se calculan máx, mín y suma a la vez; el promedio y el rango se obtienen al final con operaciones `O(1)`",
@@ -744,7 +744,7 @@
     "kc": "identificar_el_maximo_minimo_y_promedio_en_arreglos",
     "tipo": "Razonamiento",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Un sensor registra temperatura cada segundo durante 24 horas (86,400 lecturas). Se necesita: máx global, mínimo, promedio y además la 'hora pico' (la hora con el mayor promedio de temperatura). ¿Qué estructura y qué algoritmo permiten calcular eficientemente la hora pico?",
+    "enunciado": "Un sensor registra temperatura cada segundo durante 24 horas (86,400 lecturas). Se necesita: máx global, mínimo, promedio y además la 'hora pico' (la hora con el mayor promedio de temperatura). \n¿Qué estructura y qué algoritmo permiten calcular eficientemente la hora pico?",
     "opciones": [
       "A) Ordenar las 86,400 lecturas y tomar las primeras 3,600 como la hora pico",
       "B) Vector auxiliar de 24 elementos (promedio por hora): recorrer las 86,400 lecturas acumulando en el bucket de su hora (`índice = segundo/3600`) y al final tomar el máximo del vector de 24 promedios",
@@ -798,7 +798,7 @@
     "kc": "busqueda_en_matrices",
     "tipo": "Bebras",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Matriz ordenada (cada fila y cada columna crecen de menor a mayor). Se busca el valor `35`:\n`[[1,10,20,45],[5,15,30,55],[8,22,35,60],[12,28,45,70]]`\nAlgoritmo eficiente: inicia en la esquina superior derecha `M[0][cols-1]`. Si `M[i][j]==buscado`: encontrado. Si `M[i][j]>buscado`: izquierda (`j--`). Si `M[i][j]<buscado`: abajo (`i++`). ¿Cuántos pasos hace y por qué es más eficiente que el doble ciclo?",
+    "enunciado": "Matriz ordenada (cada fila y cada columna crecen de menor a mayor). Se busca el valor `35`:\n`[[1,10,20,45],[5,15,30,55],[8,22,35,60],[12,28,45,70]]`\nAlgoritmo eficiente: inicia en la esquina superior derecha `M[0][cols-1]`. Si `M[i][j]==buscado`: encontrado. Si `M[i][j]>buscado`: izquierda (`j--`). Si `M[i][j]<buscado`: abajo (`i++`). \n¿Cuántos pasos hace y por qué es más eficiente que el doble ciclo?",
     "opciones": [
       "A) 4 pasos; es tan eficiente como el doble ciclo tradicional",
       "B) 4 pasos: `M[0][3]=45>35`→izq, `M[0][2]=20<35`→abajo, `M[1][2]=30<35`→abajo, `M[2][2]=35`=encontrado. Es `O(F+C)` vs `O(F×C)` del doble ciclo",
@@ -855,7 +855,7 @@
     "enunciado": "Una imagen de 500×500 píxeles se representa como matriz. Se aplica un filtro que reemplaza cada píxel por el promedio de sus 8 vecinos (arriba, abajo, izquierda, derecha y 4 diagonales). ¿Qué problema especial presentan los píxeles del borde y cómo se resuelve?",
     "opciones": [
       "A) Los píxeles del borde no presentan ningún problema; también tienen sus 8 vecinos completos",
-      "B) Los píxeles del borde tienen vecinos fuera de la matriz (índices negativos o `≥N`). Se resuelve con: **padding** (fila/columna extra de ceros o réplicas), **clipping** (usar solo vecinos válidos) o verificación de índice antes de acceder",
+      "B) Los píxeles del borde tienen vecinos fuera de la matriz (índices negativos o `≥N`). Se resuelve con: fila/columna extra de ceros o réplicas, usar solo vecinos válidos o verificación de índice antes de acceder",
       "C) El filtro simplemente no puede aplicarse a imágenes de más de 100×100 píxeles",
       "D) Los píxeles del borde deben eliminarse de la imagen antes de aplicar el filtro"
     ],
@@ -906,10 +906,10 @@
     "kc": "generalizacion_de_algoritmos_para_n_dimensiones",
     "tipo": "Razonamiento",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "En aprendizaje automático, los videos se representan como tensores 4D: `[frames][alto][ancho][canales]`. Un video de 5 segundos a 30fps, resolución 1920×1080, con 3 canales (RGB). ¿Cuántos valores almacena y cuántos ciclos anidados se necesitan para recorrerlo completo?",
+    "enunciado": "En aprendizaje automático, los videos se representan como tensores 4D: `[frames][alto][ancho][canales]`. Un video de 5 segundos a 30fps, resolución 1920×1080, con 3 canales (RGB). \n¿Cuántos valores almacena y cuántos ciclos anidados se necesitan para recorrerlo completo?",
     "opciones": [
       "A) `1920×1080 = 2,073,600` valores; 2 ciclos anidados",
-      "B) `150×1080×1920×3 = 933,120,000` (≈933 millones) valores; 4 ciclos anidados",
+      "B) `150×1080×1920×3 = 933,120,000` valores; 4 ciclos anidados",
       "C) `30×3 = 90` valores; 2 ciclos anidados",
       "D) `5×1080 = 5,400` valores; 1 solo ciclo"
     ],
@@ -942,7 +942,7 @@
     "kc": "modularidad_disenar_multiples_funciones_relacionadas",
     "tipo": "Caso práctico",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Un sistema de análisis de vectores tiene: `calcular_suma(v)`, `calcular_promedio(v)`, `encontrar_máximo(v)`, `encontrar_mínimo(v)`, `calcular_desviacion_estandar(v)`. `calcular_promedio` llama a `calcular_suma`, y `calcular_desviacion` llama a `calcular_promedio`. ¿Qué principio de diseño refleja esto y qué ventaja tiene?",
+    "enunciado": "Un sistema de análisis de vectores tiene las funciones: \n`calcular_suma(v)`, `calcular_promedio(v)`, `encontrar_máximo(v)`, `encontrar_mínimo(v)`, `calcular_desviacion_estandar(v)`. \n`calcular_promedio` llama a `calcular_suma`, y `calcular_desviacion` llama a `calcular_promedio`. \n¿Qué principio de diseño refleja esto y qué ventaja tiene?",
     "opciones": [
       "A) No refleja ningún principio; es solo una cuestión de conveniencia al escribir",
       "B) Reutilización de componentes: las funciones de menor nivel (suma, promedio) son bloques de construcción de las de mayor nivel; optimizar `calcular_suma` beneficia a todas las que la usan",
@@ -960,10 +960,10 @@
     "kc": "modularidad_disenar_multiples_funciones_relacionadas",
     "tipo": "Razonamiento",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Se diseña un sistema con dos búsquedas: `buscar_lineal(arreglo, valor)` (`O(N)`, sin requisitos) y `buscar_binaria(arreglo, valor)` (`O(log N)`, requiere arreglo ordenado). ¿Cómo diseñarías un módulo de búsqueda que elija automáticamente el algoritmo más eficiente según el estado del arreglo?",
+    "enunciado": "Se diseña un sistema con dos búsquedas: `buscar_lineal(arreglo, valor)` (`O(N)`, sin requisitos) y `buscar_binaria(arreglo, valor)` (`O(log N)`, requiere arreglo ordenado). \n¿Cómo diseñarías un módulo de búsqueda que elija automáticamente el algoritmo más eficiente según el estado del arreglo?",
     "opciones": [
       "A) Usar siempre la búsqueda lineal, para mantener el código lo más simple posible",
-      "B) Diseñar `buscar(arreglo, valor, esta_ordenado=FALSO)`: si `esta_ordenado` usa la binaria, si no la lineal. El módulo encapsula la decisión y mantiene una interfaz consistente para quien lo usa",
+      "B) Diseñar buscar(arreglo, valor, esta_ordenado=FALSO): si esta_ordenado usa la binaria, si no la lineal. El módulo encapsula la decisión y mantiene una interfaz consistente para quien lo usa",
       "C) Usar siempre la búsqueda binaria, sin importar si el arreglo está ordenado o no",
       "D) Crear dos funciones totalmente separadas, sin ninguna función común que las coordine"
     ],
@@ -981,7 +981,7 @@
     "enunciado": "La función `calcular_promedio(lista)` se usa en el módulo de notas académicas, el de análisis de ventas y el de estadísticas de temperatura. ¿Qué principio demuestra esto?",
     "opciones": [
       "A) El principio de especificidad: cada módulo debería tener su propia versión de la función",
-      "B) El principio de reutilización (**DRY** - Don't Repeat Yourself): una función bien diseñada puede usarse en múltiples contextos sin modificaciones",
+      "B) El principio de reutilización: una función bien diseñada puede usarse en múltiples contextos sin modificaciones",
       "C) El principio de seguridad: compartir una misma función entre módulos es siempre más seguro",
       "D) No demuestra ningún principio de diseño; es solo una coincidencia entre los módulos"
     ],
@@ -1014,7 +1014,7 @@
     "kc": "reutilizacion_de_funciones_en_distintos_contextos",
     "tipo": "Bebras",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Una biblioteca de funciones para arreglos incluye: `filtrar(arreglo, condicion)`, `mapear(arreglo, transformacion)` y `reducir(arreglo, funcion, valor_inicial)`. Usando solo estas tres, expresa: 'De 100 transacciones, tomar solo las de monto>10000, multiplicar cada monto por 1.19 (IVA) y calcular el total'.",
+    "enunciado": "Una biblioteca de funciones para arreglos incluye: \n`filtrar(arreglo, condicion)`, `mapear(arreglo, transformacion)` y `reducir(arreglo, funcion, valor_inicial)`. \nUsando solo estas tres, expresa: \n'De 100 transacciones, tomar solo las de monto>10000, multiplicar cada monto por 1.19 (IVA) y calcular el total'.",
     "opciones": [
       "A) Es imposible lograrlo sin escribir ciclos `for` explícitos adicionales",
       "B) `grandes=filtrar(transacciones, t→t.monto>10000)`; `con_IVA=mapear(grandes, t→t.monto*1.19)`; `total=reducir(con_IVA, (acc,v)→acc+v, 0)`",
@@ -1035,7 +1035,7 @@
     "enunciado": "Una función `procesar_ventas()` llama a `calcular_total()`, luego a `aplicar_descuento()` y finalmente a `generar_factura()`. ¿Cómo se llama a esta función principal y qué representa?",
     "opciones": [
       "A) Una función recursiva, porque coordina varias llamadas seguidas",
-      "B) Una función **orquestadora**: coordina el flujo llamando a subfunciones especializadas en el orden correcto",
+      "B) Una función orquestadora: coordina el flujo llamando a subfunciones especializadas en el orden correcto",
       "C) La función de entrada principal que ejecuta el sistema operativo al arrancar",
       "D) Una función privada que no puede ser invocada desde ningún otro punto del programa"
     ],
@@ -1161,7 +1161,7 @@
     "enunciado": "Algoritmo para verificar si un vector es palíndromo:\n\n```\nizq=0; der=N-1; es_palindromo=VERDADERO\nMIENTRAS izq < der:\n  SI v[izq] != v[der]: es_palindromo=FALSO; ROMPER\n  izq++; der--\n```\n\nPara `v=[1,2,3,2,1]`, ¿cuántas iteraciones hace el ciclo y cuál es el resultado?",
     "opciones": [
       "A) 5 iteraciones; resultado `FALSO`",
-      "B) 2 iteraciones; resultado `VERDADERO` (`izq=0↔der=4` OK, `izq=1↔der=3` OK, luego `izq=2=der=2` hace `izq<der` falso → termina)",
+      "B) 2 iteraciones; resultado `VERDADERO`",
       "C) 3 iteraciones; resultado `VERDADERO`",
       "D) 1 iteración; resultado `VERDADERO`"
     ],
@@ -1374,7 +1374,7 @@
     "kc": "diseno_completo_de_un_caso_de_estudio",
     "tipo": "Caso práctico",
     "dominio": "KC_ALGORITHMIC_THINKING",
-    "enunciado": "Sistema: 'Analizar las ventas mensuales de 5 productos durante 12 meses y encontrar el producto más vendido, el mes con mayor venta total y el promedio general'. ¿Qué estructura de datos es más apropiada y cómo se organizan los tres cálculos?",
+    "enunciado": "Sistema: 'Analizar las ventas mensuales de 5 productos durante 12 meses y encontrar el producto más vendido, el mes con mayor venta total y el promedio general'. \n¿Qué estructura de datos es más apropiada y cómo se organizan los tres cálculos?",
     "opciones": [
       "A) Un vector de 60 elementos sin ninguna organización por producto o mes",
       "B) Matriz `ventas[5][12]` (filas=productos, columnas=meses). Producto más vendido: suma de cada fila → máximo. Mes de mayor venta: suma de cada columna → máximo. Promedio: suma total / 60",
@@ -1392,7 +1392,7 @@
     "kc": "diseno_completo_de_un_caso_de_estudio",
     "tipo": "Razonamiento",
     "dominio": "KC_ALGORITHMIC_THINKING",
-    "enunciado": "Caso de estudio: 'Sistema de detección de anomalías en sensores industriales'. Datos: 100 sensores, 1 lectura/segundo, 8 horas = 2,880,000 lecturas. Requisito: detectar en tiempo real cualquier sensor cuya lectura esté a más de 3 desviaciones estándar del promedio histórico. Diseña la arquitectura y el algoritmo principal.",
+    "enunciado": "Caso de estudio: 'Sistema de detección de anomalías en sensores industriales'. Datos: 100 sensores, 1 lectura/segundo, 8 horas = 2,880,000 lecturas. Requisito: detectar en tiempo real cualquier sensor cuya lectura esté a más de 3 desviaciones estándar del promedio histórico. \nDiseña la arquitectura y el algoritmo principal.",
     "opciones": [
       "A) Guardar las 2,880,000 lecturas en memoria y recalcular todas las estadísticas desde cero con cada nueva lectura",
       "B) Buffer circular por sensor (últimas N lecturas) + estadísticas incrementales (promedio y desviación con fórmula online `O(1)`) + comparar cada nueva lectura contra un umbral dinámico. Complejidad `O(1)` por lectura, memoria `O(sensores)`",

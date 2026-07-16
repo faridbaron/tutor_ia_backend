@@ -152,7 +152,7 @@
     "dominio": "KC_ALGORITHMIC_THINKING",
     "enunciado": "Un semáforo inteligente recibe datos de sensores de 4 carriles, el horario y el estado anterior. Calcula duraciones de fases y actualiza los semáforos. El sistema falla solo en horas pico. Sin cambiar el proceso, ¿qué modificación a las **ENTRADAS** resolvería el problema?",
     "opciones": [
-      "A) Agregar la **densidad de tráfico** en tiempo real por carril, no solo la presencia o ausencia de vehículos",
+      "A) Agregar la densidad de tráfico en tiempo real por carril, no solo la presencia o ausencia de vehículos",
       "B) Reescribir el proceso de cálculo para que asigne las duraciones de fase en menos tiempo",
       "C) Añadir una salida adicional que registre los errores detectados durante las horas pico",
       "D) Eliminar el horario como entrada y decidir las fases únicamente con los sensores"
@@ -204,10 +204,10 @@
     "kc": "ciclo_de_vida_de_un_programa",
     "tipo": "Razonamiento",
     "dominio": "KC_ALGORITHMIC_THINKING",
-    "enunciado": "Un sistema bancario de 10 años requiere actualización por nuevas regulaciones. El equipo debate: (A) modificar el sistema actual, o (B) desarrollar uno nuevo. ¿Qué factores del **ANÁLISIS** deben evaluarse primero?",
+    "enunciado": "Un sistema bancario de 10 años requiere actualización por nuevas regulaciones. El equipo debate: \n(A) modificar el sistema actual, o \n(B) desarrollar uno nuevo. \n¿Qué factores del **ANÁLISIS** deben evaluarse primero?",
     "opciones": [
       "A) El lenguaje de programación original y la cantidad de líneas de código del sistema actual",
-      "B) La **deuda técnica** acumulada, la documentación disponible, el conocimiento del equipo y el análisis **costo-beneficio** de ambas opciones",
+      "B) La deuda técnica acumulada, la documentación disponible, el conocimiento del equipo y el análisis costo-beneficio de ambas opciones",
       "C) Únicamente el presupuesto disponible, sin considerar los aspectos técnicos del sistema",
       "D) La preferencia del cliente sobre el aspecto visual de la nueva interfaz de usuario"
     ],
@@ -261,7 +261,7 @@
     "enunciado": "Dos ingenieros implementan el mismo algoritmo de burbuja. El ingeniero A tarda 2 segundos en ordenar 10,000 elementos; el B tarda 0.5 segundos. ¿Cómo es posible y qué implica sobre la relación algoritmo-programa?",
     "opciones": [
       "A) Es imposible: si el algoritmo es el mismo, el tiempo de ejecución debe ser idéntico",
-      "B) La diferencia proviene de la **implementación**: optimizaciones de código, uso de la memoria caché y operaciones más eficientes. El algoritmo define la estrategia, pero la implementación afecta el desempeño real",
+      "B) La diferencia proviene de la implementación: optimizaciones de código, uso de la memoria caché y operaciones más eficientes. El algoritmo define la estrategia, pero la implementación afecta el desempeño real",
       "C) El ingeniero B en realidad utilizó un algoritmo de ordenamiento distinto y más rápido",
       "D) La diferencia se explica únicamente por el hardware donde se ejecutó cada versión"
     ],
@@ -315,7 +315,7 @@
     "enunciado": "`Python` usa un intérprete pero tiene módulos críticos escritos en `C` (compilado). Un desarrollador observa que ciertos cálculos matemáticos en Python son 100x más lentos que en C. ¿Qué estrategia arquitectónica explicaría por qué Python sigue siendo popular para ciencia de datos a pesar de esta diferencia?",
     "opciones": [
       "A) `Python` compila automáticamente el código a lenguaje máquina cuando detecta un cuello de botella",
-      "B) `Python` usa un modelo **híbrido**: el código del desarrollador se interpreta (facilidad de uso), pero las operaciones pesadas llaman a bibliotecas compiladas en `C` que se ejecutan a velocidad nativa",
+      "B) `Python` usa un modelo híbrido: el código del desarrollador se interpreta (facilidad de uso), pero las operaciones pesadas llaman a bibliotecas compiladas en `C` que se ejecutan a velocidad nativa",
       "C) En el hardware moderno `Python` alcanza exactamente la misma velocidad que `C` en cualquier cálculo",
       "D) El intérprete de `Python` reordena y optimiza el código a nivel de máquina antes de ejecutarlo"
     ],
@@ -348,7 +348,7 @@
     "kc": "simbolos_del_diagrama_de_flujo",
     "tipo": "Diagrama",
     "dominio": "KC_ALGORITHMIC_THINKING",
-    "enunciado": "Observa el siguiente diagrama de flujo:\nÓvalo(INICIO) → Paralelogramo(Leer N) → Rombo(¿N > 0?) →[SÍ]→ Rectángulo(Resultado = N * 2) → Paralelogramo(Mostrar Resultado) → Óvalo(FIN)\n\n```\n→[NO]→ Paralelogramo(Mostrar 'Error') → Óvalo(FIN)\n```\n\n¿Qué hace este algoritmo?",
+    "enunciado": "Observa el siguiente diagrama de flujo:\n\n```\nÓvalo(INICIO) → Paralelogramo(Leer N) → Rombo(¿N > 0?) →[SÍ]→ Rectángulo(Resultado = N * 2) → Paralelogramo(Mostrar Resultado) → Óvalo(FIN)\n\n→[NO]→ Paralelogramo(Mostrar 'Error') → Óvalo(FIN)\n```\n\n¿Qué hace este algoritmo?",
     "opciones": [
       "A) Multiplica cualquier número por `2`, sin realizar ninguna validación previa",
       "B) Lee un número `N`; si es **positivo** calcula y muestra `N * 2`; si no, muestra un mensaje de error",
@@ -366,7 +366,7 @@
     "kc": "simbolos_del_diagrama_de_flujo",
     "tipo": "Diagrama",
     "dominio": "KC_ALGORITHMIC_THINKING",
-    "enunciado": "Un diagrama de flujo tiene los siguientes elementos: INICIO → Leer lista de 10 números → Inicializar suma=0, contador=0 → Rombo(¿contador < 10?) →[SÍ]→ suma = suma + lista[contador], contador = contador + 1 → vuelve al Rombo →[NO]→ Mostrar suma/10 → FIN.\n¿Qué calcula y qué pasaría si el rombo fuera `¿contador <= 10?` en lugar de `¿contador < 10?`?",
+    "enunciado": "Un diagrama de flujo tiene los siguientes elementos: \n\n```\nINICIO → Leer lista de 10 números → Inicializar suma=0, contador=0 → Rombo(¿contador < 10?) →[SÍ]→ suma = suma + lista[contador], contador = contador + 1 → vuelve al Rombo →[NO]→ Mostrar suma/10 → FIN.\n```\n\n¿Qué calcula y qué pasaría si el rombo fuera `¿contador <= 10?` en lugar de `¿contador < 10?`?",
     "opciones": [
       "A) Calcula el **promedio** de 10 números. Con `<= 10` haría 11 iteraciones y accedería a `lista[10]`, que no existe, causando un error",
       "B) Calcula la **suma** de los números. Con `<= 10` haría 9 iteraciones en lugar de 10",
@@ -405,8 +405,8 @@
     "enunciado": "Un algoritmo secuencial calcula el área de un triángulo:\n\n```\nPaso 1: Leer base\nPaso 2: Leer altura\nPaso 3: area = (base * altura) / 2\nPaso 4: Mostrar area\n```\n\n¿Qué pasaría si se intercambian el Paso 3 y el Paso 4?",
     "opciones": [
       "A) Nada cambia, porque el resultado mostrado seguiría siendo el mismo",
-      "B) **Error**: se mostraría el valor de `area` antes de calcularlo (variable sin valor definido o con un valor incorrecto)",
-      "C) El área se calcularía dos veces y se mostraría por duplicado",
+      "B) Error: se mostraría el valor de `area` antes de calcularlo (variable sin valor definido o con un valor incorrecto)",
+      "C) El `area` se calcularía dos veces y se mostraría por duplicado",
       "D) El algoritmo se detendría automáticamente al detectar el orden inválido"
     ],
     "respuesta_correcta": "B",
@@ -528,7 +528,7 @@
     "kc": "expresiones_algoritmicas_compuestas",
     "tipo": "Razonamiento",
     "dominio": "KC_ABSTRACTION",
-    "enunciado": "Un sistema de descuento calcula:\n\n```\nprecio_final = precio * (1 - descuento/100) * (1 - lealtad/100) + envio * (1 - es_premium)\nDonde: precio=50000, descuento=20, lealtad=10, envio=8000, es_premium=1 (VERDADERO=1)\n```\n\n¿Cuál es el `precio_final`?",
+    "enunciado": "Un sistema de descuento calcula:\n\n```\nprecio_final = precio * (1 - descuento/100) * (1 - lealtad/100) + envio * (1 - es_premium)\n```\n\nDonde: precio=50000, descuento=20, lealtad=10, envio=8000, es_premium=1 (VERDADERO=1)\n¿Cuál es el `precio_final`?",
     "opciones": [
       "A) `36000`",
       "B) `44000`",
@@ -604,7 +604,7 @@
     "opciones": [
       "A) **Entero**, porque las notas siempre son números sin decimales",
       "B) **Texto**, porque el promedio aparece impreso en los reportes",
-      "C) **Real** (decimal), porque el promedio puede tener cifras decimales como `3.75`",
+      "C) **Real** (decimal), porque el promedio puede tener cifras decimales",
       "D) **Lógico**, porque en el fondo indica si el estudiante aprueba o reprueba"
     ],
     "respuesta_correcta": "C",
@@ -618,12 +618,12 @@
     "kc": "tipos_de_datos_basicos",
     "tipo": "Análisis",
     "dominio": "KC_ABSTRACTION",
-    "enunciado": "Un sistema maneja: **(1)** código de producto `'00423'`, **(2)** precio `$45.99`, **(3)** cantidad en inventario `150`, **(4)** disponible: sí/no, **(5)** descripción `'Café molido premium'`.\n¿Cuál asignación de tipos es correcta?",
+    "enunciado": "Un sistema maneja: \n**(1)** código de producto `'00423'`, \n**(2)** precio `$45.99`, \n**(3)** cantidad en inventario `150`, \n**(4)** disponible: sí/no, \n**(5)** descripción `'Café molido premium'`.\n¿Cuál asignación de tipos es correcta?",
     "opciones": [
-      "A) **Texto**, **Real**, **Entero**, **Lógico**, **Texto**",
-      "B) **Entero**, **Real**, **Entero**, **Texto**, **Texto**",
-      "C) **Texto**, **Entero**, **Real**, **Lógico**, **Entero**",
-      "D) **Real**, **Real**, **Real**, **Real**, **Real**"
+      "A) Texto, Real, Entero, Lógico, Texto",
+      "B) Entero, Real, Entero, Texto, Texto",
+      "C) Texto, Entero, Real, Lógico, Entero",
+      "D) Real, Real, Real, Real, Real"
     ],
     "respuesta_correcta": "A",
     "explicacion": "Código '00423' es Texto (los ceros iniciales importan). Precio $45.99 es Real (tiene decimales). Cantidad 150 es Entero (unidades completas). Disponible sí/no es Lógico. Descripción es Texto.",
@@ -690,12 +690,12 @@
     "kc": "variables_y_asignacion_de_valores",
     "tipo": "Razonamiento",
     "dominio": "KC_ABSTRACTION",
-    "enunciado": "En un sistema de votación: `votos_A=0; votos_B=0; total=0`. Se procesan 4 votos: A,B,A,A. Después de cada voto: `votos_X += 1; total += 1`. Al final: `porcentaje_A = votos_A / total * 100`.\n¿Existe algún riesgo si el sistema se ejecuta antes de procesar cualquier voto? ¿Cómo se previene?",
+    "enunciado": "En un sistema de votación: \n`votos_A=0; votos_B=0; total=0`. \nSe procesan 4 votos: A,B,A,A. \nDespués de cada voto: `votos_X += 1; total += 1`. \nAl final: `porcentaje_A = votos_A / total * 100`.\n¿Existe algún riesgo si el sistema se ejecuta antes de procesar cualquier voto? ¿Cómo se previene?",
     "opciones": [
       "A) No existe ningún riesgo: la expresión del porcentaje siempre se calcula correctamente",
-      "B) Si `total = 0`, la división `votos_A / total` produce una **división por cero** (error fatal); se previene verificando que `total > 0` antes de calcular el porcentaje",
-      "C) El riesgo es que `porcentaje_A` termine tomando un valor mayor que `100`",
-      "D) El riesgo es que `votos_A` termine tomando un valor negativo"
+      "B) Si `total = 0`, la división `votos_A / total` produce una división por cero (error fatal); se previene verificando que `total > 0` antes de calcular el porcentaje",
+      "C) El riesgo es que `porcentaje_A` termine tomando un valor mayor que `100`; se previene verificando que `total < 100`",
+      "D) El riesgo es que `votos_A` termine tomando un valor negativo; se previene verificando que `votos_A > 0`"
     ],
     "respuesta_correcta": "B",
     "explicacion": "Si se intenta calcular el porcentaje antes de registrar votos, total=0 y la operación votos_A/0 es matemáticamente indefinida (división por cero), causando un error de ejecución.",
@@ -782,9 +782,9 @@
     "dominio": "KC_ABSTRACTION",
     "enunciado": "Un sistema de clasificación de edades usa:\n\n```\nSI edad >= 18 Y edad <= 65: categoría = 'Adulto'\nSI edad < 18: categoría = 'Menor'\nSI edad > 65: categoría = 'Adulto mayor'\n```\n\n¿Qué categoría asigna a una persona de exactamente 65 años?",
     "opciones": [
-      "A) **Adulto mayor**, porque 65 ya no es menor que 65",
+      "A) **Adulto mayor**, porque 65 ya no es menor que `65`",
       "B) **Adulto**, porque 65 cumple `65 >= 18` Y `65 <= 65`",
-      "C) **Sin categoría**, porque el valor 65 no encaja en ninguna de las condiciones",
+      "C) **Sin categoría**, porque el valor `65` no encaja en ninguna de las condiciones",
       "D) **Menor**, porque el rango de adulto excluye su límite superior"
     ],
     "respuesta_correcta": "B",
@@ -816,10 +816,10 @@
     "kc": "operadores_logicos",
     "tipo": "Conceptual",
     "dominio": "KC_ABSTRACTION",
-    "enunciado": "Una alarma se activa cuando: `puerta_abierta AND sistema_armado`. Si `puerta = ABIERTA` y `sistema = DESARMADO`, ¿se activa la alarma?",
+    "enunciado": "Una alarma se activa cuando: `puerta_abierta AND sistema_armado`. Si `puerta = ABIERTA` y `sistema = DESARMADO`, \n¿se activa la alarma?",
     "opciones": [
       "A) Sí se activa, porque la puerta está abierta",
-      "B) No se activa, porque `AND` exige que **ambas** condiciones sean verdaderas, y el sistema está **DESARMADO** (falso)",
+      "B) No se activa, porque `AND` exige que ambas condiciones sean verdaderas, y el sistema está DESARMADO (falso)",
       "C) Sí se activa, porque al menos una de las dos condiciones es verdadera",
       "D) No se activa, porque ninguna de las dos condiciones es verdadera"
     ],
@@ -837,7 +837,7 @@
     "enunciado": "Un sistema de acceso permite entrada si:\n`(tiene_tarjeta AND en_horario) OR (es_empleado AND jefe_aprobó)`\nSofía: `tiene_tarjeta=SÍ`, `en_horario=NO`, `es_empleada=SÍ`, `jefe_aprobó=SÍ`. ¿Puede entrar?",
     "opciones": [
       "A) No puede entrar, porque no se encuentra dentro del horario permitido",
-      "B) Sí puede entrar, porque el segundo grupo del `OR` se cumple por completo (`es_empleada AND jefe_aprobó` = V AND V = V)",
+      "B) Sí puede entrar, porque el segundo grupo del `OR` se cumple por completo",
       "C) No puede entrar, porque el `AND` del primer grupo resulta falso",
       "D) Sí puede entrar, porque tiene tarjeta y además es empleada"
     ],
@@ -855,7 +855,7 @@
     "enunciado": "Demuestra mediante tabla de verdad que `NOT(A AND B)` es equivalente a `NOT(A) OR NOT(B)` (**Ley de De Morgan**). ¿Cuántas combinaciones de A y B se deben evaluar y cuántas de ellas dan el mismo resultado en ambas expresiones?",
     "opciones": [
       "A) **2 combinaciones**; solo 1 de ellas da VERDADERO en ambas expresiones",
-      "B) **4 combinaciones**; las 4 dan el mismo resultado en ambas expresiones (son equivalentes)",
+      "B) **4 combinaciones**; las 4 dan el mismo resultado en ambas expresiones",
       "C) **4 combinaciones**; 2 de ellas muestran diferencias entre las dos expresiones",
       "D) **8 combinaciones**; solo 3 de ellas dan resultados iguales"
     ],
@@ -906,7 +906,7 @@
     "kc": "jerarquia_de_operadores",
     "tipo": "Razonamiento",
     "dominio": "KC_ABSTRACTION",
-    "enunciado": "Un sistema de facturación calcula:\n\n```\nprecio_final = precio_base + precio_base * descuento / 100 - 500 * NOT(cliente_frecuente) + 200 * (unidades > 10 AND categoria == 'premium')\nDonde: precio_base=8000, descuento=15, cliente_frecuente=FALSO, unidades=12, categoria='premium'.\n(NOT(FALSO)=1, booleanos: V=1, F=0)\n```\n\n¿Cuál es el `precio_final`?",
+    "enunciado": "Un sistema de facturación calcula:\n\n```\nprecio_final = precio_base + precio_base * descuento / 100 - 500 * NOT(cliente_frecuente) + 200 * (unidades > 10 AND categoria == 'premium')\n```\n\nDonde: precio_base=8000, descuento=15, cliente_frecuente=FALSO, unidades=12, categoria='premium'.\n(NOT(FALSO)=1, booleanos: V=1, F=0)\n¿Cuál es el `precio_final`?",
     "opciones": [
       "A) `8900`",
       "B) `7900`",
@@ -942,7 +942,7 @@
     "kc": "identificar_secuencias_en_ejemplos_simples",
     "tipo": "Bebras",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Una máquina produce piezas en grupos crecientes: 1 cuadrado, 1 triángulo, 1 círculo, 2 cuadrados, 2 triángulos, 2 círculos, 3 cuadrados, 3 triángulos, 3 círculos, 4 cuadrados... ¿Qué figura está en la posición 20?",
+    "enunciado": "Una máquina produce piezas en grupos crecientes: \n1 cuadrado, 1 triángulo, 1 círculo, 2 cuadrados, 2 triángulos, 2 círculos, 3 cuadrados, 3 triángulos, 3 círculos, 4 cuadrados... ¿Qué figura está en la posición 20?",
     "opciones": [
       "A) Un **triángulo**",
       "B) Un **círculo**",
@@ -1014,7 +1014,7 @@
     "kc": "detectar_repeticiones_en_un_proceso",
     "tipo": "Razonamiento",
     "dominio": "KC_PATTERN_RECOGNITION",
-    "enunciado": "Un algoritmo de compresión detecta repeticiones en un texto. Para el texto `'ABABABABAB'` (10 caracteres), lo codifica como `'5xAB'` (5 repeticiones de AB). ¿Cuántos caracteres ahorra esta codificación y qué condición mínima debe cumplirse para que la compresión sea beneficiosa?",
+    "enunciado": "Un algoritmo de compresión detecta repeticiones en un texto. Para el texto `'ABABABABAB'` (10 caracteres), lo codifica como `'5xAB'` (5 repeticiones de AB). \n¿Cuántos caracteres ahorra esta codificación y qué condición mínima debe cumplirse para que la compresión sea beneficiosa?",
     "opciones": [
       "A) Ahorra **6 caracteres**; la compresión siempre resulta beneficiosa, sin importar el patrón",
       "B) Ahorra **6 caracteres**; la compresión es beneficiosa solo cuando el código queda más corto que el original, lo que exige que el patrón se repita suficientes veces",
@@ -1068,7 +1068,7 @@
     "kc": "identificar_entradas_y_salidas_de_un_problema",
     "tipo": "Bebras",
     "dominio": "KC_PROBLEM_DECOMPOSITION",
-    "enunciado": "Un sistema de recomendación de películas recibe: historial de 500 películas vistas, calificaciones dadas y perfil demográfico. La salida son 10 recomendaciones. El sistema tarda 8 segundos. Un ingeniero debe reducirlo a menos de 2 segundos sin cambiar las salidas. ¿Qué estrategia de **ENTRADAS** podría ayudar?",
+    "enunciado": "Un sistema de recomendación de películas recibe: historial de 500 películas vistas, calificaciones dadas y perfil demográfico. La salida son 10 recomendaciones. \nEl sistema tarda 8 segundos. Un ingeniero debe reducirlo a menos de 2 segundos sin cambiar las salidas. ¿Qué estrategia de **ENTRADAS** podría ayudar?",
     "opciones": [
       "A) Eliminar el perfil demográfico del usuario como una de las entradas del sistema",
       "B) Reducir el historial a las 50 películas más relevantes o usar solo las de calificación `>= 3`, disminuyendo el volumen de datos a procesar sin perder calidad de recomendación",
@@ -1107,7 +1107,7 @@
     "enunciado": "Enunciado: 'Una empresa quiere saber cuántos empleados tienen salario superior al promedio general.'\n¿Cuáles son las partes que deben identificarse para analizar correctamente este problema?",
     "opciones": [
       "A) Basta con saber cuántos empleados tiene la empresa en total",
-      "B) **Datos**: la lista de salarios. **Proceso intermedio**: calcular primero el promedio. **Salida**: el conteo de empleados con salario mayor al promedio. **Restricción**: el promedio se calcula con todos los empleados",
+      "B) Datos: la lista de salarios. Proceso intermedio: calcular primero el promedio. Salida: el conteo de empleados con salario mayor al promedio. Restricción: el promedio se calcula con todos los empleados",
       "C) La empresa nos entrega el promedio ya calculado y solo hay que hacer el conteo",
       "D) Basta con identificar cuál es el salario más alto de toda la empresa"
     ],
@@ -1125,7 +1125,7 @@
     "enunciado": "Enunciado: 'Diseña un sistema que permita a una biblioteca gestionar préstamos de libros, registrar devoluciones, calcular multas por retraso y enviar recordatorios automáticos.'\nUn ingeniero identifica 5 entidades y 12 operaciones. ¿Qué técnica de análisis debe aplicar para manejar esta complejidad y cuál es el primer paso?",
     "opciones": [
       "A) Empezar a programar de inmediato para ir descubriendo los problemas en la práctica",
-      "B) Aplicar **descomposición jerárquica**: dividir el sistema en módulos independientes (préstamos, multas, notificaciones), identificar las interfaces entre ellos y comenzar por los módulos sin dependencias",
+      "B) Aplicar descomposición jerárquica: dividir el sistema en módulos independientes (préstamos, multas, notificaciones), identificar las interfaces entre ellos y comenzar por los módulos sin dependencias",
       "C) Reducir todo el enunciado a una sola función que se encargue de realizar todas las tareas",
       "D) Pedirle al cliente que simplifique y recorte los requisitos del sistema"
     ],
