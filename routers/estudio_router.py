@@ -178,6 +178,12 @@ def get_contenido(
     nombre = info[node_id].get("nombre_display", node_id)
     base_id, dif = _split_node_id(node_id)
 
+    unidad_str = info[node_id].get("unidad", "Unidad 1")
+    try:
+        unidad_id = f"unidad_{int(unidad_str.split()[-1])}"
+    except (ValueError, IndexError):
+        unidad_id = "unidad_1"
+
     por_tipo = neo4j_service.get_chunk_ids_por_tipo(node_id)
     index = _pinecone_index()
     client = _openai()
@@ -201,7 +207,7 @@ def get_contenido(
     # Pasar por LLM para generar contenido pedagógico limpio
     definicion_texto = _generar_con_llm(client, nombre, "definicion", def_raw or ej_raw or "") if (def_raw or ej_raw) else None
     ejemplo_texto    = _generar_con_llm(client, nombre, "ejemplo",    ej_raw  or def_raw or "") if (ej_raw or def_raw) else None
-    ejercicio_texto  = _generar_con_llm(client, nombre, "ejercicio",  en_raw  or def_raw or "") if (en_raw or def_raw) else None
+    ejercicio_texto  = _generar_con_llm(client, nombre, "ejercicio",  en_raw  or def_raw or ej_raw or "") if (en_raw or def_raw or ej_raw) else None
 
     prog = db.query(StudentProgress).filter(
         StudentProgress.student_id == current_user.id,
@@ -211,6 +217,7 @@ def get_contenido(
     return {
         "node_id": node_id,
         "nombre": nombre,
+        "unidad_id": unidad_id,
         "dominado": prog.dominado if prog else False,
         "definicion": {"contenido": definicion_texto} if definicion_texto else None,
         "ejemplo":    {"contenido": ejemplo_texto}    if ejemplo_texto    else None,

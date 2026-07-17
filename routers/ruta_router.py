@@ -112,9 +112,9 @@ def get_ruta_unidad(
 ):
     unidad_num = _unidad_num(unidad_id)
     nivel = _nivel_diagnostico(unidad_id, current_user.id, db)
-    max_dif = NIVEL_MAX_DIFICULTAD[nivel.value]
+    dificultad = NIVEL_MAX_DIFICULTAD[nivel.value]
 
-    nodos = neo4j_service.get_nodos_unidad(unidad_num, max_dif)
+    nodos = neo4j_service.get_nodos_unidad_nivel(unidad_num, dificultad)
     if not nodos:
         return {"unidad_id": unidad_id, "nivel_estudiante": nivel.value, "nodos": [], "total": 0, "dominados": 0}
 
@@ -168,9 +168,9 @@ def get_siguiente_nodo(
     unidad_id = f"unidad_{current_user.unidad_actual}"
     unidad_num = current_user.unidad_actual
     nivel = _nivel_diagnostico(unidad_id, current_user.id, db)
-    max_dif = NIVEL_MAX_DIFICULTAD[nivel.value]
+    dificultad = NIVEL_MAX_DIFICULTAD[nivel.value]
 
-    nodos = neo4j_service.get_nodos_unidad(unidad_num, max_dif)
+    nodos = neo4j_service.get_nodos_unidad_nivel(unidad_num, dificultad)
     if not nodos:
         return {"siguiente": None}
 
@@ -275,9 +275,9 @@ def get_progreso_completo(
         unidad_id = f"unidad_{u_num}"
         nivel = _nivel_diagnostico(unidad_id, current_user.id, db)
         estado_diag = _estado_diagnostico(unidad_id, current_user.id, db)
-        max_dif = NIVEL_MAX_DIFICULTAD[nivel.value]
+        dificultad = NIVEL_MAX_DIFICULTAD[nivel.value]
 
-        nodos = neo4j_service.get_nodos_unidad(u_num, max_dif)
+        nodos = neo4j_service.get_nodos_unidad_nivel(u_num, dificultad)
         node_ids = [n["tema_canonico"] for n in nodos]
         total = len(node_ids)
 

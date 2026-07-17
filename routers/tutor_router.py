@@ -39,8 +39,8 @@ def _siguiente_nodo(node_id: str, nivel: str, student_id: int, db: Session):
         unidad_num = int(unidad_str.split()[-1])
     except (ValueError, IndexError):
         unidad_num = 1
-    max_dif = NIVEL_MAX_DIFICULTAD[nivel]
-    nodos   = neo4j_service.get_nodos_unidad(unidad_num, max_dif)
+    dificultad = NIVEL_MAX_DIFICULTAD[nivel]
+    nodos      = neo4j_service.get_nodos_unidad_nivel(unidad_num, dificultad)
     if not nodos:
         return None
     ids_set     = {n["tema_canonico"] for n in nodos}

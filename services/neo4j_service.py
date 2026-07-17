@@ -42,6 +42,30 @@ def get_nodos_unidad(unidad_num: int, max_dificultad: int) -> list[dict]:
         return [dict(r["t"]) for r in result]
 
 
+def get_nodos_unidad_nivel(unidad_num: int, dificultad: int) -> list[dict]:
+    """Nodos de la unidad en el nivel EXACTO diagnosticado (no acumulativo).
+
+    A diferencia de get_nodos_unidad (<=), usado para dar por dominada una unidad
+    anterior completa, esta se usa para construir la ruta de la unidad actual: cada
+    tema existe como un nodo distinto por nivel (mismo tema, node_id/tema_canonico
+    distintos para BASICO/MEDIO/ALTO), así que traer <= mezclaría niveles inferiores
+    del mismo tema como si fueran temas pendientes aparte.
+    """
+    driver = _get_driver()
+    with driver.session() as s:
+        result = s.run(
+            """
+            MATCH (t:Tema)
+            WHERE toLower(t.unidad) CONTAINS toLower($unidad) AND t.dificultad = $dif
+            RETURN t
+            ORDER BY t.tema_canonico
+            """,
+            unidad=f"unidad {unidad_num}",
+            dif=dificultad,
+        )
+        return [dict(r["t"]) for r in result]
+
+
 def get_prereqs_nodos(node_ids: list[str]) -> dict[str, list[str]]:
     """Retorna {node_id: [prereq_tema_canonico]} para todos los nodos dados en una sola query."""
     if not node_ids:
