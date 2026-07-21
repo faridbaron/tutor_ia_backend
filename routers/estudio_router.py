@@ -8,7 +8,7 @@ from pinecone import Pinecone
 
 from database import get_db
 from auth import get_current_user
-from models import StudentProgress, User
+from models import StudentProgress, TutorMensaje, User
 from services import neo4j_service
 from services.progress_service import NIVEL_MAX_DIFICULTAD
 from tutor.graph import _split_node_id
@@ -388,9 +388,25 @@ def evaluar_quiz(
     }
 
 
+@router.get("/chat-historial")
+def get_chat_historial(
+    node_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    mensajes = (
+        db.query(TutorMensaje)
+        .filter(TutorMensaje.student_id == current_user.id, TutorMensaje.node_id == node_id)
+        .order_by(TutorMensaje.timestamp.asc())
+        .all()
+    )
+    return [{"rol": m.rol, "contenido": m.contenido} for m in mensajes]
+
+
 @router.post("/chat-burbuja")
 def chat_burbuja(
     req: ChatBurbujaRequest,
+    db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
     nombre = _nombre_tema(req.node_id)
@@ -440,8 +456,13 @@ def chat_burbuja(
         temperature=0.4,
         messages=messages,
     )
+    respuesta = resp.choices[0].message.content.strip()
 
-    return {"respuesta": resp.choices[0].message.content.strip()}
+    db.add(TutorMensaje(student_id=current_user.id, node_id=req.node_id, rol="user", contenido=req.mensaje))
+    db.add(TutorMensaje(student_id=current_user.id, node_id=req.node_id, rol="assistant", contenido=respuesta))
+    db.commit()
+
+    return {"respuesta": respuesta}
 
 
 @router.post("/chat-unidad")
@@ -505,5 +526,10 @@ def chat_unidad(
         temperature=0.4,
         messages=messages,
     )
+    respuesta = resp.choices[0].message.content.strip()
 
-    return {"respuesta": resp.choices[0].message.content.strip()}
+    db.add(TutorMensaje(student_id=current_user.id, node_id=req.unidad_id, rol="user", contenido=req.mensaje))
+    db.add(TutorMensaje(student_id=current_user.id, node_id=req.unidad_id, rol="assistant", contenido=respuesta))
+    db.commit()
+
+    return {"respuesta": respuesta}
