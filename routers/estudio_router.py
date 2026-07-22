@@ -450,6 +450,9 @@ def chat_burbuja(
                 "- Si preguntan sobre el ejercicio propuesto o el quiz, responde: "
                 "'Eso debes resolverlo tú. ¿Tienes alguna duda sobre el concepto?'\n"
                 "- Si la pregunta no es sobre el tema, redirige amablemente.\n"
+                "- Si el contenido de referencia no responde directamente lo que se pregunta, "
+                "ignóralo y responde con tu propio conocimiento correcto del tema, sin mencionar "
+                "que el contenido no era relevante.\n"
                 "- Respuestas cortas y claras, máximo 4 oraciones."
             ),
         }
@@ -520,6 +523,9 @@ def chat_unidad(
                 "REGLAS:\n"
                 "- Solo responde preguntas relacionadas con los temas de esta unidad.\n"
                 "- Si la pregunta no es sobre la unidad, redirige amablemente.\n"
+                "- Si el contenido de referencia no responde directamente lo que se pregunta, "
+                "ignóralo y responde con tu propio conocimiento correcto del tema, sin mencionar "
+                "que el contenido no era relevante.\n"
                 "- Respuestas cortas y claras, máximo 4 oraciones."
             ),
         }

@@ -216,6 +216,9 @@ def nodo_respuesta(state: TutorState) -> dict:
         + f"\n\nInstrucción: {tipo_txt}"
         + aviso_txt
         + "\n\nSé conciso: máximo 3 párrafos cortos. No repitas el contexto textualmente."
+        + "\n\nSi el contexto del libro no responde directamente lo que se pregunta, ignóralo "
+          "y responde con tu propio conocimiento correcto del tema — no fuerces una respuesta "
+          "basada en contexto que no aplica, y no menciones que el contexto no era relevante."
     )
 
     messages = [{"role": "system", "content": system}]
