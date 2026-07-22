@@ -29,6 +29,7 @@ class EvaluarEjercicioRequest(BaseModel):
 
 class GenerarQuizRequest(BaseModel):
     node_id: str
+    excluir_pregunta: str | None = None
 
 class EvaluarQuizRequest(BaseModel):
     node_id: str
@@ -287,9 +288,15 @@ def generar_quiz(
     nombre = _nombre_tema(req.node_id)
     contexto = _contexto_str(contenidos[:5])
 
+    exclusion = (
+        f"\n\nNO repitas esta pregunta ya usada, genera una distinta (puede evaluar otro "
+        f"aspecto del mismo tema):\n\"{req.excluir_pregunta}\""
+        if req.excluir_pregunta else ""
+    )
+
     resp = client.chat.completions.create(
         model="gpt-4o",
-        temperature=0.7,
+        temperature=0.9,
         messages=[
             {
                 "role": "system",
@@ -299,6 +306,7 @@ def generar_quiz(
                     "La pregunta debe evaluar comprensión conceptual, no memorización, "
                     "y ser respondible en 1-3 oraciones. "
                     "Responde SOLO con la pregunta, sin explicaciones."
+                    f"{exclusion}"
                 ),
             },
             {"role": "user", "content": "Genera la pregunta."},
