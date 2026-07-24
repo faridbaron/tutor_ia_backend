@@ -3,12 +3,13 @@ import logging
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from openai import OpenAI
 from pinecone import Pinecone
 
 from database import get_db
 from auth import get_current_user
-from models import StudentProgress, TutorMensaje, User
+from models import StudentProgress, TutorMensaje, User, ContenidoTema
 from services import neo4j_service
 from services.progress_service import NIVEL_MAX_DIFICULTAD
 from tutor.graph import _split_node_id
@@ -208,30 +209,51 @@ def get_contenido(
     except (ValueError, IndexError):
         unidad_id = "unidad_1"
 
-    por_tipo = neo4j_service.get_chunk_ids_por_tipo(node_id)
-    index = _pinecone_index()
-    client = _openai()
+    # Caché global por node_id: el contenido no depende del usuario, así que se
+    # genera una sola vez con GPT-4o y se reutiliza para toda la cohorte.
+    cache = db.query(ContenidoTema).filter(ContenidoTema.node_id == node_id).first()
+    if cache:
+        definicion_texto = cache.definicion
+        ejemplo_texto    = cache.ejemplo
+        ejercicio_texto  = cache.ejercicio
+    else:
+        por_tipo = neo4j_service.get_chunk_ids_por_tipo(node_id)
+        index = _pinecone_index()
+        client = _openai()
 
-    # Reunir contexto crudo por tipo
-    def_ids = por_tipo.get("definicion", [])
-    def_raw = None
-    if def_ids:
-        fetched = _fetch_chunk_contenido(index, def_ids[:3])
-        def_raw = next((fetched[c] for c in def_ids if fetched.get(c)), None)
+        # Reunir contexto crudo por tipo
+        def_ids = por_tipo.get("definicion", [])
+        def_raw = None
+        if def_ids:
+            fetched = _fetch_chunk_contenido(index, def_ids[:3])
+            def_raw = next((fetched[c] for c in def_ids if fetched.get(c)), None)
 
-    # Para ejemplo: búsqueda semántica
-    ej_raw = _buscar_ejemplo(index, base_id, dif, client)
+        # Para ejemplo: búsqueda semántica
+        ej_raw = _buscar_ejemplo(index, base_id, dif, client)
 
-    en_ids = por_tipo.get("enunciado", [])
-    en_raw = None
-    if en_ids:
-        fetched2 = _fetch_chunk_contenido(index, en_ids[:2])
-        en_raw = next((fetched2[c] for c in en_ids if fetched2.get(c)), None)
+        en_ids = por_tipo.get("enunciado", [])
+        en_raw = None
+        if en_ids:
+            fetched2 = _fetch_chunk_contenido(index, en_ids[:2])
+            en_raw = next((fetched2[c] for c in en_ids if fetched2.get(c)), None)
 
-    # Pasar por LLM para generar contenido pedagógico limpio
-    definicion_texto = _generar_con_llm(client, nombre, "definicion", def_raw or ej_raw or "", nivel) if (def_raw or ej_raw) else None
-    ejemplo_texto    = _generar_con_llm(client, nombre, "ejemplo",    ej_raw  or def_raw or "", nivel) if (ej_raw or def_raw) else None
-    ejercicio_texto  = _generar_con_llm(client, nombre, "ejercicio",  en_raw  or def_raw or ej_raw or "", nivel) if (en_raw or def_raw or ej_raw) else None
+        # Pasar por LLM para generar contenido pedagógico limpio
+        definicion_texto = _generar_con_llm(client, nombre, "definicion", def_raw or ej_raw or "", nivel) if (def_raw or ej_raw) else None
+        ejemplo_texto    = _generar_con_llm(client, nombre, "ejemplo",    ej_raw  or def_raw or "", nivel) if (ej_raw or def_raw) else None
+        ejercicio_texto  = _generar_con_llm(client, nombre, "ejercicio",  en_raw  or def_raw or ej_raw or "", nivel) if (en_raw or def_raw or ej_raw) else None
+
+        # Guardar en caché. Si otro request generó el mismo node_id en paralelo,
+        # el insert falla por PK duplicada: se ignora (ya está cacheado).
+        db.add(ContenidoTema(
+            node_id=node_id,
+            definicion=definicion_texto,
+            ejemplo=ejemplo_texto,
+            ejercicio=ejercicio_texto,
+        ))
+        try:
+            db.commit()
+        except IntegrityError:
+            db.rollback()
 
     prog = db.query(StudentProgress).filter(
         StudentProgress.student_id == current_user.id,

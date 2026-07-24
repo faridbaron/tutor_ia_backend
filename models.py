@@ -75,6 +75,21 @@ class StudentProgress(Base):
     )
 
 
+class ContenidoTema(Base):
+    """Caché global (compartido entre todos los usuarios) del contenido pedagógico
+    generado por el LLM para cada tema+nivel. La clave es node_id (que ya incluye el
+    nivel, ej. 'que_es_un_algoritmo_ALTO'), porque el contenido no depende del usuario:
+    se deriva del libro y del prompt adaptado por nivel. Evita regenerar con GPT-4o en
+    cada visita. El Quiz NO se cachea (se genera fresco para variar la pregunta)."""
+    __tablename__ = "contenido_tema"
+
+    node_id     = Column(String, primary_key=True, index=True)
+    definicion  = Column(Text, nullable=True)
+    ejemplo     = Column(Text, nullable=True)
+    ejercicio   = Column(Text, nullable=True)
+    generado_en = Column(DateTime(timezone=True), server_default=func.now())
+
+
 class TutorMensaje(Base):
     __tablename__ = "tutor_mensajes"
 
