@@ -48,10 +48,24 @@ class ChatUnidadRequest(BaseModel):
 
 
 NIVEL_TXT = {
-    "BASICO": "Usa lenguaje muy simple y ejemplos cotidianos. El estudiante es principiante.",
-    "MEDIO":  "Usa lenguaje técnico moderado con ejemplos de programación.",
-    "ALTO":   "Puedes usar terminología avanzada y profundizar en detalles.",
+    "BASICO": ("Usa lenguaje muy simple y ejemplos cotidianos. El estudiante es principiante. "
+               "Apunta a los niveles RECORDAR y COMPRENDER de Bloom: definir, reconocer o explicar el concepto con palabras propias."),
+    "MEDIO":  ("Usa lenguaje técnico moderado con ejemplos de programación. "
+               "Apunta al nivel APLICAR de Bloom: usar el concepto para resolver o calcular un caso concreto."),
+    "ALTO":   ("Puedes usar terminología avanzada y profundizar en detalles. "
+               "Apunta a los niveles EVALUAR y CREAR de Bloom: justificar, comparar alternativas o diseñar una solución."),
 }
+
+DIF_NIVEL = {1: "BASICO", 2: "MEDIO", 3: "ALTO"}
+
+# El frontend renderiza Markdown sin soporte de LaTeX/KaTeX, así que cualquier
+# fórmula en LaTeX se mostraría como texto crudo. Se instruye al modelo a escribir
+# las fórmulas en texto plano legible o en bloque de código.
+FORMATO_MATEMATICO = (
+    " No uses LaTeX ni comandos como \\text, \\frac, \\times, \\log o delimitadores como [ ], $ o $$. "
+    "Escribe cualquier fórmula en texto plano legible (por ejemplo: "
+    "dB = 10 * log10(P_salida / P_entrada)) o dentro de un bloque de código."
+)
 
 
 # ── helpers ──────────────────────────────────────────────────────────
@@ -127,29 +141,37 @@ def _get_todos_chunks_contenido(index, base_id: str, dif: int, client: OpenAI) -
 def _contexto_str(contenidos: list[str]) -> str:
     return "\n\n".join(c for c in contenidos if c)
 
-def _generar_con_llm(client: OpenAI, nombre: str, tipo: str, contexto: str) -> str:
-    """Usa GPT-4o para generar contenido pedagógico limpio a partir del chunk."""
+def _generar_con_llm(client: OpenAI, nombre: str, tipo: str, contexto: str, nivel: str = "BASICO") -> str:
+    """Usa GPT-4o para generar contenido pedagógico limpio a partir del chunk,
+    adaptando el tono y la profundidad al nivel del estudiante (BASICO/MEDIO/ALTO)."""
+    nivel_txt = NIVEL_TXT.get(nivel, NIVEL_TXT["BASICO"])
+    adaptacion = f"Nivel del estudiante: {nivel}. {nivel_txt}\n"
     prompts = {
         "definicion": (
             f"Eres un tutor de lógica computacional. Explica de forma clara y directa qué es '{nombre}'.\n"
+            f"{adaptacion}"
             f"Basa tu explicación en este contenido del libro:\n\n{contexto}\n\n"
             "Escribe una definición clara en 3-5 oraciones. "
             "No menciones figuras, páginas ni referencias bibliográficas. "
-            "Usa lenguaje sencillo dirigido a un estudiante universitario de primer semestre."
+            "Ajusta el lenguaje y la profundidad al nivel indicado del estudiante."
         ),
         "ejemplo": (
             f"Eres un tutor de lógica computacional. Presenta un ejemplo concreto sobre '{nombre}'.\n"
+            f"{adaptacion}"
             f"Basa el ejemplo en este contenido del libro:\n\n{contexto}\n\n"
             "Muestra un ejemplo paso a paso que ilustre el concepto. "
             "No menciones figuras, páginas ni referencias. "
-            "Si el contenido incluye pseudocódigo o pasos, preséntalos de forma ordenada y clara."
+            "Si el contenido incluye pseudocódigo o pasos, preséntalos de forma ordenada y clara. "
+            "Ajusta la complejidad del ejemplo al nivel indicado del estudiante."
         ),
         "ejercicio": (
             f"Eres un tutor de lógica computacional. Formula un ejercicio práctico sobre '{nombre}'.\n"
+            f"{adaptacion}"
             f"Basa el ejercicio en este contenido del libro:\n\n{contexto}\n\n"
             "Escribe el enunciado de un ejercicio que el estudiante deba resolver. "
             "No menciones figuras ni páginas. "
-            "El ejercicio debe ser respondible en texto, sin necesidad de dibujar diagramas."
+            "El ejercicio debe ser respondible en texto, sin necesidad de dibujar diagramas. "
+            "Ajusta la dificultad del ejercicio al nivel indicado del estudiante."
         ),
     }
 
@@ -157,7 +179,7 @@ def _generar_con_llm(client: OpenAI, nombre: str, tipo: str, contexto: str) -> s
         model="gpt-4o",
         temperature=0.4,
         messages=[
-            {"role": "system", "content": prompts[tipo]},
+            {"role": "system", "content": prompts[tipo] + FORMATO_MATEMATICO},
             {"role": "user", "content": "Genera el contenido."},
         ],
     )
@@ -178,6 +200,7 @@ def get_contenido(
 
     nombre = info[node_id].get("nombre_display", node_id)
     base_id, dif = _split_node_id(node_id)
+    nivel = DIF_NIVEL.get(dif, "BASICO")
 
     unidad_str = info[node_id].get("unidad", "Unidad 1")
     try:
@@ -206,9 +229,9 @@ def get_contenido(
         en_raw = next((fetched2[c] for c in en_ids if fetched2.get(c)), None)
 
     # Pasar por LLM para generar contenido pedagógico limpio
-    definicion_texto = _generar_con_llm(client, nombre, "definicion", def_raw or ej_raw or "") if (def_raw or ej_raw) else None
-    ejemplo_texto    = _generar_con_llm(client, nombre, "ejemplo",    ej_raw  or def_raw or "") if (ej_raw or def_raw) else None
-    ejercicio_texto  = _generar_con_llm(client, nombre, "ejercicio",  en_raw  or def_raw or ej_raw or "") if (en_raw or def_raw or ej_raw) else None
+    definicion_texto = _generar_con_llm(client, nombre, "definicion", def_raw or ej_raw or "", nivel) if (def_raw or ej_raw) else None
+    ejemplo_texto    = _generar_con_llm(client, nombre, "ejemplo",    ej_raw  or def_raw or "", nivel) if (ej_raw or def_raw) else None
+    ejercicio_texto  = _generar_con_llm(client, nombre, "ejercicio",  en_raw  or def_raw or ej_raw or "", nivel) if (en_raw or def_raw or ej_raw) else None
 
     prog = db.query(StudentProgress).filter(
         StudentProgress.student_id == current_user.id,
@@ -256,6 +279,7 @@ def evaluar_ejercicio(
                     "- Parcial: señala qué está bien y qué falta.\n"
                     "- Incorrecta: explica el error sin dar la respuesta completa.\n"
                     "Máximo 3 oraciones. Termina con exactamente una de estas palabras en mayúsculas: CORRECTO, PARCIAL, INCORRECTO."
+                    f"{FORMATO_MATEMATICO}"
                 ),
             },
             {
@@ -278,6 +302,7 @@ def generar_quiz(
     current_user: User = Depends(get_current_user),
 ):
     base_id, dif = _split_node_id(req.node_id)
+    nivel = DIF_NIVEL.get(dif, "BASICO")
     index = _pinecone_index()
     client = _openai()
 
@@ -303,9 +328,12 @@ def generar_quiz(
                 "content": (
                     f"Eres un tutor de lógica computacional. Genera UNA pregunta de quiz sobre '{nombre}' "
                     f"basada estrictamente en este contenido:\n\n{contexto}\n\n"
+                    f"Nivel del estudiante: {nivel}. {NIVEL_TXT.get(nivel, NIVEL_TXT['BASICO'])}\n"
                     "La pregunta debe evaluar comprensión conceptual, no memorización, "
+                    "ajustar su exigencia cognitiva al nivel indicado del estudiante, "
                     "y ser respondible en 1-3 oraciones. "
                     "Responde SOLO con la pregunta, sin explicaciones."
+                    f"{FORMATO_MATEMATICO}"
                     f"{exclusion}"
                 ),
             },
@@ -346,6 +374,7 @@ def evaluar_quiz(
                     "Responde en este formato exacto:\n"
                     "RESULTADO: APROBADO o REPROBADO\n"
                     "FEEDBACK: (una o dos oraciones de retroalimentación)"
+                    f"{FORMATO_MATEMATICO}"
                 ),
             },
             {
@@ -454,6 +483,7 @@ def chat_burbuja(
                 "ignóralo y responde con tu propio conocimiento correcto del tema, sin mencionar "
                 "que el contenido no era relevante.\n"
                 "- Respuestas cortas y claras, máximo 4 oraciones."
+                f"{FORMATO_MATEMATICO}"
             ),
         }
     ]
@@ -527,6 +557,7 @@ def chat_unidad(
                 "ignóralo y responde con tu propio conocimiento correcto del tema, sin mencionar "
                 "que el contenido no era relevante.\n"
                 "- Respuestas cortas y claras, máximo 4 oraciones."
+                f"{FORMATO_MATEMATICO}"
             ),
         }
     ]

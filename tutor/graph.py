@@ -219,6 +219,9 @@ def nodo_respuesta(state: TutorState) -> dict:
         + "\n\nSi el contexto del libro no responde directamente lo que se pregunta, ignóralo "
           "y responde con tu propio conocimiento correcto del tema — no fuerces una respuesta "
           "basada en contexto que no aplica, y no menciones que el contexto no era relevante."
+        + "\n\nNo uses LaTeX ni comandos como \\text, \\frac, \\times o \\log, ni delimitadores "
+          "como [ ], $ o $$. Escribe cualquier fórmula en texto plano legible (por ejemplo: "
+          "dB = 10 * log10(P_salida / P_entrada)) o dentro de un bloque de código."
     )
 
     messages = [{"role": "system", "content": system}]
